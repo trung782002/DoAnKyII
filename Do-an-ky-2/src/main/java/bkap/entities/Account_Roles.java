@@ -18,10 +18,10 @@ public class Account_Roles {
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name = "accId", referencedColumnName = "accId")
+	@JoinColumn(name = "AccId", referencedColumnName = "AccId")
 	private Accounts objAccount;
 	
 	@ManyToOne
-	@JoinColumn(name = "roleId", referencedColumnName = "roleId")
+	@JoinColumn(name = "RoleId", referencedColumnName = "RoleId")
 	private Roles objRole;
 }

@@ -1,5 +1,4 @@
 package bkap.entities;
-
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -73,3 +72,4 @@ public class Roles {
 	
 	
 }
+

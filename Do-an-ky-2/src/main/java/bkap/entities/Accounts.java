@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "Tours")
+@Table(name = "Accounts")
 public class Accounts {
 	@Id
 	@Column(name = "AccId")
@@ -56,15 +56,22 @@ public class Accounts {
 	@OneToMany(mappedBy = "objAccount")
 	private Set<Account_Roles> listAccountRoles;
 	
+	@OneToMany(mappedBy = "objReview")
+	private Set<Reviews> listAccountReview;
+	
+	@OneToMany(mappedBy = "objCart")
+	private Set<Carts> listAccountCarts;
+	
+	@OneToMany(mappedBy = "objAccountOfOrder")
+	private Set<Orders> listAccountOrders;
+	
 	public Accounts() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Accounts(Integer accId, @NotEmpty(message = "AccName is null") String accName,
-			@NotEmpty(message = "FullName is null") String fullName, @NotEmpty(message = "Email is null") String email,
-			@NotEmpty(message = "Address is null") String address, @NotEmpty(message = "Phone is null") String phone,
-			@NotEmpty(message = "Password is null") String password, Boolean status, String rememberToken,
-			Date createdAt, Set<Account_Roles> listAccountRoles) {
+	public Accounts(Integer accId, String accName, String fullName, String email, String address, String phone,
+			String password, Boolean status, String rememberToken, Date createdAt, Set<Account_Roles> listAccountRoles,
+			Set<Reviews> listAccountReview, Set<Carts> listAccountCarts, Set<Orders> listAccountOrders) {
 		super();
 		this.accId = accId;
 		this.accName = accName;
@@ -77,6 +84,9 @@ public class Accounts {
 		this.rememberToken = rememberToken;
 		this.createdAt = createdAt;
 		this.listAccountRoles = listAccountRoles;
+		this.listAccountReview = listAccountReview;
+		this.listAccountCarts = listAccountCarts;
+		this.listAccountOrders = listAccountOrders;
 	}
 
 	public Integer getAccId() {
@@ -166,6 +176,31 @@ public class Accounts {
 	public void setListAccountRoles(Set<Account_Roles> listAccountRoles) {
 		this.listAccountRoles = listAccountRoles;
 	}
+
+	public Set<Reviews> getListAccountReview() {
+		return listAccountReview;
+	}
+
+	public void setListAccountReview(Set<Reviews> listAccountReview) {
+		this.listAccountReview = listAccountReview;
+	}
+
+	public Set<Carts> getListAccountCarts() {
+		return listAccountCarts;
+	}
+
+	public void setListAccountCarts(Set<Carts> listAccountCarts) {
+		this.listAccountCarts = listAccountCarts;
+	}
+
+	public Set<Orders> getListAccountOrders() {
+		return listAccountOrders;
+	}
+
+	public void setListAccountOrders(Set<Orders> listAccountOrders) {
+		this.listAccountOrders = listAccountOrders;
+	}
+	
 	
 	
 }
