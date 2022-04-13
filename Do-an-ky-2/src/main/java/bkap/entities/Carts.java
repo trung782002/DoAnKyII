@@ -17,32 +17,35 @@ public class Carts {
 	@Column(name = "CartId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cartId;
+	
 	@Column(name = "Quantity")
-	@NotNull(message = "Quantity Price is not null !!")
+	@NotNull(message = "Quantity Price is not null.")
 	private Integer quantity;
+	
 	@Column(name = "TotalPrice")
 	private Double totalPrice;
 	
 	@ManyToOne
 	@JoinColumn(name = "AccId", referencedColumnName = "AccId")
-	private Accounts objCart;
+	private Accounts objAccountOfCart;
 	
 	@ManyToOne
 	@JoinColumn(name = "ProId", referencedColumnName = "ProId")
-	private Products objProduct;
+	private Products objProductOfCart;
 
 	public Carts() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Carts(Integer cartId, Integer quantity, Double totalPrice, Accounts objCart, Products objProduct) {
+	public Carts(Integer cartId, @NotNull(message = "Quantity Price is not null.") Integer quantity, Double totalPrice,
+			Accounts objAccountOfCart, Products objProductOfCart) {
 		super();
 		this.cartId = cartId;
 		this.quantity = quantity;
 		this.totalPrice = totalPrice;
-		this.objCart = objCart;
-		this.objProduct = objProduct;
+		this.objAccountOfCart = objAccountOfCart;
+		this.objProductOfCart = objProductOfCart;
 	}
 
 	public Integer getCartId() {
@@ -69,21 +72,21 @@ public class Carts {
 		this.totalPrice = totalPrice;
 	}
 
-	public Accounts getObjCart() {
-		return objCart;
+	public Accounts getObjAccountOfCart() {
+		return objAccountOfCart;
 	}
 
-	public void setObjCart(Accounts objCart) {
-		this.objCart = objCart;
+	public void setObjAccountOfCart(Accounts objAccountOfCart) {
+		this.objAccountOfCart = objAccountOfCart;
 	}
 
-	public Products getObjProduct() {
-		return objProduct;
+	public Products getObjProductOfCart() {
+		return objProductOfCart;
 	}
 
-	public void setObjProduct(Products objProduct) {
-		this.objProduct = objProduct;
+	public void setObjProductOfCart(Products objProductOfCart) {
+		this.objProductOfCart = objProductOfCart;
 	}
-	
+
 	
 }

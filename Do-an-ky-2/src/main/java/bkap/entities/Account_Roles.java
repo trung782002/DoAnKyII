@@ -19,9 +19,42 @@ public class Account_Roles {
 	
 	@ManyToOne
 	@JoinColumn(name = "AccId", referencedColumnName = "AccId")
-	private Accounts objAccount;
+	private Accounts objAccountOfAccountRole;
 	
 	@ManyToOne
 	@JoinColumn(name = "RoleId", referencedColumnName = "RoleId")
-	private Roles objRole;
+	private Roles objRoleOfAccountRole;
+
+	public Account_Roles(Integer id, Accounts objAccountOfAccountRole, Roles objRoleOfAccountRole) {
+		super();
+		this.id = id;
+		this.objAccountOfAccountRole = objAccountOfAccountRole;
+		this.objRoleOfAccountRole = objRoleOfAccountRole;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Accounts getObjAccountOfAccountRole() {
+		return objAccountOfAccountRole;
+	}
+
+	public void setObjAccountOfAccountRole(Accounts objAccountOfAccountRole) {
+		this.objAccountOfAccountRole = objAccountOfAccountRole;
+	}
+
+	public Roles getObjRoleOfAccountRole() {
+		return objRoleOfAccountRole;
+	}
+
+	public void setObjRoleOfAccountRole(Roles objRoleOfAccountRole) {
+		this.objRoleOfAccountRole = objRoleOfAccountRole;
+	}
+
+	
 }

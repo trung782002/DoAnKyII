@@ -16,38 +16,49 @@ public class Product_images {
 	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@Column(name = "ImageUrl")
 	private String imageUrl;	
+	
 	@ManyToOne
-	@JoinColumn(name = "ProId",referencedColumnName = "Id")
-	private Products objImage;
+	@JoinColumn(name = "ProId",referencedColumnName = "ProId")
+	private Products objProductOfImage;
+	
 	public Product_images() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Product_images(Integer id, String imageUrl, Products objImage) {
+
+	public Product_images(Integer id, String imageUrl, Products objProductOfImage) {
 		super();
 		this.id = id;
 		this.imageUrl = imageUrl;
-		this.objImage = objImage;
+		this.objProductOfImage = objProductOfImage;
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getImageUrl() {
 		return imageUrl;
 	}
+
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-	public Products getObjImage() {
-		return objImage;
+
+	public Products getObjProductOfImage() {
+		return objProductOfImage;
 	}
-	public void setObjImage(Products objImage) {
-		this.objImage = objImage;
+
+	public void setObjProductOfImage(Products objProductOfImage) {
+		this.objProductOfImage = objProductOfImage;
 	}
+	
 	
 }

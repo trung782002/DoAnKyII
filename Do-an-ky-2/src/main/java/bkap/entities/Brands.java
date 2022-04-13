@@ -19,33 +19,37 @@ public class Brands {
 	@Column(name = "BrandId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer brandId;
+	
 	@Column(name = "Name")
 	@NotEmpty(message = "Brands Name is not null !!")
 	private String name;
+	
 	@Column(name = "ImageUrl")
 	private String imageUrl;
+	
 	@Column(name = "Status")
-	private boolean status;
+	private Boolean status;
+	
 	@Column(name = "CreatedAt")
 	private Date createdAt;
 	
-	@OneToMany(mappedBy = "objBrand")
-	private Set<Products> listProduct;
+	@OneToMany(mappedBy = "objBrandOfProduct")
+	private Set<Products> listProducts;
 
 	public Brands() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Brands(Integer brandId, String name, String imageUrl, boolean status, Date createdAt,
-			Set<Products> listProduct) {
+	public Brands(Integer brandId, @NotEmpty(message = "Brands Name is not null !!") String name, String imageUrl,
+			Boolean status, Date createdAt, Set<Products> listProducts) {
 		super();
 		this.brandId = brandId;
 		this.name = name;
 		this.imageUrl = imageUrl;
 		this.status = status;
 		this.createdAt = createdAt;
-		this.listProduct = listProduct;
+		this.listProducts = listProducts;
 	}
 
 	public Integer getBrandId() {
@@ -72,11 +76,11 @@ public class Brands {
 		this.imageUrl = imageUrl;
 	}
 
-	public boolean isStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 
@@ -88,12 +92,12 @@ public class Brands {
 		this.createdAt = createdAt;
 	}
 
-	public Set<Products> getListProduct() {
-		return listProduct;
+	public Set<Products> getListProducts() {
+		return listProducts;
 	}
 
-	public void setListProduct(Set<Products> listProduct) {
-		this.listProduct = listProduct;
+	public void setListProducts(Set<Products> listProducts) {
+		this.listProducts = listProducts;
 	}
 
 	

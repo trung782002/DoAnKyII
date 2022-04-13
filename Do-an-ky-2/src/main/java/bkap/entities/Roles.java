@@ -23,7 +23,7 @@ public class Roles {
 	@Column(name = "Status")
 	private Boolean status;
 	
-	@OneToMany(mappedBy = "objRole")
+	@OneToMany(mappedBy = "objRoleOfAccountRole")
 	private Set<Account_Roles> listAccountRoles;
 	
 	public Roles() {
@@ -69,7 +69,7 @@ public class Roles {
 	public void setListAccountRoles(Set<Account_Roles> listAccountRoles) {
 		this.listAccountRoles = listAccountRoles;
 	}
-	
+
 	
 }
 

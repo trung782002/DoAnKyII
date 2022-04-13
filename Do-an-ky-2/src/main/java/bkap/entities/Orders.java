@@ -21,23 +21,31 @@ public class Orders {
 	@Column(name = "OrderId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer orderId;
+	
 	@Column(name = "FullName")
 	@NotEmpty(message = "FullName is not null !!")
 	private String fullName;
+	
 	@Column(name = "Address")
 	@NotEmpty(message = "Address is not null !!")
 	private String address;
+	
 	@Column(name = "Phone")
 	@NotEmpty(message = "Phone is not null !!")
 	private String phone;
+	
 	@Column(name = "Note")
 	private String note;
+	
 	@Column(name = "TotalPrice")
 	private String totalPrice;
+	
 	@Column(name = "Status")
 	private boolean status;
+	
 	@Column(name = "CreatedAt")
 	private Date createdAt;
+	
 	@Column(name = "UpdatedAt")
 	private Date updatedAt;
 	
@@ -45,17 +53,18 @@ public class Orders {
 	@JoinColumn(name = "AccId", referencedColumnName = "AccId")
 	private Accounts objAccountOfOrder;
 	
-	@OneToMany(mappedBy = "objOrderDetail")
-	private Set<OrderDetails> listAccountOrderDetails;
+	@OneToMany(mappedBy = "objOrderOfOrderDetail")
+	private Set<OrderDetails> listOrderDetails;
 
 	public Orders() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Orders(Integer orderId, String fullName, String address, String phone, String note, String totalPrice,
-			boolean status, Date createdAt, Date updatedAt, Accounts objAccountOfOrder,
-			Set<OrderDetails> listAccountOrderDetails) {
+	public Orders(Integer orderId, @NotEmpty(message = "FullName is not null !!") String fullName,
+			@NotEmpty(message = "Address is not null !!") String address,
+			@NotEmpty(message = "Phone is not null !!") String phone, String note, String totalPrice, boolean status,
+			Date createdAt, Date updatedAt, Accounts objAccountOfOrder, Set<OrderDetails> listOrderDetails) {
 		super();
 		this.orderId = orderId;
 		this.fullName = fullName;
@@ -67,7 +76,7 @@ public class Orders {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.objAccountOfOrder = objAccountOfOrder;
-		this.listAccountOrderDetails = listAccountOrderDetails;
+		this.listOrderDetails = listOrderDetails;
 	}
 
 	public Integer getOrderId() {
@@ -150,13 +159,13 @@ public class Orders {
 		this.objAccountOfOrder = objAccountOfOrder;
 	}
 
-	public Set<OrderDetails> getListAccountOrderDetails() {
-		return listAccountOrderDetails;
+	public Set<OrderDetails> getListOrderDetails() {
+		return listOrderDetails;
 	}
 
-	public void setListAccountOrderDetails(Set<OrderDetails> listAccountOrderDetails) {
-		this.listAccountOrderDetails = listAccountOrderDetails;
+	public void setListOrderDetails(Set<OrderDetails> listOrderDetails) {
+		this.listOrderDetails = listOrderDetails;
 	}
-	
+
 	
 }

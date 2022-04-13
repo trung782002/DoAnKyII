@@ -15,31 +15,34 @@ public class OrderDetails {
 	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@Column(name = "Quantity")
 	private Integer quantity;
+	
 	@Column(name = "Price")
 	private Double price;
 	
 	@ManyToOne
 	@JoinColumn(name = "OrderId", referencedColumnName = "OrderId")
-	private Orders OrderDetail;
+	private Orders objOrderOfOrderDetail;
 	
 	@ManyToOne
 	@JoinColumn(name = "ProId", referencedColumnName = "ProId")
-	private Products objOrderDetail;
+	private Products objProductOfOrderDetail;
 
 	public OrderDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrderDetails(Integer id, Integer quantity, Double price, Orders orderDetail, Products objOrderDetail) {
+	public OrderDetails(Integer id, Integer quantity, Double price, Orders objOrderOfOrderDetail,
+			Products objProductOfOrderDetail) {
 		super();
 		this.id = id;
 		this.quantity = quantity;
 		this.price = price;
-		OrderDetail = orderDetail;
-		this.objOrderDetail = objOrderDetail;
+		this.objOrderOfOrderDetail = objOrderOfOrderDetail;
+		this.objProductOfOrderDetail = objProductOfOrderDetail;
 	}
 
 	public Integer getId() {
@@ -66,21 +69,21 @@ public class OrderDetails {
 		this.price = price;
 	}
 
-	public Orders getOrderDetail() {
-		return OrderDetail;
+	public Orders getObjOrderOfOrderDetail() {
+		return objOrderOfOrderDetail;
 	}
 
-	public void setOrderDetail(Orders orderDetail) {
-		OrderDetail = orderDetail;
+	public void setObjOrderOfOrderDetail(Orders objOrderOfOrderDetail) {
+		this.objOrderOfOrderDetail = objOrderOfOrderDetail;
 	}
 
-	public Products getObjOrderDetail() {
-		return objOrderDetail;
+	public Products getObjProductOfOrderDetail() {
+		return objProductOfOrderDetail;
 	}
 
-	public void setObjOrderDetail(Products objOrderDetail) {
-		this.objOrderDetail = objOrderDetail;
+	public void setObjProductOfOrderDetail(Products objProductOfOrderDetail) {
+		this.objProductOfOrderDetail = objProductOfOrderDetail;
 	}
-	
+
 	
 }

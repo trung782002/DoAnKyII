@@ -53,25 +53,28 @@ public class Accounts {
 	@Column(name = "CreatedAt")
 	private Date createdAt;
 	
-	@OneToMany(mappedBy = "objAccount")
+	@OneToMany(mappedBy = "objAccountOfAccountRole")
 	private Set<Account_Roles> listAccountRoles;
 	
-	@OneToMany(mappedBy = "objReview")
-	private Set<Reviews> listAccountReview;
+	@OneToMany(mappedBy = "objAccountOfReview")
+	private Set<Reviews> listReviews;
 	
-	@OneToMany(mappedBy = "objCart")
-	private Set<Carts> listAccountCarts;
+	@OneToMany(mappedBy = "objAccountOfCart")
+	private Set<Carts> listCarts;
 	
 	@OneToMany(mappedBy = "objAccountOfOrder")
-	private Set<Orders> listAccountOrders;
+	private Set<Orders> listOrders;
 	
 	public Accounts() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Accounts(Integer accId, String accName, String fullName, String email, String address, String phone,
-			String password, Boolean status, String rememberToken, Date createdAt, Set<Account_Roles> listAccountRoles,
-			Set<Reviews> listAccountReview, Set<Carts> listAccountCarts, Set<Orders> listAccountOrders) {
+	public Accounts(Integer accId, @NotEmpty(message = "AccName is null") String accName,
+			@NotEmpty(message = "FullName is null") String fullName, @NotEmpty(message = "Email is null") String email,
+			@NotEmpty(message = "Address is null") String address, @NotEmpty(message = "Phone is null") String phone,
+			@NotEmpty(message = "Password is null") String password, Boolean status, String rememberToken,
+			Date createdAt, Set<Account_Roles> listAccountRoles, Set<Reviews> listReviews, Set<Carts> listCarts,
+			Set<Orders> listOrders) {
 		super();
 		this.accId = accId;
 		this.accName = accName;
@@ -84,9 +87,9 @@ public class Accounts {
 		this.rememberToken = rememberToken;
 		this.createdAt = createdAt;
 		this.listAccountRoles = listAccountRoles;
-		this.listAccountReview = listAccountReview;
-		this.listAccountCarts = listAccountCarts;
-		this.listAccountOrders = listAccountOrders;
+		this.listReviews = listReviews;
+		this.listCarts = listCarts;
+		this.listOrders = listOrders;
 	}
 
 	public Integer getAccId() {
@@ -177,30 +180,29 @@ public class Accounts {
 		this.listAccountRoles = listAccountRoles;
 	}
 
-	public Set<Reviews> getListAccountReview() {
-		return listAccountReview;
+	public Set<Reviews> getListReviews() {
+		return listReviews;
 	}
 
-	public void setListAccountReview(Set<Reviews> listAccountReview) {
-		this.listAccountReview = listAccountReview;
+	public void setListReviews(Set<Reviews> listReviews) {
+		this.listReviews = listReviews;
 	}
 
-	public Set<Carts> getListAccountCarts() {
-		return listAccountCarts;
+	public Set<Carts> getListCarts() {
+		return listCarts;
 	}
 
-	public void setListAccountCarts(Set<Carts> listAccountCarts) {
-		this.listAccountCarts = listAccountCarts;
+	public void setListCarts(Set<Carts> listCarts) {
+		this.listCarts = listCarts;
 	}
 
-	public Set<Orders> getListAccountOrders() {
-		return listAccountOrders;
+	public Set<Orders> getListOrders() {
+		return listOrders;
 	}
 
-	public void setListAccountOrders(Set<Orders> listAccountOrders) {
-		this.listAccountOrders = listAccountOrders;
+	public void setListOrders(Set<Orders> listOrders) {
+		this.listOrders = listOrders;
 	}
-	
-	
+
 	
 }
