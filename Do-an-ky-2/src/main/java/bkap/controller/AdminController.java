@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class AdminCotroller {
+public class AdminController {
 	@RequestMapping(value = {"/loginAdmin"})
 	public String login(Model model) {
 		return "admin/pages/login";
