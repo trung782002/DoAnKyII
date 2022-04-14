@@ -47,9 +47,14 @@ public class Configs {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Configs(String logoImage, String bannerImage, String address, String map, String email, String phone,
-			Date createdAt) {
+
+	public Configs(Integer id, String logoImage, String bannerImage,
+			@NotEmpty(message = "Address is not null !!") String address,
+			@NotEmpty(message = "Map is not null !!") String map,
+			@NotEmpty(message = "Email is not null !!") String email,
+			@NotEmpty(message = "Phone is not null !!") String phone, Date createdAt) {
 		super();
+		this.id = id;
 		LogoImage = logoImage;
 		this.bannerImage = bannerImage;
 		this.address = address;
@@ -58,69 +63,72 @@ public class Configs {
 		this.phone = phone;
 		this.createdAt = createdAt;
 	}
-	
+
+
+
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getLogoImage() {
 		return LogoImage;
 	}
-	
+
 	public void setLogoImage(String logoImage) {
 		LogoImage = logoImage;
 	}
-	
+
 	public String getBannerImage() {
 		return bannerImage;
 	}
-	
+
 	public void setBannerImage(String bannerImage) {
 		this.bannerImage = bannerImage;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
-	
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	public String getMap() {
 		return map;
 	}
-	
+
 	public void setMap(String map) {
 		this.map = map;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getPhone() {
 		return phone;
 	}
-	
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
+
 	public Date getCreatedAt() {
 		return createdAt;
 	}
-	
+
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+	
 	
 }

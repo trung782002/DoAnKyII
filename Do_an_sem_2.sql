@@ -30,7 +30,7 @@ CREATE TABLE Products (
 	BrandId INT FOREIGN KEY REFERENCES Brands(BrandId),
 	ShortDescription NVARCHAR(255) NOT NULL,
 	Description NTEXT NOT NULL,
-	Quanity INT NOT NULL, 
+	Quanity INT NOT NULL,
 	Status BIT DEFAULT 1,
 	CreatedAt DATETIME DEFAULT GETDATE()
 )
@@ -84,12 +84,13 @@ CREATE TABLE Contacts (
 
 GO
 CREATE TABLE Configs (
+	Id INT PRIMARY KEY IDENTITY(1,1),
 	LogoImage NVARCHAR(250) NOT NULL,
 	BannerImage NVARCHAR(250) NOT NULL,
 	Address NVARCHAR(250) NOT NULL,
 	Map TEXT NOT NULL,
-	Email NVARCHAR(150) NOT NULL,
 	Phone VARCHAR(20) NOT NULL,
+	Email NVARCHAR(150) NOT NULL,
 	UpdatedAt DATETIME NULL
 )
 
@@ -153,7 +154,7 @@ CREATE TABLE Blogs (
 
 GO
 Insert into Configs values ('logoImage.jpg', 'bannerImage.ipg', N'Số 238 Hoàng Quốc Việt, Cầu GIấy, Hà nội', 
-'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4331.764921528694!2d105.71224085080011!3d18.6438196872751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3139cc46daf9fc6b%3A0x9332dd7c2df8d550!2zTMOqIER1eSDEkGnhur9tLCB0dC4gWHXDom4gQW4sIE5naGkgWHXDom4sIEjDoCBUxKluaCwgVmnhu4d0IE5hbQ!5e1!3m2!1svi!2s!4v1649836718565!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>', '0398888888', 'Eiser@gamil.com', '2022-02-02')
+'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4331.764921528694!2d105.71224085080011!3d18.6438196872751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3139cc46daf9fc6b%3A0x9332dd7c2df8d550!2zTMOqIER1eSDEkGnhur9tLCB0dC4gWHXDom4gQW4sIE5naGkgWHXDom4sIEjDoCBUxKluaCwgVmnhu4d0IE5hbQ!5e1!3m2!1svi!2s!4v1649836718565!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>', 'Eiser@gamil.com', '0398888888', '2022-02-02')
 
 go
 select * from Configs
