@@ -1,3 +1,5 @@
 ngo kim trung
  
 insert product
+
+update product

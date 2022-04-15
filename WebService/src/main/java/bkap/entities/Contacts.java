@@ -39,6 +39,7 @@ public class Contacts {
 	private Date createdAt;
 	
 	public Contacts() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
