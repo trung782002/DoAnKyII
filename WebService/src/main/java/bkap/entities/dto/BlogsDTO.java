@@ -1,60 +1,37 @@
-package bkap.entities;
+package bkap.entities.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "Blogs")
-
-public class Blogs {
-	@Id
-	@Column(name = "Id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BlogsDTO {
+	
 	private Integer id;
 	
-	@Column(name = "Name")
 	private String name;
-	
-	@Column(name = "Title")
+
 	private String title;	
-	
-	@Column(name = "MainImageUrl")
+
 	private String mainImageUrl;
-	
-	@Column(name = "Content_1")
+
 	private String content_1;
-	
-	@Column(name = "SecondImageUrl")
+
 	private String secondImageUrl;
-	
-	@Column(name = "Content_2")
+
 	private String content_2;
-	
-	@Column(name = "ThirdImageUrl")
+
 	private String thirdImageUrl;
-	
-	@Column(name = "Content_3")
+
 	private String content_3;
-	
-	@Column(name = "Status")
-	private Boolean status;
-	
-	@Column(name = "CreatedAt")
+
+	private boolean status;
+
 	private Date createdAt;
 	
-	public Blogs() {
-		super();
+	public BlogsDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Blogs(Integer id, String name, String title, String mainImageUrl, String content_1, String secondImageUrl,
-			String content_2, String thirdImageUrl, String content_3, Boolean status, Date createdAt) {
+	public BlogsDTO(Integer id, String name, String title, String mainImageUrl, String content_1, String secondImageUrl,
+			String content_2, String thirdImageUrl, String content_3, boolean status, Date createdAt) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -141,11 +118,11 @@ public class Blogs {
 		this.content_3 = content_3;
 	}
 
-	public Boolean getStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 
@@ -156,6 +133,6 @@ public class Blogs {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-
+	
 	
 }

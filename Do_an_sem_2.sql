@@ -131,8 +131,8 @@ CREATE TABLE Orders (
 GO
 CREATE TABLE OrderDetails (
 	Id INT PRIMARY KEY IDENTITY(1,1),
-	ProId INT FOREIGN KEY REFERENCES Products(ProId),
 	OrderId INT FOREIGN KEY REFERENCES Orders(OrderId),
+	ProId INT FOREIGN KEY REFERENCES Products(ProId),
 	Quantity INT NOT NULL,
 	Price MONEY NOT NULL
 )
@@ -153,8 +153,14 @@ CREATE TABLE Blogs (
 )
 
 GO
-Insert into Configs values ('logoImage.jpg', 'bannerImage.ipg', N'Số 238 Hoàng Quốc Việt, Cầu GIấy, Hà nội', 
+INSERT INTO Configs VALUES ('logoImage.jpg', 'bannerImage.ipg', N'Số 238 Hoàng Quốc Việt, Cầu GIấy, Hà nội', 
 '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4331.764921528694!2d105.71224085080011!3d18.6438196872751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3139cc46daf9fc6b%3A0x9332dd7c2df8d550!2zTMOqIER1eSDEkGnhur9tLCB0dC4gWHXDom4gQW4sIE5naGkgWHXDom4sIEjDoCBUxKluaCwgVmnhu4d0IE5hbQ!5e1!3m2!1svi!2s!4v1649836718565!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>', 'Eiser@gamil.com', '0398888888', '2022-02-02')
 
-go
-select * from Configs
+GO
+SELECT * FROM Configs
+
+GO
+INSERT INTO Roles(Name) VALUES ('Admin'), ('Customer')
+
+GO
+SELECT * FROM Roles

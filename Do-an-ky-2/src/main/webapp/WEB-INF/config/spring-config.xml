@@ -27,7 +27,7 @@
 		<property name="maxUploadSize" value="2000000"></property>
 	</bean>
 
-	<bean id="dataSource"
+	<!-- <bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="com.microsoft.sqlserver.jdbc.SQLServerDriver"></property>
@@ -47,5 +47,5 @@
 				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServer2008Dialect</prop>
 			</props>
 		</property>
-	</bean>
+	</bean> -->
 </beans>

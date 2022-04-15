@@ -1,60 +1,46 @@
 package bkap.entities;
 
 import java.util.Date;
+import javax.validation.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class BlogsDTO {
 
-@Entity
-@Table(name = "Blogs")
-
-public class Blogs {
-	@Id
-	@Column(name = "Id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "Name")
+	@NotEmpty(message = "Name is not null.")
 	private String name;
 	
-	@Column(name = "Title")
+	@NotEmpty(message = "Title is not null.")
 	private String title;	
 	
-	@Column(name = "MainImageUrl")
 	private String mainImageUrl;
 	
-	@Column(name = "Content_1")
+	@NotEmpty(message = "Content 1 is not null.")
 	private String content_1;
 	
-	@Column(name = "SecondImageUrl")
 	private String secondImageUrl;
 	
-	@Column(name = "Content_2")
+	@NotEmpty(message = "Content 2 is not null.")
 	private String content_2;
 	
-	@Column(name = "ThirdImageUrl")
 	private String thirdImageUrl;
 	
-	@Column(name = "Content_3")
 	private String content_3;
 	
-	@Column(name = "Status")
-	private Boolean status;
+	private boolean status;
 	
-	@Column(name = "CreatedAt")
 	private Date createdAt;
-	
-	public Blogs() {
+
+	public BlogsDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Blogs(Integer id, String name, String title, String mainImageUrl, String content_1, String secondImageUrl,
-			String content_2, String thirdImageUrl, String content_3, Boolean status, Date createdAt) {
+	public BlogsDTO(Integer id, @NotEmpty(message = "Name is not null.") String name,
+			@NotEmpty(message = "Title is not null.") String title, String mainImageUrl,
+			@NotEmpty(message = "Content 1 is not null.") String content_1, String secondImageUrl,
+			@NotEmpty(message = "Content 2 is not null.") String content_2, String thirdImageUrl, String content_3,
+			boolean status, Date createdAt) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -141,11 +127,11 @@ public class Blogs {
 		this.content_3 = content_3;
 	}
 
-	public Boolean getStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 

@@ -24,6 +24,10 @@ public class Account_Roles {
 	@ManyToOne
 	@JoinColumn(name = "RoleId", referencedColumnName = "RoleId")
 	private Roles objRoleOfAccountRole;
+	
+	public Account_Roles() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Account_Roles(Integer id, Accounts objAccountOfAccountRole, Roles objRoleOfAccountRole) {
 		super();
