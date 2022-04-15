@@ -2,3 +2,4 @@ ngo kim trung
  
 insert product
 update product
+load product
