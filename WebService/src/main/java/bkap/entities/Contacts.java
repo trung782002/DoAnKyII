@@ -15,7 +15,7 @@ public class Contacts {
 	@Id
 	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer brandId;
+	private Integer id;
 	
 	@Column(name = "AccId")
 	private Integer accId;
@@ -43,10 +43,10 @@ public class Contacts {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Contacts(Integer brandId, Integer accId, String fullName, String email, String phone, String message,
+	public Contacts(Integer id, Integer accId, String fullName, String email, String phone, String message,
 			boolean status, Date createdAt) {
 		super();
-		this.brandId = brandId;
+		this.id = id;
 		this.accId = accId;
 		this.fullName = fullName;
 		this.email = email;
@@ -56,12 +56,12 @@ public class Contacts {
 		this.createdAt = createdAt;
 	}
 
-	public Integer getBrandId() {
-		return brandId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setBrandId(Integer brandId) {
-		this.brandId = brandId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getAccId() {
@@ -119,6 +119,6 @@ public class Contacts {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	
+
 	
 }

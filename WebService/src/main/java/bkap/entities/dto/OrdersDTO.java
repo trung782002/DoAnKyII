@@ -18,7 +18,7 @@ public class OrdersDTO {
 
 	private String totalPrice;
 
-	private boolean status;
+	private int status;
 
 	private Date createdAt;
 
@@ -29,7 +29,7 @@ public class OrdersDTO {
 	}
 
 	public OrdersDTO(Integer orderId, Integer accId, String fullName, String address, String phone, String note,
-			String totalPrice, boolean status, Date createdAt, Date updatedAt) {
+			String totalPrice, int status, Date createdAt, Date updatedAt) {
 		super();
 		this.orderId = orderId;
 		this.accId = accId;
@@ -99,11 +99,11 @@ public class OrdersDTO {
 		this.totalPrice = totalPrice;
 	}
 
-	public boolean isStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
@@ -122,6 +122,6 @@ public class OrdersDTO {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+
 	
 }

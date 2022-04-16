@@ -148,7 +148,7 @@ CREATE TABLE Blogs (
 	Content_2 NTEXT NOT NULL,
 	ThirdImageUrl VARCHAR(255) NULL,
 	Content_3 NTEXT NULL,
-	Status INT DEFAULT 1,
+	Status BIT DEFAULT 1,
 	CreatedAt DATETIME DEFAULT GETDATE(),
 )
 
@@ -164,3 +164,6 @@ INSERT INTO Roles(Name) VALUES ('Admin'), ('Customer')
 
 GO
 SELECT * FROM Roles
+
+GO
+SELECT * FROM Contacts

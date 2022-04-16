@@ -37,7 +37,7 @@ public class Orders {
 	private String totalPrice;
 	
 	@Column(name = "Status")
-	private boolean status;
+	private int status;
 	
 	@Column(name = "CreatedAt")
 	private Date createdAt;
@@ -58,7 +58,7 @@ public class Orders {
 	}
 
 	public Orders(Integer orderId, String fullName, String address, String phone, String note, String totalPrice,
-			boolean status, Date createdAt, Date updatedAt, Accounts objAccountOfOrder,
+			int status, Date createdAt, Date updatedAt, Accounts objAccountOfOrder,
 			Set<OrderDetails> listOrderDetails) {
 		super();
 		this.orderId = orderId;
@@ -122,11 +122,11 @@ public class Orders {
 		this.totalPrice = totalPrice;
 	}
 
-	public boolean isStatus() {
+	public int isStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

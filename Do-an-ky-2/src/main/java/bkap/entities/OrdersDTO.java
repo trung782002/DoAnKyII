@@ -23,7 +23,7 @@ public class OrdersDTO {
 	
 	private String totalPrice;
 	
-	private boolean status;
+	private int status;
 	
 	private Date createdAt;
 	
@@ -37,7 +37,7 @@ public class OrdersDTO {
 
 	public OrdersDTO(Integer orderId, Integer accId, @NotEmpty(message = "Fullname is not null !!") String fullName,
 			@NotEmpty(message = "Address is not null !!") String address,
-			@NotEmpty(message = "Phone is not null !!") String phone, String note, String totalPrice, boolean status,
+			@NotEmpty(message = "Phone is not null !!") String phone, String note, String totalPrice, int status,
 			Date createdAt, Date updatedAt) {
 		super();
 		this.orderId = orderId;
@@ -108,11 +108,11 @@ public class OrdersDTO {
 		this.totalPrice = totalPrice;
 	}
 
-	public boolean isStatus() {
+	public int isStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

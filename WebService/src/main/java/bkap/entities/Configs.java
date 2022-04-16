@@ -18,7 +18,7 @@ public class Configs {
 	private Integer id;
 	
 	@Column(name = "LogoImage")
-	private String LogoImage;
+	private String logoImage;
 	
 	@Column(name = "BannerImage")
 	private String bannerImage;	
@@ -47,7 +47,7 @@ public class Configs {
 			String phone, Date createdAt) {
 		super();
 		this.id = id;
-		LogoImage = logoImage;
+		this.logoImage = logoImage;
 		this.bannerImage = bannerImage;
 		this.address = address;
 		this.map = map;
@@ -65,11 +65,11 @@ public class Configs {
 	}
 
 	public String getLogoImage() {
-		return LogoImage;
+		return logoImage;
 	}
 
 	public void setLogoImage(String logoImage) {
-		LogoImage = logoImage;
+		this.logoImage = logoImage;
 	}
 
 	public String getBannerImage() {

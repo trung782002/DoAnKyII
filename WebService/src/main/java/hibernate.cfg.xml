@@ -20,7 +20,7 @@
 		<mapping class="bkap.entities.Contacts" />
 		<mapping class="bkap.entities.OrderDetails" />
 		<mapping class="bkap.entities.Orders" />
-		<mapping class="bkap.entities.Products_images" />
+		<mapping class="bkap.entities.Product_images" />
 		<mapping class="bkap.entities.Products" />
 		<mapping class="bkap.entities.Reviews" />
 		<mapping class="bkap.entities.Roles" />
