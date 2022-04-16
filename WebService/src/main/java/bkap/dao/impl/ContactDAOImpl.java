@@ -11,7 +11,7 @@ import bkap.util.HibernateUtil;
 public class ContactDAOImpl implements ContactDAO {
 
 	@Override
-	public List<Contacts> getListContacts() {
+	public List<Contacts> getList() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			List list = session.createQuery("from Contacts").list();

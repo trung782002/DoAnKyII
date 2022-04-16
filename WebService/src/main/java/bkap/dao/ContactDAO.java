@@ -5,7 +5,7 @@ import java.util.List;
 import bkap.entities.Contacts;
 
 public interface ContactDAO {
-	public List<Contacts> getListContacts();
+	public List<Contacts> getList();
 	
 	public boolean insert(Contacts contact);
 	

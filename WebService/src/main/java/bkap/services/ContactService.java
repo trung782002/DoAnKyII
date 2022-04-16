@@ -18,12 +18,12 @@ import bkap.entities.Contacts;
 @Path("/contactService/")
 public class ContactService {
 	@GET
-	@Path("/getListContacts")
+	@Path("/getList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getListContacts() {
-		List<Contacts> getListContacts = new ContactDAOImpl().getListContacts();
+	public String getList() {
+		List<Contacts> list = new ContactDAOImpl().getList();
 		Gson son = new Gson();
-		String data = son.toJson(getListContacts);
+		String data = son.toJson(list);
 		return data;
 	}
 	

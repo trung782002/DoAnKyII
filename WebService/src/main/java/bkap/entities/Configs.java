@@ -35,8 +35,8 @@ public class Configs {
 	@Column(name = "Phone")
 	private String phone;
 	
-	@Column(name = "CreatedAt")
-	private Date createdAt;
+	@Column(name = "UpdatedAt")
+	private Date updatedAt;
 	
 	public Configs() {
 		super();
@@ -44,7 +44,7 @@ public class Configs {
 	}
 
 	public Configs(Integer id, String logoImage, String bannerImage, String address, String map, String email,
-			String phone, Date createdAt) {
+			String phone, Date updatedAt) {
 		super();
 		this.id = id;
 		this.logoImage = logoImage;
@@ -53,7 +53,7 @@ public class Configs {
 		this.map = map;
 		this.email = email;
 		this.phone = phone;
-		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
 
 	public Integer getId() {
@@ -112,12 +112,12 @@ public class Configs {
 		this.phone = phone;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	
