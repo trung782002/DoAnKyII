@@ -16,7 +16,7 @@ public class OrdersDTO {
 
 	private String note;
 
-	private String totalPrice;
+	private double totalPrice;
 
 	private int status;
 
@@ -29,7 +29,7 @@ public class OrdersDTO {
 	}
 
 	public OrdersDTO(Integer orderId, Integer accId, String fullName, String address, String phone, String note,
-			String totalPrice, int status, Date createdAt, Date updatedAt) {
+			double totalPrice, int status, Date createdAt, Date updatedAt) {
 		super();
 		this.orderId = orderId;
 		this.accId = accId;
@@ -91,11 +91,11 @@ public class OrdersDTO {
 		this.note = note;
 	}
 
-	public String getTotalPrice() {
+	public double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(String totalPrice) {
+	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 

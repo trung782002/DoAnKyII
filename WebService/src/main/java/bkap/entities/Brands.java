@@ -26,7 +26,7 @@ public class Brands {
 	private String imageUrl;
 	
 	@Column(name = "Status")
-	private Boolean status;
+	private boolean status;
 	
 	@Column(name = "CreatedAt")
 	private Date createdAt;
@@ -38,8 +38,8 @@ public class Brands {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public Brands(Integer brandId, String name, String imageUrl, Boolean status, Date createdAt,
+	
+	public Brands(Integer brandId, String name, String imageUrl, boolean status, Date createdAt,
 			Set<Products> listProducts) {
 		super();
 		this.brandId = brandId;
@@ -74,11 +74,11 @@ public class Brands {
 		this.imageUrl = imageUrl;
 	}
 
-	public Boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 

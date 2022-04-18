@@ -99,7 +99,7 @@ public class AccountsDTO {
 		this.password = password;
 	}
 
-	public boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
@@ -122,6 +122,6 @@ public class AccountsDTO {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	
+
 	
 }

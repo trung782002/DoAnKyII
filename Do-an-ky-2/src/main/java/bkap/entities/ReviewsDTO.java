@@ -80,7 +80,7 @@ public class ReviewsDTO {
 		this.contentRated = contentRated;
 	}
 
-	public boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 

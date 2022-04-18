@@ -130,7 +130,7 @@ public class ProductsDTO {
 		this.quanity = quanity;
 	}
 
-	public boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
@@ -145,6 +145,6 @@ public class ProductsDTO {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	
+
 	
 }

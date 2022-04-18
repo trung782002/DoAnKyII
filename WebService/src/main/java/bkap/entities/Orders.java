@@ -34,7 +34,7 @@ public class Orders {
 	private String note;
 	
 	@Column(name = "TotalPrice")
-	private String totalPrice;
+	private double totalPrice;
 	
 	@Column(name = "Status")
 	private int status;
@@ -57,7 +57,7 @@ public class Orders {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Orders(Integer orderId, String fullName, String address, String phone, String note, String totalPrice,
+	public Orders(Integer orderId, String fullName, String address, String phone, String note, double totalPrice,
 			int status, Date createdAt, Date updatedAt, Accounts objAccountOfOrder,
 			Set<OrderDetails> listOrderDetails) {
 		super();
@@ -114,15 +114,15 @@ public class Orders {
 		this.note = note;
 	}
 
-	public String getTotalPrice() {
+	public double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(String totalPrice) {
+	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
-	public int isStatus() {
+	public int getStatus() {
 		return status;
 	}
 

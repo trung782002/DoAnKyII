@@ -30,9 +30,9 @@ public class ContactService {
 	@POST
 	@Path("/insert")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String insert(String contact) {
+	public String insert(String jsonContact) {
 		Gson son = new Gson();
-		Contacts objContact = son.fromJson(contact, Contacts.class);
+		Contacts objContact = son.fromJson(jsonContact, Contacts.class);
 		boolean bl = new ContactDAOImpl().insert(objContact);
 		String data = son.toJson(bl);
 		return data;
@@ -41,9 +41,9 @@ public class ContactService {
 	@PUT
 	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String update(String contact) {
+	public String update(String jsonContact) {
 		Gson son = new Gson();
-		Contacts objContact = son.fromJson(contact, Contacts.class);
+		Contacts objContact = son.fromJson(jsonContact, Contacts.class);
 		boolean bl = new ContactDAOImpl().update(objContact);
 		String data = son.toJson(bl);
 		return data;

@@ -23,7 +23,7 @@ public class Categories {
 	private String name;
 	
 	@Column(name = "Status")
-	private Boolean status;
+	private boolean status;
 	
 	@Column(name = "CreatedAt")
 	private Date createdAt;
@@ -36,7 +36,7 @@ public class Categories {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Categories(Integer cateId, String name, Boolean status, Date createdAt, Set<Products> listProducts) {
+	public Categories(Integer cateId, String name, boolean status, Date createdAt, Set<Products> listProducts) {
 		super();
 		this.cateId = cateId;
 		this.name = name;
@@ -61,11 +61,11 @@ public class Categories {
 		this.name = name;
 	}
 
-	public Boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 

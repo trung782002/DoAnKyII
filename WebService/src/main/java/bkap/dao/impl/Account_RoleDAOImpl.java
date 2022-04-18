@@ -4,17 +4,18 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import bkap.dao.BrandDAO;
-import bkap.entities.Brands;
+import bkap.dao.Account_RoleDAO;
+import bkap.entities.Account_Roles;
+import bkap.entities.Accounts;
 import bkap.util.HibernateUtil;
 
-public class BrandDAOImpl implements BrandDAO {
+public class Account_RoleDAOImpl implements Account_RoleDAO {
 
 	@Override
-	public List<Brands> getList() {
+	public List<Account_Roles> getList() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery("from Brands").list();
+			List list = session.createQuery("from Account_Roles").list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -25,31 +26,11 @@ public class BrandDAOImpl implements BrandDAO {
 	}
 
 	@Override
-	public List<Brands> searchByName(String name) {
+	public Account_Roles getById(Integer id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			if (name == null || name.length() == 0) {
-				name = "%";
-			} else {
-				name = "%" + name + "%";
-			}
-			List list = session.createQuery("from Brands where Name like :name").setParameter("name", name).list();
-			return list;
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return null;
-	}
-
-	@Override
-	public Brands getById(Integer id) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		try {
-			Brands brand = session.get(Brands.class, id);
-			return brand;
+			Account_Roles account_role = session.get(Account_Roles.class, id);
+			return account_role;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -59,15 +40,14 @@ public class BrandDAOImpl implements BrandDAO {
 	}
 
 	@Override
-	public boolean insert(Brands brand) {
+	public boolean insert(Account_Roles account_role) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
-			session.save(brand);
+			session.save(account_role);
 			session.getTransaction().commit();
 			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (Exception e){
 			e.printStackTrace();
 			session.getTransaction().rollback();
 		} finally {
@@ -77,15 +57,14 @@ public class BrandDAOImpl implements BrandDAO {
 	}
 
 	@Override
-	public boolean update(Brands brand) {
+	public boolean update(Account_Roles account_role) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
-			session.update(brand);
+			session.update(account_role);
 			session.getTransaction().commit();
 			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (Exception e){
 			e.printStackTrace();
 			session.getTransaction().rollback();
 		} finally {
@@ -103,9 +82,8 @@ public class BrandDAOImpl implements BrandDAO {
 			session.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
-			session.getTransaction().commit();
+			session.getTransaction().rollback();
 		} finally {
 			session.close();
 		}

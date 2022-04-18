@@ -4,17 +4,18 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import bkap.dao.BrandDAO;
-import bkap.entities.Brands;
+import bkap.dao.ProductDAO;
+import bkap.entities.Products;
 import bkap.util.HibernateUtil;
 
-public class BrandDAOImpl implements BrandDAO {
+public class ProductDAOImpl implements ProductDAO{
 
 	@Override
-	public List<Brands> getList() {
+	public List<Products> getList() {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery("from Brands").list();
+			List list = session.createQuery("from Products").list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -25,7 +26,8 @@ public class BrandDAOImpl implements BrandDAO {
 	}
 
 	@Override
-	public List<Brands> searchByName(String name) {
+	public List<Products> searchByName(String name) {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			if (name == null || name.length() == 0) {
@@ -33,7 +35,7 @@ public class BrandDAOImpl implements BrandDAO {
 			} else {
 				name = "%" + name + "%";
 			}
-			List list = session.createQuery("from Brands where Name like :name").setParameter("name", name).list();
+			List list = session.createQuery("from Products where Name like :name").setParameter("name", name).list();
 			return list;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -45,11 +47,12 @@ public class BrandDAOImpl implements BrandDAO {
 	}
 
 	@Override
-	public Brands getById(Integer id) {
+	public Products getById(Integer id) {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			Brands brand = session.get(Brands.class, id);
-			return brand;
+		    Products product = session.get(Products.class, id);
+			return product;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -59,11 +62,12 @@ public class BrandDAOImpl implements BrandDAO {
 	}
 
 	@Override
-	public boolean insert(Brands brand) {
+	public boolean insert(Products product) {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
-			session.save(brand);
+			session.save(product);
 			session.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
@@ -77,11 +81,12 @@ public class BrandDAOImpl implements BrandDAO {
 	}
 
 	@Override
-	public boolean update(Brands brand) {
+	public boolean update(Products product) {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
-			session.update(brand);
+			session.update(product);
 			session.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
@@ -96,6 +101,7 @@ public class BrandDAOImpl implements BrandDAO {
 
 	@Override
 	public boolean delete(Integer id) {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();

@@ -4,17 +4,19 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import bkap.dao.BrandDAO;
+import bkap.dao.CartDAO;
 import bkap.entities.Brands;
+import bkap.entities.Carts;
 import bkap.util.HibernateUtil;
 
-public class BrandDAOImpl implements BrandDAO {
+public class CartDAOImpl implements CartDAO {
 
 	@Override
-	public List<Brands> getList() {
+	public List<Carts> getList() {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery("from Brands").list();
+			List list = session.createQuery("from Carts").list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -25,67 +27,34 @@ public class BrandDAOImpl implements BrandDAO {
 	}
 
 	@Override
-	public List<Brands> searchByName(String name) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		try {
-			if (name == null || name.length() == 0) {
-				name = "%";
-			} else {
-				name = "%" + name + "%";
-			}
-			List list = session.createQuery("from Brands where Name like :name").setParameter("name", name).list();
-			return list;
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return null;
-	}
-
-	@Override
-	public Brands getById(Integer id) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		try {
-			Brands brand = session.get(Brands.class, id);
-			return brand;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return null;
-	}
-
-	@Override
-	public boolean insert(Brands brand) {
+	public boolean insert(Carts carts) {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
-			session.save(brand);
+			session.save(carts);
 			session.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			session.getTransaction().rollback();
-		} finally {
+		}finally {
 			session.close();
 		}
 		return false;
 	}
 
 	@Override
-	public boolean update(Brands brand) {
+	public boolean update(Carts carts) {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
-			session.update(brand);
+			session.update(carts);
 			session.getTransaction().commit();
 			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (Exception e){
 			e.printStackTrace();
 			session.getTransaction().rollback();
 		} finally {
@@ -96,6 +65,7 @@ public class BrandDAOImpl implements BrandDAO {
 
 	@Override
 	public boolean delete(Integer id) {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
@@ -106,10 +76,22 @@ public class BrandDAOImpl implements BrandDAO {
 			// TODO: handle exception
 			e.printStackTrace();
 			session.getTransaction().commit();
-		} finally {
+		}finally {
 			session.close();
 		}
 		return false;
+	}
+
+	@Override
+	public Carts getById(Integer id) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Carts cart = session.get(Carts.class, id);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
 	}
 
 }

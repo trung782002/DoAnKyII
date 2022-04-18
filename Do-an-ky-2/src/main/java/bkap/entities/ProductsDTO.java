@@ -143,7 +143,7 @@ public class ProductsDTO {
 		this.quanity = quanity;
 	}
 
-	public boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 

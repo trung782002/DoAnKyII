@@ -20,7 +20,8 @@ public class CategoriesDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CategoriesDTO(Integer cateId, String name, boolean status, Date createdAt) {
+	public CategoriesDTO(Integer cateId, @NotEmpty(message = "Category name is not null !!") String name,
+			boolean status, Date createdAt) {
 		super();
 		this.cateId = cateId;
 		this.name = name;
@@ -44,7 +45,7 @@ public class CategoriesDTO {
 		this.name = name;
 	}
 
-	public boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
@@ -60,5 +61,5 @@ public class CategoriesDTO {
 		this.createdAt = createdAt;
 	}
 
-		
+	
 }

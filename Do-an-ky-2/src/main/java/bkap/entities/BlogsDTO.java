@@ -127,7 +127,7 @@ public class BlogsDTO {
 		this.content_3 = content_3;
 	}
 
-	public boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 

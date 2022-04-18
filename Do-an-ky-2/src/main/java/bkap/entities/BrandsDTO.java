@@ -21,7 +21,7 @@ public class BrandsDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public BrandsDTO(Integer brandId, @NotEmpty(message = "Brand name is not null.") String name, String imageUrl,
 			boolean status, Date createdAt) {
 		super();
@@ -56,7 +56,7 @@ public class BrandsDTO {
 		this.imageUrl = imageUrl;
 	}
 
-	public boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
@@ -71,7 +71,6 @@ public class BrandsDTO {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-
 	
 	
 }

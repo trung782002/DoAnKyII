@@ -51,7 +51,7 @@ public class BrandsDTO {
 		this.imageUrl = imageUrl;
 	}
 
-	public boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
@@ -66,6 +66,6 @@ public class BrandsDTO {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	
+
 	
 }

@@ -26,7 +26,7 @@ public class Reviews {
 	private Integer contentRated;
 	
 	@Column(name = "Status")
-	private Boolean status;
+	private boolean status;
 	
 	@Column(name = "CreatedAt")
 	private Date createdAt;
@@ -44,7 +44,7 @@ public class Reviews {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reviews(Integer id, Integer productQuality, Integer contentRated, Boolean status, Date createdAt,
+	public Reviews(Integer id, Integer productQuality, Integer contentRated, boolean status, Date createdAt,
 			Accounts objAccountOfReview, Products objProductOfReview) {
 		super();
 		this.id = id;
@@ -80,11 +80,11 @@ public class Reviews {
 		this.contentRated = contentRated;
 	}
 
-	public Boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 

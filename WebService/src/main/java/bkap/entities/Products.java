@@ -45,7 +45,7 @@ public class Products {
 	private Integer quanity;
 	
 	@Column(name = "Status")
-	private Boolean status;
+	private boolean status;
 	
 	@Column(name = "CreatedAt")
 	private Date createdAt;
@@ -76,7 +76,7 @@ public class Products {
 	}
 
 	public Products(Integer proId, String name, String imageUrl, double price, double discount, String shortDescription,
-			String description, Integer quanity, Boolean status, Date createdAt, Categories objCategoryOfProduct,
+			String description, Integer quanity, boolean status, Date createdAt, Categories objCategoryOfProduct,
 			Brands objBrandOfProduct, Set<Product_images> listProductImages, Set<Reviews> listReviews,
 			Set<Carts> listCarts, Set<OrderDetails> listOrderDetails) {
 		super();
@@ -162,11 +162,11 @@ public class Products {
 		this.quanity = quanity;
 	}
 
-	public Boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 

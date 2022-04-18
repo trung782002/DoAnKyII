@@ -110,7 +110,7 @@ public class AccountsDTO {
 		this.password = password;
 	}
 
-	public boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
@@ -134,4 +134,5 @@ public class AccountsDTO {
 		this.createdAt = createdAt;
 	}
 
+	
 }

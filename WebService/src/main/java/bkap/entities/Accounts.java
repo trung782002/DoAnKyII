@@ -38,7 +38,7 @@ public class Accounts {
 	private String password;
 	
 	@Column(name = "Status")
-	private Boolean status;
+	private boolean status;
 	
 	@Column(name = "RememberToken")
 	private String rememberToken;
@@ -63,7 +63,7 @@ public class Accounts {
 	}
 
 	public Accounts(Integer accId, String accName, String fullName, String email, String address, String phone,
-			String password, Boolean status, String rememberToken, Date createdAt, Set<Account_Roles> listAccountRoles,
+			String password, boolean status, String rememberToken, Date createdAt, Set<Account_Roles> listAccountRoles,
 			Set<Reviews> listReviews, Set<Carts> listCarts, Set<Orders> listOrders) {
 		super();
 		this.accId = accId;
@@ -138,11 +138,11 @@ public class Accounts {
 		this.password = password;
 	}
 
-	public Boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 

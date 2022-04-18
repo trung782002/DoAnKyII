@@ -40,7 +40,7 @@ public class CategoriesDTO {
 		this.name = name;
 	}
 
-	public boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
@@ -55,6 +55,6 @@ public class CategoriesDTO {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	
+
 	
 }

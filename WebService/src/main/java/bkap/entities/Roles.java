@@ -21,7 +21,7 @@ public class Roles {
 	private String name;
 	
 	@Column(name = "Status")
-	private Boolean status;
+	private boolean status;
 	
 	@OneToMany(mappedBy = "objRoleOfAccountRole")
 	private Set<Account_Roles> listAccountRoles;
@@ -30,7 +30,7 @@ public class Roles {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Roles(Integer roleId, String name, Boolean status, Set<Account_Roles> listAccountRoles) {
+	public Roles(Integer roleId, String name, boolean status, Set<Account_Roles> listAccountRoles) {
 		super();
 		this.roleId = roleId;
 		this.name = name;
@@ -54,11 +54,11 @@ public class Roles {
 		this.name = name;
 	}
 
-	public Boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 

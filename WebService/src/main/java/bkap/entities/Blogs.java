@@ -43,7 +43,7 @@ public class Blogs {
 	private String content_3;
 	
 	@Column(name = "Status")
-	private Boolean status;
+	private boolean status;
 	
 	@Column(name = "CreatedAt")
 	private Date createdAt;
@@ -54,7 +54,7 @@ public class Blogs {
 	}
 
 	public Blogs(Integer id, String name, String title, String mainImageUrl, String content_1, String secondImageUrl,
-			String content_2, String thirdImageUrl, String content_3, Boolean status, Date createdAt) {
+			String content_2, String thirdImageUrl, String content_3, boolean status, Date createdAt) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -141,11 +141,11 @@ public class Blogs {
 		this.content_3 = content_3;
 	}
 
-	public Boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 
