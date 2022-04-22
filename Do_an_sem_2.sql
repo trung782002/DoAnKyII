@@ -50,7 +50,7 @@ CREATE TABLE Accounts (
 	Email VARCHAR(150) UNIQUE NOT NULL,
 	Address NVARCHAR(255) NOT NULL,
 	Phone VARCHAR(20) NOT NULL,
-	Password VARCHAR(50) NOT NULL,
+	Password VARCHAR(255) NOT NULL,
 	Status BIT DEFAULT 1,
 	RememberToken VARCHAR(150) NULL,
 	CreatedAt DATETIME DEFAULT GETDATE()
@@ -159,7 +159,6 @@ INSERT INTO Configs VALUES ('logoImage.jpg', 'bannerImage.ipg', N'Số 238 Hoàn
 GO
 SELECT * FROM Configs
 
---GO
 --INSERT INTO Roles(Name) VALUES ('Admin'), ('Customer')
 
 GO
