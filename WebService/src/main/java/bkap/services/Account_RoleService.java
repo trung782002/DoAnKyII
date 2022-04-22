@@ -21,6 +21,7 @@ import bkap.entities.Accounts;
 import bkap.entities.Roles;
 import bkap.entities.dto.Account_RolesDTO;
 
+@Path("/account_roleService/")
 public class Account_RoleService {
 	@GET
 	@Path("/getList")

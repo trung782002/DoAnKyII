@@ -159,11 +159,14 @@ INSERT INTO Configs VALUES ('logoImage.jpg', 'bannerImage.ipg', N'Số 238 Hoàn
 GO
 SELECT * FROM Configs
 
-GO
-INSERT INTO Roles(Name) VALUES ('Admin'), ('Customer')
+--GO
+--INSERT INTO Roles(Name) VALUES ('Admin'), ('Customer')
 
 GO
 SELECT * FROM Roles
 
 GO
-SELECT * FROM Contacts
+SELECT * FROM Accounts
+
+GO
+SELECT * FROM Account_Roles

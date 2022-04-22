@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <jsp:include page="../layouts/header.jsp" flush="true"></jsp:include>
 
 <jsp:include page="../layouts/menu.jsp" flush="true"></jsp:include>
@@ -14,13 +16,71 @@
 					<p>Very us move be blessed multiply night</p>
 				</div>
 				<div class="page_link">
-					<a href="index.html">Home</a> <a href="checkout.html">Product
-						Checkout</a>
+					<a href="home">Home</a> <a href="signUp">Sign up</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 <!--================End Home Banner Area =================-->
+
+<section class="section_gap">
+	<div class="container">
+		<div class="text-center mb-4">
+			<h2>Sign up</h2>
+			<h6 class="font-weight-light">Welcome to Eiser, fill out the information below to register an account and start shopping</h6>
+		</div>
+		<div class="col-12 col-lg-7 m-auto">
+			<form:form action="doSignUp" modelAttribute="account" method="post">
+				<form:input path="accId" type="hidden"/>
+			
+				<div class="form-group">
+				    <label>Account name <span class="text-danger">*</span></label>
+				    <form:input class="form-control" autocomplete="off" path="accName" placeholder="enter account name"/>
+				    <form:errors class="text-danger mt-5" path="accName"></form:errors>
+				</div>
+				
+				<div class="form-group">
+				    <label>Full name <span class="text-danger">*</span></label>
+				    <form:input class="form-control" autocomplete="off" path="fullName" placeholder="enter full name"/>
+				    <form:errors class="text-danger" path="fullName"></form:errors>
+				</div>
+				
+				<div class="form-group">
+				    <label>Email address <span class="text-danger">*</span></label>
+				    <form:input type="email" class="form-control" autocomplete="off" path="email" placeholder="enter email"/>
+				    <form:errors class="text-danger" path="email"></form:errors>
+				</div>
+				
+				<div class="form-group">
+				    <label>Address <span class="text-danger">*</span></label>
+				    <form:input class="form-control" autocomplete="off" path="address" placeholder="enter address"/>
+				    <form:errors class="text-danger" path="address"></form:errors>
+				</div>
+				
+				<div class="form-group">
+				    <label>Phone <span class="text-danger">*</span></label>
+				    <form:input class="form-control" autocomplete="off" path="phone" placeholder="enter phone"/>
+				    <form:errors class="text-danger" path="phone"></form:errors>
+				</div>
+				
+				<div class="form-group">
+				    <label>Password <span class="text-danger">*</span></label>
+				    <form:input class="form-control" autocomplete="off" type="password" path="password" placeholder="enter password"/>
+				    <form:errors class="text-danger" path="password"></form:errors>
+				</div>
+				
+				<%-- <div class="form-group">
+				    <label>Confirm password <span class="text-danger">*</span></label>
+				    <form:input class="form-control" autocomplete="off" path="" placeholder="enter confirm password"/>
+				</div> --%>
+				
+				<div class="d-flex justify-content-center">
+					<input class="main_btn px-5" type="submit" value="Sign up">
+				</div>
+			</form:form>
+		</div>
+	</div>
+</section>
 
 <jsp:include page="../layouts/footer.jsp" flush="true"></jsp:include>

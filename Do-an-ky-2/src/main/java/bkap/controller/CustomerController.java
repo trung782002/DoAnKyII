@@ -45,14 +45,4 @@ public class CustomerController {
 	public String contact(Model model) {
 		return "customer/pages/contact";
 	}
-	
-	@RequestMapping(value = "/login")
-	public String login(Model model) {
-		return "customer/pages/login";
-	}
-	
-	@RequestMapping(value = "/signUp")
-	public String signUp(Model model) {
-		return "customer/pages/signUp";
-	}
 }
