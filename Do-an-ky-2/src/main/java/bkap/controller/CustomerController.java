@@ -31,16 +31,6 @@ public class CustomerController {
 		return "customer/pages/cart";
 	}
 	
-	@RequestMapping(value = "/blog")
-	public String blog(Model model) {
-		return "customer/pages/blog";
-	}
-	
-	@RequestMapping(value = "/blogDetail")
-	public String blogDetail(Model model) {
-		return "customer/pages/blogDetail";
-	}
-	
 	@RequestMapping(value = "/contact")
 	public String contact(Model model) {
 		return "customer/pages/contact";

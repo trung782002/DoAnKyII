@@ -6,17 +6,21 @@ import org.hibernate.Session;
 
 import bkap.dao.BlogDAO;
 import bkap.entities.Blogs;
-import bkap.entities.Brands;
 import bkap.util.HibernateUtil;
 
 public class BlogDAOImpl implements BlogDAO{
 
 	@Override
-	public List<Blogs> getList() {
-		// TODO Auto-generated method stub
+	public List<Blogs> getList(Integer status) {
+		String query;
+		if(status == 0)
+			query = "from Blogs";
+		else 
+			query = "from Blogs where Status = " + status;
+		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery("from Blogs").list();
+			List list = session.createQuery(query).list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();

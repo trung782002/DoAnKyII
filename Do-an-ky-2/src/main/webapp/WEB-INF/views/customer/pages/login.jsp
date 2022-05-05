@@ -21,6 +21,10 @@
 		</div>
 	</div>
 </section>
+
+<div class="text-center">
+    <span>Need an account? </span> <a href="signUp" class="mainColor">Sign up</a>
+</div>
 <!--================End Home Banner Area =================-->
 
 <jsp:include page="../layouts/footer.jsp" flush="true"></jsp:include>

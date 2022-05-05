@@ -8,4 +8,6 @@ public interface ConfigDAO {
 	public List<Configs> getList();
 	
 	public boolean update(Configs config);
+	
+	public Configs getById(Integer id);
 }

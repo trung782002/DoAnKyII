@@ -3,27 +3,30 @@ package bkap.entities;
 import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 public class AccountsDTO {
 
 	private Integer accId;
 
-	@NotEmpty(message = "Account name is null")
+	@NotEmpty(message = "Please enter your account name.")
 	private String accName;
 
-	@NotEmpty(message = "Fullname is null")
+	@NotEmpty(message = "Please enter your fullname.")
 	private String fullName;
 
-	@NotEmpty(message = "Email is null")
+	@NotEmpty(message = "Please enter your email.")
 	private String email;
 
-	@NotEmpty(message = "Address is null")
+//	@NotEmpty(message = "Please enter your address.")
+	@Pattern(regexp="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", message = "Email wrong format")
 	private String address;
 
-	@NotEmpty(message = "Phone is null")
+	@NotEmpty(message = "Please enter your phone.")
+	@Pattern(regexp="(^$|[0-9]{10})", message = "Phone wrong format.")
 	private String phone;
 
-	@NotEmpty(message = "Password is null")
+	@NotEmpty(message = "Please enter password.")
 	private String password;
 
 	private boolean status;
@@ -36,11 +39,8 @@ public class AccountsDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AccountsDTO(Integer accId, @NotEmpty(message = "Account name is null") String accName,
-			@NotEmpty(message = "Fullname is null") String fullName, @NotEmpty(message = "Email is null") String email,
-			@NotEmpty(message = "Address is null") String address, @NotEmpty(message = "Phone is null") String phone,
-			@NotEmpty(message = "Password is null") String password, boolean status, String rememberToken,
-			Date createdAt) {
+	public AccountsDTO(Integer accId, String accName, String fullName, String email, String address, String phone,
+			String password, boolean status, String rememberToken, Date createdAt) {
 		super();
 		this.accId = accId;
 		this.accName = accName;
@@ -134,5 +134,4 @@ public class AccountsDTO {
 		this.createdAt = createdAt;
 	}
 
-	
 }

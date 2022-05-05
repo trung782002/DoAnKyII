@@ -6,29 +6,29 @@ import javax.validation.constraints.NotEmpty;
 public class BlogsDTO {
 
 	private Integer id;
-	
-	@NotEmpty(message = "Name is not null.")
+
+	@NotEmpty(message = "Please enter blog name.")
 	private String name;
-	
-	@NotEmpty(message = "Title is not null.")
-	private String title;	
-	
+
+	@NotEmpty(message = "Please enter title.")
+	private String title;
+
 	private String mainImageUrl;
-	
-	@NotEmpty(message = "Content 1 is not null.")
+
+	@NotEmpty(message = "Please enter first content.")
 	private String content_1;
-	
+
 	private String secondImageUrl;
-	
-	@NotEmpty(message = "Content 2 is not null.")
+
+	@NotEmpty(message = "Please enter second content.")
 	private String content_2;
-	
+
 	private String thirdImageUrl;
-	
+
 	private String content_3;
-	
+
 	private boolean status;
-	
+
 	private Date createdAt;
 
 	public BlogsDTO() {
@@ -36,11 +36,8 @@ public class BlogsDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BlogsDTO(Integer id, @NotEmpty(message = "Name is not null.") String name,
-			@NotEmpty(message = "Title is not null.") String title, String mainImageUrl,
-			@NotEmpty(message = "Content 1 is not null.") String content_1, String secondImageUrl,
-			@NotEmpty(message = "Content 2 is not null.") String content_2, String thirdImageUrl, String content_3,
-			boolean status, Date createdAt) {
+	public BlogsDTO(Integer id, String name, String title, String mainImageUrl, String content_1, String secondImageUrl,
+			String content_2, String thirdImageUrl, String content_3, boolean status, Date createdAt) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -143,5 +140,4 @@ public class BlogsDTO {
 		this.createdAt = createdAt;
 	}
 
-	
 }

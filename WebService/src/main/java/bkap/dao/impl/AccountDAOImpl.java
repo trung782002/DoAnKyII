@@ -37,6 +37,20 @@ public class AccountDAOImpl implements AccountDAO {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<Accounts> checkUnique(String accName) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			List list = session.createQuery("from Accounts where AccName = :accName").setParameter("accName", accName).list();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
 
 	@Override
 	public boolean insert(Accounts account) {
@@ -86,6 +100,12 @@ public class AccountDAOImpl implements AccountDAO {
 		} finally {
 			session.close();
 		}
+		return false;
+	}
+
+	@Override
+	public boolean checkAccName(String accName) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

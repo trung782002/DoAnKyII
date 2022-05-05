@@ -36,16 +36,6 @@ public class AdminController {
 		return "admin/pages/insertProduct";
 	}
 	
-	@RequestMapping(value = {"/listBlogs"})
-	public String listBlogs(Model model) {
-		return "admin/pages/listBlogs";
-	}
-	
-	@RequestMapping(value = {"/insertBlog"})
-	public String insertBlog(Model model) {
-		return "admin/pages/insertBlog";
-	}
-	
 	@RequestMapping(value = {"/orderManagement"})
 	public String orderManagement(Model model) {
 		return "admin/pages/orderManagement";
@@ -66,8 +56,5 @@ public class AdminController {
 		return "admin/pages/contactManagement";
 	}
 	
-	@RequestMapping(value = {"/configuration"})
-	public String configuration(Model model) {
-		return "admin/pages/configuration";
-	}
+	
 }

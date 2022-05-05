@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -34,6 +35,16 @@ public class ConfigService {
 		Configs objConfig = son.fromJson(jsonConfig, Configs.class);
 		boolean bl = new ConfigDAOImpl().update(objConfig);
 		String data = son.toJson(bl);
+		return data;
+	}
+	
+	@GET
+	@Path("/getById/{configId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getById(@PathParam("configId") Integer configId) {
+		Configs configById = new ConfigDAOImpl().getById(configId) ;
+		Gson son = new Gson();
+		String data = son.toJson(configById);
 		return data;
 	}
 }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <jsp:include page="../layouts/header.jsp" flush="true"></jsp:include>
@@ -37,37 +38,37 @@
 				<div class="form-group">
 				    <label>Account name <span class="text-danger">*</span></label>
 				    <form:input class="form-control" autocomplete="off" path="accName" placeholder="enter account name"/>
-				    <form:errors class="text-danger mt-5" path="accName"></form:errors>
+				    <form:errors class="text-danger mt-1 d-block" path="accName"></form:errors>
 				</div>
 				
 				<div class="form-group">
 				    <label>Full name <span class="text-danger">*</span></label>
 				    <form:input class="form-control" autocomplete="off" path="fullName" placeholder="enter full name"/>
-				    <form:errors class="text-danger" path="fullName"></form:errors>
+				    <form:errors class="text-danger mt-1 d-block" path="fullName"></form:errors>
 				</div>
 				
 				<div class="form-group">
 				    <label>Email address <span class="text-danger">*</span></label>
 				    <form:input type="email" class="form-control" autocomplete="off" path="email" placeholder="enter email"/>
-				    <form:errors class="text-danger" path="email"></form:errors>
+				    <form:errors class="text-danger mt-1 d-block" path="email"></form:errors>
 				</div>
 				
 				<div class="form-group">
 				    <label>Address <span class="text-danger">*</span></label>
 				    <form:input class="form-control" autocomplete="off" path="address" placeholder="enter address"/>
-				    <form:errors class="text-danger" path="address"></form:errors>
+				    <form:errors class="text-danger mt-1 d-block" path="address"></form:errors>
 				</div>
 				
 				<div class="form-group">
 				    <label>Phone <span class="text-danger">*</span></label>
-				    <form:input class="form-control" autocomplete="off" path="phone" placeholder="enter phone"/>
-				    <form:errors class="text-danger" path="phone"></form:errors>
+				    <form:input class="form-control" autocomplete="off" type="number" min="0" path="phone" placeholder="enter phone"/>
+				    <form:errors class="text-danger mt-1 d-block" path="phone"></form:errors>
 				</div>
 				
 				<div class="form-group">
 				    <label>Password <span class="text-danger">*</span></label>
 				    <form:input class="form-control" autocomplete="off" type="password" path="password" placeholder="enter password"/>
-				    <form:errors class="text-danger" path="password"></form:errors>
+				    <form:errors class="text-danger mt-1 d-block" path="password"></form:errors>
 				</div>
 				
 				<%-- <div class="form-group">
@@ -78,6 +79,9 @@
 				<div class="d-flex justify-content-center">
 					<input class="main_btn px-5" type="submit" value="Sign up">
 				</div>
+				<div class="text-center mt-2">
+	                <span>Already have an account? </span> <a href="login" class="mainColor">Login</a>
+	            </div>
 			</form:form>
 		</div>
 	</div>

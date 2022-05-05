@@ -11,9 +11,13 @@ public interface AccountDAO {
 	
 	public Accounts getById(Integer id);
 	
+	public List<Accounts> checkUnique(String accName);
+	
 	public boolean insert(Accounts account);
 	
 	public boolean update(Accounts account);
 	
 	public boolean delete(Integer id);
+	
+	public boolean checkAccName(String accName);
 }

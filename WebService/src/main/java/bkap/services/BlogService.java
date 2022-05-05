@@ -20,10 +20,10 @@ import bkap.entities.Blogs;
 @Path("/blogService/")
 public class BlogService {
 	@GET
-	@Path("/getList")
+	@Path("/getList/{status}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getListBlog() {
-		List<Blogs> listBlog = new BlogDAOImpl().getList();
+	public String getListBlog(@PathParam("status") Integer status) {
+		List<Blogs> listBlog = new BlogDAOImpl().getList(status);
 		Gson son = new Gson();
 		String data = son.toJson(listBlog);
 		return data;

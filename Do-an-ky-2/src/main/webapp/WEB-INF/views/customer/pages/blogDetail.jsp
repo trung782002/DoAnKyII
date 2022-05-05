@@ -14,8 +14,8 @@
 					<p>Very us move be blessed multiply night</p>
 				</div>
 				<div class="page_link">
-					<a href="index.html">Home</a> <a href="blog.html">Blog </a> <a
-						href="single-blog.html">Blog Details</a>
+					<a href="home">Home</a> <a href="blog">Blog </a> <a
+						href="blogDetail?blogId=${blog.id}">Blog Details</a>
 				</div>
 			</div>
 		</div>
@@ -27,54 +27,37 @@
 <section class="blog_area single-post-area section_gap">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-8 posts-list">
+			<div class="col-lg-12 posts-list">
 				<div class="single-post">
 					<div class="feature-img">
-						<img class="img-fluid" src="<c:url value="assets"/>/customer/img/blog/main-blog/m-blog-1.jpg"
-							alt="">
+						<img class="img-fluid" src="<c:url value="assets"/>/customer/img/blog/${blog.mainImageUrl}">
 					</div>
 					<div class="blog_details">
-						<h2>Second divided from form fish beast made every of seas
-							all gathered us saying he our</h2>
-						<ul class="blog-info-link mt-3 mb-4">
+						<h2>${blog.name}</h2>
+						<!-- <ul class="blog-info-link mt-3 mb-4">
 							<li><a href="#"><i class="ti-user"></i> Travel,
 									Lifestyle</a></li>
 							<li><a href="#"><i class="ti-comments"></i> 03 Comments</a></li>
-						</ul>
-						<p class="excert">MCSE boot camps have its supporters and its
-							detractors. Some people do not understand why you should have to
-							spend money on boot camp when you can get the MCSE study
-							materials yourself at a fraction of the camp price. However, who
-							has the willpower</p>
-						<p>MCSE boot camps have its supporters and its detractors.
-							Some people do not understand why you should have to spend money
-							on boot camp when you can get the MCSE study materials yourself
-							at a fraction of the camp price. However, who has the willpower
-							to actually sit through a self-imposed MCSE training. who has the
-							willpower to actually</p>
+						</ul> -->
+						${blog.content_1}
 						<div class="quote-wrapper">
-							<div class="quotes">MCSE boot camps have its supporters and
-								its detractors. Some people do not understand why you should
-								have to spend money on boot camp when you can get the MCSE study
-								materials yourself at a fraction of the camp price. However, who
-								has the willpower to actually sit through a self-imposed MCSE
-								training.</div>
+							<div class="quotes">${blog.title}</div>
 						</div>
-
-
-						<p>MCSE boot camps have its supporters and its detractors.
-							Some people do not understand why you should have to spend money
-							on boot camp when you can get the MCSE study materials yourself
-							at a fraction of the camp price. However, who has the willpower</p>
-						<p>MCSE boot camps have its supporters and its detractors.
-							Some people do not understand why you should have to spend money
-							on boot camp when you can get the MCSE study materials yourself
-							at a fraction of the camp price. However, who has the willpower
-							to actually sit through a self-imposed MCSE training. who has the
-							willpower to actually</p>
+						
+						<div class="feature-img">
+							<img class="img-fluid" src="<c:url value="assets"/>/customer/img/blog/${blog.secondImageUrl}">
+						</div>
+						<div class="mt-3">${blog.content_2}</div> 
+						
+						<c:if test="${not empty blog.thirdImageUrl}">
+							<div class="feature-img">
+								<img class="img-fluid" src="<c:url value="assets"/>/customer/img/blog/${blog.thirdImageUrl}">
+							</div>
+						</c:if>
+						<c:if test="${not empty blog.content_3}"><div class="mt-3">${blog.content_3}</div></c:if>
 					</div>
 				</div>
-				<div class="navigation-top">
+				<%-- <div class="navigation-top">
 					<div class="d-sm-flex justify-content-between text-center">
 						<p class="like-info">
 							<span class="align-middle"><i class="ti-heart"></i></span> Lily
@@ -275,8 +258,8 @@
 						</div>
 					</form>
 				</div>
-			</div>
-			<div class="col-lg-4">
+			</div> --%>
+			<%-- <div class="col-lg-4">
 				<div class="blog_right_sidebar">
 					<aside class="single_sidebar_widget search_widget">
 						<form action="#">
@@ -415,8 +398,8 @@
 							<button class="main_btn rounded-0 w-100" type="submit">Subscribe</button>
 						</form>
 					</aside>
-				</div>
-			</div>
+				</div> --%>
+			</div> 
 		</div>
 	</div>
 </section>

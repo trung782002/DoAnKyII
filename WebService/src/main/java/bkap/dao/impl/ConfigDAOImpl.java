@@ -41,4 +41,16 @@ public class ConfigDAOImpl implements ConfigDAO {
 		return false;
 	}
 
+	@Override
+	public Configs getById(Integer id) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Configs config = session.get(Configs.class, id);
+			return config;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
 }

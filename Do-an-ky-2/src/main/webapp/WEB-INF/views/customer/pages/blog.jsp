@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <jsp:include page="../layouts/header.jsp" flush="true"></jsp:include>
 
 <jsp:include page="../layouts/menu.jsp" flush="true"></jsp:include>
@@ -14,7 +15,7 @@
 					<p>Very us move be blessed multiply night</p>
 				</div>
 				<div class="page_link">
-					<a href="index.html">Home</a> <a href="blog.html">Blog </a>
+					<a href="home">Home</a> <a href="blog">Blog </a>
 				</div>
 			</div>
 		</div>
@@ -26,155 +27,34 @@
 <section class="blog_area section_gap">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-8 mb-5 mb-lg-0">
+			<c:forEach items="${listBlogs}" var="blog">
+			<div class="col-lg-4 mb-5 mb-lg-0">
 				<div class="blog_left_sidebar">
 					<article class="blog_item">
 						<div class="blog_item_img">
-							<img class="card-img rounded-0"
-								src="<c:url value="assets"/>/customer/img/blog/main-blog/m-blog-1.jpg" alt=""> <a href="#"
-								class="blog_item_date">
+							<a href="blogDetail?blogId=${blog.id}">
+								<img class="card-img rounded-0" src="<c:url value="assets"/>/customer/img/blog/${blog.mainImageUrl}" alt=""> 
+							</a>
+							<!-- <a href="#" class="blog_item_date">
 								<h3>15</h3>
 								<p>Jan</p>
-							</a>
+							</a> -->
 						</div>
-
 						<div class="blog_details">
-							<a class="d-inline-block" href="blogDetail">
-								<h2>Google inks pact for new 35-storey office</h2>
-							</a>
-							<p>That dominion stars lights dominion divide years for
-								fourth have don't stars is that he earth it first without heaven
-								in place seed it second morning saying.</p>
+							<a class="d-inline-block" href="blogDetail?blogId=${blog.id}"><h2>${blog.name}</h2></a>
+							<p>${blog.title}</p>
 							<ul class="blog-info-link">
-								<li><a href="#"><i class="ti-user"></i> Travel,
-										Lifestyle</a></li>
-								<li><a href="#"><i class="ti-comments"></i> 03 Comments</a></li>
+								<!-- <li><a href="#"><i class="ti-user"></i> Travel, Lifestyle</a></li>
+								<li><a href="#"><i class="ti-comments"></i> 03 Comments</a></li> -->
+								<li class="mainColor">${String.valueOf(blog.createdAt).subSequence(0, 10)}</li>
 							</ul>
 						</div>
 					</article>
-
-					<article class="blog_item">
-						<div class="blog_item_img">
-							<img class="card-img rounded-0"
-								src="<c:url value="assets"/>/customer/img/blog/main-blog/m-blog-2.jpg" alt=""> <a href="#"
-								class="blog_item_date">
-								<h3>15</h3>
-								<p>Jan</p>
-							</a>
-						</div>
-
-						<div class="blog_details">
-							<a class="d-inline-block" href="single-blog.html">
-								<h2>Google inks pact for new 35-storey office</h2>
-							</a>
-							<p>That dominion stars lights dominion divide years for
-								fourth have don't stars is that he earth it first without heaven
-								in place seed it second morning saying.</p>
-							<ul class="blog-info-link">
-								<li><a href="#"><i class="ti-user"></i> Travel,
-										Lifestyle</a></li>
-								<li><a href="#"><i class="ti-comments"></i> 03 Comments</a></li>
-							</ul>
-						</div>
-					</article>
-
-					<article class="blog_item">
-						<div class="blog_item_img">
-							<img class="card-img rounded-0"
-								src="<c:url value="assets"/>/customer/img/blog/main-blog/m-blog-3.jpg" alt=""> <a href="#"
-								class="blog_item_date">
-								<h3>15</h3>
-								<p>Jan</p>
-							</a>
-						</div>
-
-						<div class="blog_details">
-							<a class="d-inline-block" href="single-blog.html">
-								<h2>Google inks pact for new 35-storey office</h2>
-							</a>
-							<p>That dominion stars lights dominion divide years for
-								fourth have don't stars is that he earth it first without heaven
-								in place seed it second morning saying.</p>
-							<ul class="blog-info-link">
-								<li><a href="#"><i class="ti-user"></i> Travel,
-										Lifestyle</a></li>
-								<li><a href="#"><i class="ti-comments"></i> 03 Comments</a></li>
-							</ul>
-						</div>
-					</article>
-
-					<article class="blog_item">
-						<div class="blog_item_img">
-							<img class="card-img rounded-0"
-								src="<c:url value="assets"/>/customer/img/blog/main-blog/m-blog-4.jpg" alt=""> <a href="#"
-								class="blog_item_date">
-								<h3>15</h3>
-								<p>Jan</p>
-							</a>
-						</div>
-
-						<div class="blog_details">
-							<a class="d-inline-block" href="single-blog.html">
-								<h2>Google inks pact for new 35-storey office</h2>
-							</a>
-							<p>That dominion stars lights dominion divide years for
-								fourth have don't stars is that he earth it first without heaven
-								in place seed it second morning saying.</p>
-							<ul class="blog-info-link">
-								<li><a href="#"><i class="ti-user"></i> Travel,
-										Lifestyle</a></li>
-								<li><a href="#"><i class="ti-comments"></i> 03 Comments</a></li>
-							</ul>
-						</div>
-					</article>
-
-					<article class="blog_item">
-						<div class="blog_item_img">
-							<img class="card-img rounded-0"
-								src="<c:url value="assets"/>/customer/img/blog/main-blog/m-blog-5.jpg" alt=""> <a href="#"
-								class="blog_item_date">
-								<h3>15</h3>
-								<p>Jan</p>
-							</a>
-						</div>
-
-						<div class="blog_details">
-							<a class="d-inline-block" href="single-blog.html">
-								<h2>Google inks pact for new 35-storey office</h2>
-							</a>
-							<p>That dominion stars lights dominion divide years for
-								fourth have don't stars is that he earth it first without heaven
-								in place seed it second morning saying.</p>
-							<ul class="blog-info-link">
-								<li><a href="#"><i class="ti-user"></i> Travel,
-										Lifestyle</a></li>
-								<li><a href="#"><i class="ti-comments"></i> 03 Comments</a></li>
-							</ul>
-						</div>
-					</article>
-
-
-
-					<nav class="blog-pagination justify-content-center d-flex">
-						<ul class="pagination">
-							<li class="page-item"><a href="#" class="page-link"
-								aria-label="Previous"> <span aria-hidden="true"> <span
-										class="ti-arrow-left"></span>
-								</span>
-							</a></li>
-							<li class="page-item"><a href="#" class="page-link">1</a></li>
-							<li class="page-item active"><a href="#" class="page-link">2</a>
-							</li>
-							<li class="page-item"><a href="#" class="page-link"
-								aria-label="Next"> <span aria-hidden="true"> <span
-										class="ti-arrow-right"></span>
-								</span>
-							</a></li>
-						</ul>
-					</nav>
 				</div>
 			</div>
-			<div class="col-lg-4">
+			</c:forEach>
+			
+			<%-- <div class="col-lg-4">
 				<div class="blog_right_sidebar">
 					<aside class="single_sidebar_widget search_widget">
 						<form action="#">
@@ -314,8 +194,25 @@
 						</form>
 					</aside>
 				</div>
-			</div>
+			</div> --%>
 		</div>
+				<nav class="blog-pagination justify-content-center d-flex">
+					<ul class="pagination">
+						<li class="page-item"><a href="#" class="page-link"
+							aria-label="Previous"> <span aria-hidden="true"> <span
+									class="ti-arrow-left"></span>
+							</span>
+						</a></li>
+						<li class="page-item"><a href="#" class="page-link">1</a></li>
+						<li class="page-item active"><a href="#" class="page-link">2</a>
+						</li>
+						<li class="page-item"><a href="#" class="page-link"
+							aria-label="Next"> <span aria-hidden="true"> <span
+									class="ti-arrow-right"></span>
+							</span>
+						</a></li>
+					</ul>
+				</nav>
 	</div>
 </section>
 <!--================Blog Area =================-->
