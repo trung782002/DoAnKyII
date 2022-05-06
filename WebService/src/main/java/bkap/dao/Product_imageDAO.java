@@ -13,4 +13,6 @@ public interface Product_imageDAO {
     
     public boolean deleteId(Integer id);
     
+    public Product_images getById(Integer id);
+    
 }

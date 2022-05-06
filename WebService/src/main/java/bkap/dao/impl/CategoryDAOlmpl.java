@@ -2,10 +2,11 @@ package bkap.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Session;
 
+import org.hibernate.Session;
 import bkap.dao.CategoryDAO;
 import bkap.entities.Categories;
+import bkap.entities.Products;
 import bkap.util.HibernateUtil;
 
 public class CategoryDAOlmpl implements CategoryDAO{
@@ -30,8 +31,8 @@ public class CategoryDAOlmpl implements CategoryDAO{
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			Categories categories = session.get(Categories.class, id);
-			return categories;
+			Categories category = session.get(Categories.class, id);
+			return category;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -96,5 +97,35 @@ public class CategoryDAOlmpl implements CategoryDAO{
 		}
 		return false;
 	}
+	
+	public List<Categories> checkUnique(String name) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+		 List list =  session.createQuery("from Categories where name = :name").setParameter("name", name).list();
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			session.getTransaction().commit();
+		}finally {
+			session.close();
+		}
+		return null;
+	}
+	
+    public List<Products> getByProduct(Integer cateId){
+    	Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+		 List list =  session.createQuery("from Products where CateId = :cateId").setParameter("cateId", cateId).list();
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			session.getTransaction().commit();
+		}finally {
+			session.close();
+		}
+		return null;
+    }
 
 }

@@ -15,7 +15,7 @@ public class Product_imageDAOImpl implements Product_imageDAO{
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-				List list = session.createQuery("from Products where ProId = : ProId").setParameter("ProId", proId).list();
+				List list = session.createQuery("from Product_images where ProId = : ProId").setParameter("ProId", proId).list();
 				return list;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -50,8 +50,28 @@ public class Product_imageDAOImpl implements Product_imageDAO{
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
+			List<Product_images> list = new Product_imageDAOImpl().getByProId(proId);
+			for (Product_images product_images : list) {
+				deleteId(product_images.getId());	
+			}
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			session.getTransaction().commit();
+		} finally {
+			session.close();
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean deleteId(Integer id) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
 			session.beginTransaction();
-			session.delete(getByProId(proId));
+			session.delete(getById(id));
 			session.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
@@ -63,12 +83,19 @@ public class Product_imageDAOImpl implements Product_imageDAO{
 		}
 		return false;
 	}
-
+	
 	@Override
-	public boolean deleteId(Integer id) {
+	public Product_images getById(Integer id) {
 		// TODO Auto-generated method stub
-		
-		return false;
-	}
-	  
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Product_images product_images = session.get(Product_images.class, id);
+			return product_images;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+	} 
 }

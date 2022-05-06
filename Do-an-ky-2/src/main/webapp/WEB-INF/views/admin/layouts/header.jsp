@@ -9,12 +9,12 @@
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <!-- Favicon icon -->
-<link rel="icon" href="<c:url value="assets"/>/admin/images/favicon.ico"
+<link rel="icon" href="${pageContext.request.contextPath}/<c:url value="assets"/>/admin/images/favicon.ico"
 	type="image/x-icon">
 
 <!-- vendor css -->
 <link rel="stylesheet"
-	href="<c:url value="assets"/>/admin/css/style.css">
+	href="${pageContext.request.contextPath}/<c:url value="assets"/>/admin/css/style.css">
 </head>
 
 <body>
@@ -34,9 +34,9 @@
 		<div class="m-header">
 			<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
 			<a href="#!" class="b-brand"> <!-- ========   change your logo hear   ============ -->
-				<img src="<c:url value="assets"/>/admin/images/logo.png" alt=""
+				<img src="${pageContext.request.contextPath}/<c:url value="assets"/>/admin/images/logo.png" alt=""
 				class="logo"> <img
-				src="<c:url value="assets"/>/admin/images/logo-icon.png" alt=""
+				src="${pageContext.request.contextPath}/<c:url value="assets"/>/admin/images/logo-icon.png" alt=""
 				class="logo-thumb">
 			</a> <a href="#!" class="mob-toggler"> <i
 				class="feather icon-more-vertical"></i>
@@ -158,7 +158,7 @@
 								<li class="notification">
 									<div class="media">
 										<img class="img-radius"
-											src="<c:url value="assets"/>/admin/images/user/avatar-1.jpg"
+											src="${pageContext.request.contextPath}/<c:url value="assets"/>/admin/images/user/avatar-1.jpg"
 											alt="Generic placeholder image">
 										<div class="media-body">
 											<p>
@@ -175,7 +175,7 @@
 								<li class="notification">
 									<div class="media">
 										<img class="img-radius"
-											src="<c:url value="assets"/>/admin/images/user/avatar-2.jpg"
+											src="${pageContext.request.contextPath}/<c:url value="assets"/>/admin/images/user/avatar-2.jpg"
 											alt="Generic placeholder image">
 										<div class="media-body">
 											<p>
@@ -190,7 +190,7 @@
 								<li class="notification">
 									<div class="media">
 										<img class="img-radius"
-											src="<c:url value="assets"/>/admin/images/user/avatar-1.jpg"
+											src="${pageContext.request.contextPath}/<c:url value="assets"/>/admin/images/user/avatar-1.jpg"
 											alt="Generic placeholder image">
 										<div class="media-body">
 											<p>
@@ -204,7 +204,7 @@
 								<li class="notification">
 									<div class="media">
 										<img class="img-radius"
-											src="<c:url value="assets"/>/admin/images/user/avatar-2.jpg"
+											src="${pageContext.request.contextPath}/<c:url value="assets"/>/admin/images/user/avatar-2.jpg"
 											alt="Generic placeholder image">
 										<div class="media-body">
 											<p>

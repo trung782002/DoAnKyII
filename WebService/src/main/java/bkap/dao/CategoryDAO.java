@@ -3,6 +3,7 @@ package bkap.dao;
 import java.util.List;
 
 import bkap.entities.Categories;
+import bkap.entities.Products;
 
 public interface CategoryDAO {
 	
@@ -16,5 +17,7 @@ public interface CategoryDAO {
     
     public boolean delete(Integer id);     
     
-
+    public List<Categories> checkUnique(String name);
+    
+    public List<Products> getByProduct(Integer cateId);
 }

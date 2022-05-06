@@ -34,7 +34,7 @@
 				
 				<!-- Category -->
 				<li class="nav-item">
-					<a href="categoryManagement" class="nav-link ">
+					<a href="admin/categoryManagement" class="nav-link ">
 						<span class="pcoded-micon"><i class="feather icon-home"></i></span>
 						<span class="pcoded-mtext">Category Management</span>
 					</a>
@@ -56,7 +56,7 @@
                     </a>
                     <ul class="pcoded-submenu">
                         <li><a href="listProducts" >List products</a></li>
-                        <li><a href="insertProduct" >Add product</a></li>
+                        <li><a href="createProduct" >Add product</a></li>
                     </ul>
                 </li>
                 

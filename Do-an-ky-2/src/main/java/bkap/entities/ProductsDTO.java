@@ -1,9 +1,9 @@
 package bkap.entities;
 
 import java.util.Date;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class ProductsDTO {
 	
@@ -20,8 +20,10 @@ public class ProductsDTO {
 	@NotNull(message = "Discount is not null !!")
 	private double discount;
 	
+	@NotNull(message = "Category is not null !!")
 	private Integer cateId;
 	
+	@NotNull(message = "Brand is not null !!")
 	private Integer brandId;
 
 	@NotEmpty(message = "Short description is not null !!")
@@ -35,6 +37,7 @@ public class ProductsDTO {
 
 	private boolean status;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
 
 	public ProductsDTO() {
@@ -44,7 +47,9 @@ public class ProductsDTO {
 
 	public ProductsDTO(Integer proId, @NotEmpty(message = "Proudct name is not null !!") String name, String imageUrl,
 			@NotNull(message = "Price is not null !!") double price,
-			@NotNull(message = "Discount is not null !!") double discount, Integer cateId, Integer brandId,
+			@NotNull(message = "Discount is not null !!") double discount,
+			@NotNull(message = "Category is not null !!") Integer cateId,
+			@NotNull(message = "Brand is not null !!") Integer brandId,
 			@NotEmpty(message = "Short description is not null !!") String shortDescription,
 			@NotEmpty(message = "Description is not null !!") String description,
 			@NotNull(message = "Quanity is not null !!") Integer quanity, boolean status, Date createdAt) {

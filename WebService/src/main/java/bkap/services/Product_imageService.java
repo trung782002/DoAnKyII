@@ -22,9 +22,9 @@ import bkap.entities.dto.Product_imagesDTO;
 @Path("/product_imageService/")
 public class Product_imageService {
 	@GET
-	@Path("/getByProId/{ProId}")
+	@Path("/getByProId/{proId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getByProId(@PathParam("ProId") Integer Id) {
+	public String getByProId(@PathParam("proId") Integer Id) {
 		List<Product_images> listProduct_image = new Product_imageDAOImpl().getByProId(Id);
 		Gson son = new Gson();
 		List<Product_imagesDTO> listData = new ArrayList<Product_imagesDTO>();
@@ -44,7 +44,7 @@ public class Product_imageService {
 		Gson son = new Gson();
 		Product_imagesDTO objDTO = son.fromJson(product_image, Product_imagesDTO.class);
 		Products proId = new Products();
-		proId.setProId(objDTO.getId());
+		proId.setProId(objDTO.getProId());
 		Product_images ojbProduct_image = new Product_images(0, objDTO.getImageUrl(), proId);
 		boolean bl = new Product_imageDAOImpl().insert(ojbProduct_image);
 		String data = son.toJson(bl);
@@ -52,9 +52,9 @@ public class Product_imageService {
 	}
 
 	@DELETE
-	@Path("/delete/{ProId}")
+	@Path("/delete/{proId}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String delete(@PathParam("ProId") Integer Id) {
+	public String delete(@PathParam("proId") Integer Id) {
 		Gson son = new Gson();
 		boolean bl = new Product_imageDAOImpl().delete(Id);
 		String data = son.toJson(bl);

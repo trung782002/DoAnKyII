@@ -8,7 +8,7 @@ import bkap.dao.ProductDAO;
 import bkap.entities.Products;
 import bkap.util.HibernateUtil;
 
-public class ProductDAOImpl implements ProductDAO{
+public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<Products> getList() {
@@ -16,6 +16,21 @@ public class ProductDAOImpl implements ProductDAO{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			List list = session.createQuery("from Products").list();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+	
+	@Override
+	public List<Products> getListStatus(){
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			List list = session.createQuery("from Products where Status = true").list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,7 +66,7 @@ public class ProductDAOImpl implements ProductDAO{
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-		    Products product = session.get(Products.class, id);
+			Products product = session.get(Products.class, id);
 			return product;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,14 +77,14 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 
 	@Override
-	public boolean insert(Products product) {
+	public Products insert(Products product) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
 			session.save(product);
 			session.getTransaction().commit();
-			return true;
+			return product;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -77,7 +92,7 @@ public class ProductDAOImpl implements ProductDAO{
 		} finally {
 			session.close();
 		}
-		return false;
+		return null;
 	}
 
 	@Override
@@ -97,6 +112,23 @@ public class ProductDAOImpl implements ProductDAO{
 			session.close();
 		}
 		return false;
+	}
+
+	public Products getProductTop() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Products products = (Products) session.createQuery("TOP(1) * FROM Products ORDER BY ProId DESC;").getSingleResult();
+			return products;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	public static void main(String[] args) {
+		System.out.print(new ProductDAOImpl().getProductTop());
 	}
 
 	@Override
