@@ -16,24 +16,9 @@ public class AdminController {
 		return "admin/pages/index";
 	}
 	
-	@RequestMapping(value = {"/categoryManagement"})
-	public String categoryManagement(Model model) {
-		return "admin/pages/categoryManagement";
-	}
-	
 	@RequestMapping(value = {"/brandManagement"})
 	public String brandManagement(Model model) {
 		return "admin/pages/brandManagement";
-	}
-	
-	@RequestMapping(value = {"/listProducts"})
-	public String listProducts(Model model) {
-		return "admin/pages/listProducts";
-	}
-	
-	@RequestMapping(value = {"/insertProduct"})
-	public String insertProduct(Model model) {
-		return "admin/pages/insertProduct";
 	}
 	
 	@RequestMapping(value = {"/orderManagement"})

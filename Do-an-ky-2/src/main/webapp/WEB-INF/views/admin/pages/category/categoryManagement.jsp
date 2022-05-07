@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="../../layouts/header.jsp" flush="true"></jsp:include>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<jsp:include page="../../layouts/header.jsp" flush="true"></jsp:include>
 
 <div class="page-header col-12">
 	<div class="page-block">
@@ -24,7 +25,6 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-6">
-
 			<c:if test="${not empty success}">
 				<div class="alert alert-success alert-dismissible fade show"
 					role="alert">

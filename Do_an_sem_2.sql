@@ -2,8 +2,6 @@
 GO
 USE Do_an_sem_2
 
---DROP DATABASE Do_an_sem_2
-
 GO
 CREATE TABLE Categories (
 	CateId INT PRIMARY KEY IDENTITY(1,1),
@@ -163,24 +161,12 @@ BEGIN
 	INSERT Account_Roles VALUES ((SELECT TOP 1 AccId FROM Accounts ORDER BY AccId DESC), 2)
 END
 
---INSERT INTO Configs VALUES ('logoImage.jpg', 'bannerImage.ipg', N'Số 238 Hoàng Quốc Việt, Cầu GIấy, Hà nội', 
---'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4331.764921528694!2d105.71224085080011!3d18.6438196872751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3139cc46daf9fc6b%3A0x9332dd7c2df8d550!2zTMOqIER1eSDEkGnhur9tLCB0dC4gWHXDom4gQW4sIE5naGkgWHXDom4sIEjDoCBUxKluaCwgVmnhu4d0IE5hbQ!5e1!3m2!1svi!2s!4v1649836718565!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>', 'Eiser@gamil.com', '0398888888', '2022-02-02')
-
 GO
-SELECT * FROM Configs
-
---INSERT INTO Roles(Name) VALUES ('Admin'), ('Customer')
-
+INSERT INTO Categories(Name) VALUES ('Men watch'), ('Ladies watches')
 GO
-SELECT * FROM Accounts
-
+INSERT INTO Brands(Name, ImageUrl) VALUES ('Rolex', 'rolex.jpg'), ('Casio', 'casio.jpg')
 GO
-SELECT * FROM Roles
-
+INSERT INTO Roles(Name) VALUES ('ROLE_ADMIN'), ('ROLE_USER')
 GO
-SELECT * FROM Account_Roles
-
---INSERT INTO Blogs(Name, Title, MainImageUrl, Content_1, SecondImageUrl, Content_2) VALUES ('name', 'title', 'image1', 'content1', 'image2', 'content2')
-
-GO
-SELECT * FROM Blogs
+INSERT INTO Configs VALUES ('logoImage.jpg', 'bannerImage.jpg', N'Số 238 Hoàng Quốc Việt, Cầu GIấy, Hà nội', 
+'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4331.764921528694!2d105.71224085080011!3d18.6438196872751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3139cc46daf9fc6b%3A0x9332dd7c2df8d550!2zTMOqIER1eSDEkGnhur9tLCB0dC4gWHXDom4gQW4sIE5naGkgWHXDom4sIEjDoCBUxKluaCwgVmnhu4d0IE5hbQ!5e1!3m2!1svi!2s!4v1649836718565!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>', 'Eiser@gamil.com', '0398888888', '2022-02-02')

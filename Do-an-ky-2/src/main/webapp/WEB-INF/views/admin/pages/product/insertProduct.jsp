@@ -1,7 +1,9 @@
-s<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="../../layouts/header.jsp" flush="true"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<jsp:include page="../../layouts/header.jsp" flush="true"></jsp:include>
+
 <div class="page-header col-12">
 	<div class="page-block">
 		<div class="row align-items-center">
@@ -13,7 +15,7 @@ s<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 					<li class="breadcrumb-item"><a href="admin"><i
 							class="feather icon-home"></i></a></li>
 					<li class="breadcrumb-item">Product management</li>
-					<li class="breadcrumb-item"><a href="insertProduct">Add
+					<li class="breadcrumb-item"><a href="createProduct">Add
 							product</a></li>
 				</ul>
 			</div>
@@ -34,47 +36,46 @@ s<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 					<div class="col-9">
 						<form:input type="text" placeholder="Product name"
 							class="form-control" path="name" />
-						<form:errors path="name" style="color:red"></form:errors>
+						<form:errors path="name" class="text-danger mt-2 d-block"></form:errors>
 					</div>
 				</div>
 
 				<div class="row mt-3">
 					<div class="col-2 ml-4">
-						<h5>Product price</h5>
+						<h5>Price</h5>
 					</div>
 					<div class="col-9">
-						<form:input type="number" placeholder="Product price"
+						<form:input type="number" min="0" placeholder="Product price"
 							class="form-control" path="price" />
-						<form:errors path="price" style="color:red"></form:errors>
+						<form:errors path="price" class="text-danger mt-2 d-block"></form:errors>
 					</div>
 				</div>
 
 				<div class="row mt-3">
 					<div class="col-2 ml-4">
-						<h5>Product discount</h5>
+						<h5>Discount</h5>
 					</div>
 					<div class="col-9">
-						<form:input type="number" placeholder="Product discount"
-							class="form-control" path="discount" />
-						<form:errors path="discount" style="color:red"></form:errors>
-						<b style="color:red">${discount}</b>
+						<form:input type="number" min="0" placeholder="Product discount"
+							class="form-control" path="discount"/>
+						<span class="text-danger mt-2 d-block">${discount}</span>
 					</div>
 				</div>
 
 				<div class="row mt-3">
 					<div class="col-2 ml-4">
-						<h5>Product Image</h5>
+						<h5>Image</h5>
 					</div>
 					<div class="col-9">
 						<input type="file" class="form-control-file" 
 							name="image" id="exampleFormControlFile1">
-							<b style="color:red">${ImageNull}</b>
+							<span class="text-danger mt-2 d-block">${ImageNull}</span>
 					</div>
 				</div>
 
 				<div class="row mt-3">
 					<div class="col-2 ml-4">
-						<h5>Description Images</h5>
+						<h5>Related photos</h5>
 					</div>
 					<div class="col-9">
 						<input type="file" class="form-control-file" 
@@ -93,7 +94,7 @@ s<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 								<option value="${list.cateId}">${list.name}</option>
 							</c:forEach>
 						</form:select>
-						<form:errors path="cateId" style="color:red"></form:errors>
+						<form:errors path="cateId" class="text-danger mt-2 d-block"></form:errors>
 					</div>
 				</div>
 
@@ -108,18 +109,17 @@ s<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 								<option value="${list.brandId}">${list.name}</option>
 							</c:forEach>
 						</form:select>
-						<form:errors path="brandId" style="color:red"></form:errors>
+						<form:errors path="brandId" class="text-danger mt-2 d-block"></form:errors>
 					</div>
 				</div>
 
 				<div class="row mt-3">
 					<div class="col-2 ml-4">
-						<h5>Short Description</h5>
+						<h5>Short description</h5>
 					</div>
 					<div class="col-9">
-						<form:input type="" placeholder="Product shortDescription"
-							class="form-control" path="shortDescription" />
-						<form:errors path="shortDescription" style="color:red"></form:errors>
+						<form:textarea path="shortDescription" />
+						<form:errors path="shortDescription" class="text-danger mt-2 d-block"></form:errors>
 					</div>
 				</div>
 
@@ -128,9 +128,8 @@ s<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 						<h5>Description</h5>
 					</div>
 					<div class="col-9">
-						<form:input type="" placeholder="Product description"
-							class="form-control" path="description" />
-						<form:errors path="description" style="color:red"></form:errors>
+						<form:textarea path="description" />
+						<form:errors path="description" class="text-danger mt-2 d-block"></form:errors>
 					</div>
 				</div>
 
@@ -139,9 +138,9 @@ s<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 						<h5>Quanity</h5>
 					</div>
 					<div class="col-9">
-						<form:input type="number" placeholder="Product quanity"
+						<form:input type="number" min="1" placeholder="Product quanity"
 							class="form-control" path="quanity" />
-						<form:errors path="quanity" style="color:red"></form:errors>
+						<form:errors path="quanity" class="text-danger mt-2 d-block"></form:errors>
 					</div>
 				</div>
 
@@ -166,9 +165,8 @@ s<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 					</div>
 				</div>
 
-				<input class="btn btn-outline-success mt-4 ml-4" type="submit"
+				<input class="btn btn-success mt-4 ml-4" type="submit"
 					value="Insert">
-
 			</form:form>
 		</div>
 	</div>

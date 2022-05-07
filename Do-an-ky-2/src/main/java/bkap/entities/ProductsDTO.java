@@ -6,23 +6,22 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class ProductsDTO {
-	
+
 	private Integer proId;
-	
+
 	@NotEmpty(message = "Proudct name is not null !!")
 	private String name;
-	
+
 	private String imageUrl;
-	
+
 	@NotNull(message = "Price is not null !!")
-	private double price;
-	
-	@NotNull(message = "Discount is not null !!")
-	private double discount;
-	
+	private Double price;
+
+	private Double discount;
+
 	@NotNull(message = "Category is not null !!")
 	private Integer cateId;
-	
+
 	@NotNull(message = "Brand is not null !!")
 	private Integer brandId;
 
@@ -45,14 +44,8 @@ public class ProductsDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProductsDTO(Integer proId, @NotEmpty(message = "Proudct name is not null !!") String name, String imageUrl,
-			@NotNull(message = "Price is not null !!") double price,
-			@NotNull(message = "Discount is not null !!") double discount,
-			@NotNull(message = "Category is not null !!") Integer cateId,
-			@NotNull(message = "Brand is not null !!") Integer brandId,
-			@NotEmpty(message = "Short description is not null !!") String shortDescription,
-			@NotEmpty(message = "Description is not null !!") String description,
-			@NotNull(message = "Quanity is not null !!") Integer quanity, boolean status, Date createdAt) {
+	public ProductsDTO(Integer proId, String name, String imageUrl, Double price, Double discount, Integer cateId,
+			Integer brandId, String shortDescription, String description, Integer quanity, boolean status, Date createdAt) {
 		super();
 		this.proId = proId;
 		this.name = name;
@@ -92,19 +85,19 @@ public class ProductsDTO {
 		this.imageUrl = imageUrl;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public double getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(double discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 
@@ -164,5 +157,4 @@ public class ProductsDTO {
 		this.createdAt = createdAt;
 	}
 
-	
 }

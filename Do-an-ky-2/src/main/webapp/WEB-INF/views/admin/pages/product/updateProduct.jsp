@@ -29,132 +29,131 @@
 				modelAttribute="product" enctype="multipart/form-data">
 				<form:input type="hidden" path="proId"/>
 				<div class="row mt-3">
-					<div class="col-3 ml-4">
-						<h5>Product name</h5>
+					<div class="col-2 ml-4">
+						<h5>Name</h5>
 					</div>
-					<div class="col-8">
+					<div class="col-9">
 						<form:input type="text" placeholder="Product name"
 							class="form-control" path="name" />
-						<form:errors path="name" style="color:red"></form:errors>
+						<form:errors path="name" class="text-danger mt-2 d-block"></form:errors>
 					</div>
 				</div>
 
 				<div class="row mt-3">
-					<div class="col-3 ml-4">
-						<h5>Product price</h5>
+					<div class="col-2 ml-4">
+						<h5>Price</h5>
 					</div>
-					<div class="col-8">
-						<form:input type="number" placeholder="Product price"
+					<div class="col-9">
+						<form:input type="number" min="0" placeholder="Product price"
 							class="form-control" path="price" />
-						<form:errors path="price" style="color:red"></form:errors>
+						<form:errors path="price" class="text-danger mt-2 d-block"></form:errors>
 					</div>
 				</div>
 
 				<div class="row mt-3">
-					<div class="col-3 ml-4">
-						<h5>Product discount</h5>
+					<div class="col-2 ml-4">
+						<h5>Discount</h5>
 					</div>
-					<div class="col-8">
-						<form:input type="number" placeholder="Product discount"
+					<div class="col-9">
+						<form:input type="number" min="0" placeholder="Product discount"
 							class="form-control" path="discount" />
-						<form:errors path="discount" style="color:red"></form:errors>
+						<form:errors path="discount" class="text-danger mt-2 d-block"></form:errors>
+						<span class="text-danger mt-2 d-block">${discount}</span>
 					</div>
 				</div>
 
 				<div class="row mt-3">
-					<div class="col-3 ml-4">
-						<h5>Product Image</h5>
+					<div class="col-2 ml-4">
+						<h5>Image</h5>
 					</div>
-					<div class="col-8">
+					<div class="col-9">
 						<input type="file" class="form-control-file" 
 							name="image" id="exampleFormControlFile1"> <img
 							src="<c:url value="http://localhost:8080/Do-an-ky-2/resources"/>/image/${product.imageUrl}"
-							alt="product" class="img-fluid img-thumbnail mt-3" width="10%">
+							alt="product" class="img-fluid img-thumbnail mt-3" width="15%">
 							<form:input type="hidden" path="imageUrl"/>
 					</div>
 				</div>
 
 				<div class="row mt-3">
-					<div class="col-3 ml-4">
-						<h5>Description Images</h5>
+					<div class="col-2 ml-4">
+						<h5>Related photos</h5>
 					</div>
-					<div class="col-8">
+					<div class="col-9">
 						<input type="file" class="form-control-file" 
 							name="images" id="exampleFormControlFile1" multiple>
 						<c:forEach items="${productimages}" var="list">
 							<img
 								src="<c:url value="http://localhost:8080/Do-an-ky-2/resources"/>/image/${list.imageUrl}"
-								alt="product" class="img-fluid img-thumbnail mt-3" width="10%">
+								alt="product" class="img-fluid img-thumbnail mt-3 ml-3" width="10%">
 						</c:forEach>
 					</div>
 				</div>
 
 				<div class="row mt-3">
-					<div class="col-3 ml-4">
+					<div class="col-2 ml-4">
 						<h5>Category</h5>
 					</div>
-					<div class="col-8">
+					<div class="col-9">
 						<form:select class="custom-select mr-sm-2" path="cateId">
 							<!-- <option selected>Choose...</option> -->
 							<c:forEach items="${category}" var="list">
 								<option ${list.cateId == product.cateId?"selected" : ""}  value="${list.cateId}">${list.name}</option>
 							</c:forEach>
 						</form:select>
-						<form:errors path="cateId" style="color:red"></form:errors>
+						<form:errors path="cateId" class="text-danger mt-2 d-block"></form:errors>
 					</div>
 				</div>
 
 				<div class="row mt-3">
-					<div class="col-3 ml-4">
+					<div class="col-2 ml-4">
 						<h5>Brand</h5>
 					</div>
-					<div class="col-8">
+					<div class="col-9">
 						<form:select class="custom-select mr-sm-2" path="brandId">
 							<!-- <option selected>Choose...</option> -->
 							<c:forEach items="${brand}" var="list">
 								<option ${list.brandId == product.brandId?"selected" : ""} value="${list.brandId}">${list.name}</option>
 							</c:forEach>
 						</form:select>
-						<form:errors path="brandId" style="color:red"></form:errors>
+						<form:errors path="brandId" class="text-danger mt-2 d-block"></form:errors>
 					</div>
 				</div>
 
 				<div class="row mt-3">
-					<div class="col-3 ml-4">
-						<h5>Product shortDescription</h5>
+					<div class="col-2 ml-4">
+						<h5>Short description</h5>
 					</div>
-					<div class="col-8">
-						<form:input type="" placeholder="Product shortDescription"
-							class="form-control" path="shortDescription" />
-						<form:errors path="shortDescription" style="color:red"></form:errors>
-					</div>
-				</div>
-
-				<div class="row mt-3">
-					<div class="col-3 ml-4">
-						<h5>Product description</h5>
-					</div>
-					<div class="col-8">
-						<form:input type="" placeholder="Product description"
-							class="form-control" path="description" />
-						<form:errors path="description" style="color:red"></form:errors>
+					<div class="col-9">
+						<form:textarea path="shortDescription" />
+						<form:errors path="shortDescription" class="text-danger mt-2 d-block"></form:errors>
 					</div>
 				</div>
 
 				<div class="row mt-3">
-					<div class="col-3 ml-4">
-						<h5>Product quanity</h5>
+					<div class="col-2 ml-4">
+						<h5>Description</h5>
 					</div>
-					<div class="col-8">
-						<form:input type="number" placeholder="Product quanity"
+					<div class="col-9">
+						<form:textarea path="description" />
+						<form:errors path="description" class="text-danger mt-2 d-block"></form:errors>
+					</div>
+				</div>
+
+				<div class="row mt-3">
+					<div class="col-2 ml-4">
+						<h5>Quanity</h5>
+					</div>
+					<div class="col-9">
+						<form:input type="number" min="0" placeholder="Product quanity"
 							class="form-control" path="quanity" />
-						<form:errors path="quanity" style="color:red"></form:errors>
+						<form:errors path="quanity" class="text-danger mt-2 "></form:errors>
 					</div>
 				</div>
 
 				<div class="row mt-3">
-					<div class="col-3 ml-4">
-						<h5>Product Status</h5>
+					<div class="col-2 ml-4">
+						<h5>Status</h5>
 					</div>
 					<div class="col-1">
 						<div class="form-check mt-2">
@@ -173,8 +172,8 @@
 					</div>
 				</div>
 
-				<input class="btn btn-outline-success mt-4 ml-4" type="submit"
-					value="Insert">
+				<input class="btn btn-success mt-4 ml-4" type="submit"
+					value="Update">
 
 			</form:form>
 		</div>

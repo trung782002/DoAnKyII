@@ -34,7 +34,7 @@
 				
 				<!-- Category -->
 				<li class="nav-item">
-					<a href="admin/categoryManagement" class="nav-link ">
+					<a href="categoryManagement" class="nav-link ">
 						<span class="pcoded-micon"><i class="feather icon-home"></i></span>
 						<span class="pcoded-mtext">Category Management</span>
 					</a>

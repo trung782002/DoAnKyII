@@ -30,10 +30,10 @@ public class Products {
 	private String imageUrl;
 	
 	@Column(name = "Price")
-	private double price;
+	private Double price;
 	
 	@Column(name = "Discount")
-	private double discount;
+	private Double discount;
 	
 	@Column(name = "ShortDescription")
 	private String shortDescription;
@@ -75,7 +75,7 @@ public class Products {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Products(Integer proId, String name, String imageUrl, double price, double discount, String shortDescription,
+	public Products(Integer proId, String name, String imageUrl, Double price, Double discount, String shortDescription,
 			String description, Integer quanity, boolean status, Date createdAt, Categories objCategoryOfProduct,
 			Brands objBrandOfProduct, Set<Product_images> listProductImages, Set<Reviews> listReviews,
 			Set<Carts> listCarts, Set<OrderDetails> listOrderDetails) {
@@ -122,19 +122,19 @@ public class Products {
 		this.imageUrl = imageUrl;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public double getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(double discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 
@@ -226,5 +226,6 @@ public class Products {
 		this.listOrderDetails = listOrderDetails;
 	}
 
+	
 	
 }

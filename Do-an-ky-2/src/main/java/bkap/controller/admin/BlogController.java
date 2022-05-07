@@ -64,7 +64,8 @@ public class BlogController {
 	public String doInsertBlog(@Valid @ModelAttribute("blog") BlogsDTO blog, BindingResult result, RedirectAttributes redirAttrs,
 			@RequestParam("mainImagePath") MultipartFile mainImagePath,
 			@RequestParam("secondImagePath") MultipartFile secondImagePath,
-			@RequestParam("thirdImagePath") MultipartFile thirdImagePath, Model model, HttpServletRequest request) {
+			@RequestParam("thirdImagePath") MultipartFile thirdImagePath, Model model, HttpServletRequest request) 
+	{
 		String path = request.getServletContext().getRealPath("assets/customer/img/blog");
 		File f = new File(path);
 		

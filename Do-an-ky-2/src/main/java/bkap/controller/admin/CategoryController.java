@@ -26,7 +26,6 @@ import com.sun.jersey.api.client.WebResource;
 import bkap.entities.CategoriesDTO;
 
 @Controller
-@RequestMapping("/admin")
 public class CategoryController {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -79,14 +78,14 @@ public class CategoryController {
 				boolean bt = gson.fromJson(re, boolean.class);
 				if (bt) {
 					redirAttrs.addFlashAttribute("success", "Successfully added new");
-					return "redirect:/admin/categoryManagement";					
+					return "redirect:/categoryManagement";					
 				} else {
 					redirAttrs.addFlashAttribute("errors", "Add failed");
-					return "redirect:/admin/categoryManagement";
+					return "redirect:/categoryManagement";
 				}
 			}else {
 				redirAttrs.addFlashAttribute("uniquename", "Name category already exists");
-				return "redirect:/admin/categoryManagement";
+				return "redirect:/categoryManagement";
 			}
 		}
 	}
@@ -120,10 +119,10 @@ public class CategoryController {
 				boolean bt = gson.fromJson(re, boolean.class);
 				if (bt) {
 					redirAttrs.addFlashAttribute("success", "Update Successfully");
-					return "redirect:/admin/categoryManagement";
+					return "redirect:/categoryManagement";
 				} else {
 					redirAttrs.addFlashAttribute("errors", "Update failed");
-					return "redirect:/admin/categoryManagement";
+					return "redirect:/categoryManagement";
 				}
 			}else {
 				Client client1 = new Client();
@@ -141,10 +140,10 @@ public class CategoryController {
 					boolean bt = gson.fromJson(re, boolean.class);
 					if (bt) {
 						redirAttrs.addFlashAttribute("success", "Update Successfully");
-						return "redirect:/admin/categoryManagement";
+						return "redirect:/categoryManagement";
 					} else {
 						redirAttrs.addFlashAttribute("errors", "Update failed");
-						return "redirect:/admin/categoryManagement";											
+						return "redirect:/categoryManagement";											
 					}
 				}else {
 					model.addAttribute("category", categoriesDTO);
@@ -172,14 +171,14 @@ public class CategoryController {
 		    boolean bl = gson.fromJson(data1,boolean.class);
 		    if(bl) {
 				redirAttrs.addFlashAttribute("success", "Delete successful");
-				return "redirect:/admin/categoryManagement";
+				return "redirect:/categoryManagement";
 		    }else {
 				redirAttrs.addFlashAttribute("errors", "Deletion failed");
-				return "redirect:/admin/categoryManagement";
+				return "redirect:/categoryManagement";
 		    }
 		}else {			
 			redirAttrs.addFlashAttribute("errors", "There are products in the catalog");
-			return "redirect:/admin/categoryManagement";
+			return "redirect:/categoryManagement";
 		}   
 	}
 }
