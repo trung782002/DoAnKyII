@@ -24,7 +24,7 @@ public class ProductsDTO {
 
 	private Integer quanity;
 
-	private boolean status;
+	private Integer status;
 
 	private Date createdAt;
 
@@ -33,7 +33,7 @@ public class ProductsDTO {
 	}
 
 	public ProductsDTO(Integer proId, String name, String imageUrl, Double price, Double discount, Integer cateId,
-			Integer brandId, String shortDescription, String description, Integer quanity, boolean status,
+			Integer brandId, String shortDescription, String description, Integer quanity, Integer status,
 			Date createdAt) {
 		super();
 		this.proId = proId;
@@ -130,11 +130,11 @@ public class ProductsDTO {
 		this.quanity = quanity;
 	}
 
-	public boolean isStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -146,5 +146,5 @@ public class ProductsDTO {
 		this.createdAt = createdAt;
 	}
 
-	
+		
 }

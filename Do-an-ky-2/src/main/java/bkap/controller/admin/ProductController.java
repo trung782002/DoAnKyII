@@ -126,7 +126,7 @@ public class ProductController {
 			return "admin/pages/product/insertProduct";
 		} else {
 			product.setDiscount(product.getDiscount() == null ? 0 : product.getDiscount());
-			if(product.getPrice() < product.getDiscount()) {
+			if(product.getPrice() <= product.getDiscount()) {
 				model.addAttribute("discount", " Discount must be less than the price");
 				flag++;
 			}
@@ -216,7 +216,7 @@ public class ProductController {
 			model.addAttribute("product", product);
 
 			return "admin/pages/product/updateProduct";
-		} else if (product.getPrice() < product.getDiscount()) {
+		} else if (product.getPrice() <= product.getDiscount()) {
 			model.addAttribute("discount", " Discount must be less than the price");
 			model.addAttribute("productimages", getListProduct_images(client, gson, product.getProId()));
 			model.addAttribute("brand", getListBrands(client, gson));
@@ -284,19 +284,25 @@ public class ProductController {
 		}
 	}
 
-	@RequestMapping(value = { "detailProduct" })
-	public String detailProduct(@RequestParam("ProId") Integer id, Model model) {
+	@RequestMapping(value = { "deleteProduct" })
+	public String detailProduct(@RequestParam("ProId") Integer id ,RedirectAttributes redirAttrs, Model model) {
 		Client client = Client.create();
 		Gson gson = new Gson();
 		WebResource webResource2 = client.resource("http://localhost:8080/WebService/rest/productService/getById/" + id);
 		String data = webResource2.get(String.class);
 		ProductsDTO productsDTO = gson.fromJson(data, ProductsDTO.class);
-
-		model.addAttribute("product", productsDTO);
-		model.addAttribute("productimages", getListProduct_images(client, gson, id));
-		model.addAttribute("brand", getListBrands(client, gson));
-		model.addAttribute("category", getListCategories(client, gson));
-
-		return "admin/pages/product/detailProduct";
+        productsDTO.setStatus(3);
+		String data1 = gson.toJson(productsDTO);
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/update");
+		ClientResponse clientResponse = webResource.type("application/json").put(ClientResponse.class, data1);
+		String re = clientResponse.getEntity(String.class);
+		boolean bt = gson.fromJson(re, boolean.class);
+		if(bt) {
+			redirAttrs.addFlashAttribute("success", "Delete Successfully");
+			return "redirect:/listProducts";
+		}else {
+			redirAttrs.addFlashAttribute("success", "Delete failed");
+			return "redirect:/listProducts";
+		}
 	}
 }

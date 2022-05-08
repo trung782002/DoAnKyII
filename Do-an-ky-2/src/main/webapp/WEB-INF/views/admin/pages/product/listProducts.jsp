@@ -92,12 +92,14 @@
 								</c:if>
 							</c:forEach>
 							<td>${list.quanity}</td>
-							<td style="color: ${list.status ? "green" : "red"}">${list.status? "Show" : "Hidden"}</td>
-							<td><a class="mr-3" href="detailProduct?ProId=${list.proId}">
-									<i class="fas fa-eye"></i>
-							</a> <a class="mr-3" href="getByIdProduct?ProId=${list.proId}"> <i
+							<td style="color: ${list.status == 2? "red" : "#6699FF"} ">${list.status == 1? "Show" : "Hidden"}</td>
+							<td> <a class="mr-3" href="getByIdProduct?ProId=${list.proId}"> <i
 									class="fas fa-edit"></i>
-							</a></td>
+							     </a>
+							     <a class="mr-3" href="deleteProduct?ProId=${list.proId}">
+									<i class="fas fa-backspace text-danger"></i>
+							     </a>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

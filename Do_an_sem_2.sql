@@ -31,7 +31,7 @@ CREATE TABLE Products (
 	ShortDescription NVARCHAR(255) NOT NULL,
 	Description NTEXT NOT NULL,
 	Quanity INT NOT NULL,
-	Status BIT DEFAULT 1,
+	Status TINYINT DEFAULT 1,
 	CreatedAt DATETIME DEFAULT GETDATE()
 )
 

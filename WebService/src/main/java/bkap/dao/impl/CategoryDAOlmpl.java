@@ -116,7 +116,7 @@ public class CategoryDAOlmpl implements CategoryDAO{
     public List<Products> getByProduct(Integer cateId){
     	Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-		 List list =  session.createQuery("from Products where CateId = :cateId").setParameter("cateId", cateId).list();
+		 List list =  session.createQuery("from Products where Status != 3 and CateId = :cateId").setParameter("cateId", cateId).list();
 			return list;
 		} catch (Exception e) {
 			// TODO: handle exception

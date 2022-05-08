@@ -110,7 +110,7 @@ public class CategoryService {
 		for (Products pr : Products) {
 			ProductsDTO prDTO = new ProductsDTO(0, pr.getName(), pr.getImageUrl(), pr.getPrice(), pr.getDiscount(),
 					pr.getObjCategoryOfProduct().getCateId(), pr.getObjBrandOfProduct().getBrandId(),
-					pr.getShortDescription(), pr.getDescription(), pr.getQuanity(), pr.isStatus(), pr.getCreatedAt());
+					pr.getShortDescription(), pr.getDescription(), pr.getQuanity(), pr.getStatus(), pr.getCreatedAt());
 			listData.add(prDTO);
 		}
 		String data = son.toJson(listData);

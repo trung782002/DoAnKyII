@@ -20,6 +20,4 @@ public interface ProductDAO {
 	
 	public boolean delete(Integer id);
 	
-	public Products getProductTop();
-	
 }

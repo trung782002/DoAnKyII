@@ -34,7 +34,7 @@ public class ProductsDTO {
 	@NotNull(message = "Quanity is not null !!")
 	private Integer quanity;
 
-	private boolean status;
+	private Integer status;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
@@ -44,8 +44,13 @@ public class ProductsDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProductsDTO(Integer proId, String name, String imageUrl, Double price, Double discount, Integer cateId,
-			Integer brandId, String shortDescription, String description, Integer quanity, boolean status, Date createdAt) {
+	public ProductsDTO(Integer proId, @NotEmpty(message = "Proudct name is not null !!") String name, String imageUrl,
+			@NotNull(message = "Price is not null !!") Double price, Double discount,
+			@NotNull(message = "Category is not null !!") Integer cateId,
+			@NotNull(message = "Brand is not null !!") Integer brandId,
+			@NotEmpty(message = "Short description is not null !!") String shortDescription,
+			@NotEmpty(message = "Description is not null !!") String description,
+			@NotNull(message = "Quanity is not null !!") Integer quanity, Integer status, Date createdAt) {
 		super();
 		this.proId = proId;
 		this.name = name;
@@ -141,11 +146,11 @@ public class ProductsDTO {
 		this.quanity = quanity;
 	}
 
-	public boolean isStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -157,4 +162,5 @@ public class ProductsDTO {
 		this.createdAt = createdAt;
 	}
 
+	
 }

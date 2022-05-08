@@ -6,10 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CustomerController {
-	@RequestMapping(value = {"/", "/home"})
-	public String home(Model model) {
-		return "customer/pages/index";
-	}
 	
 	@RequestMapping(value = "/category")
 	public String category(Model model) {
@@ -24,11 +20,6 @@ public class CustomerController {
 	@RequestMapping(value = "/checkOut")
 	public String checkOut(Model model) {
 		return "customer/pages/checkOut";
-	}
-	
-	@RequestMapping(value = "/cart")
-	public String cart(Model model) {
-		return "customer/pages/cart";
 	}
 	
 	@RequestMapping(value = "/contact")

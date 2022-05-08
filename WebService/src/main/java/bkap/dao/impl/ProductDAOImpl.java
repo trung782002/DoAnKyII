@@ -15,7 +15,7 @@ public class ProductDAOImpl implements ProductDAO {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery("from Products").list();
+			List list = session.createQuery("from Products where Status != 3 ORDER BY ProId DESC").list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -30,7 +30,7 @@ public class ProductDAOImpl implements ProductDAO {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery("from Products where Status = true").list();
+			List list = session.createQuery("from Products where Status = 1 ORDER BY ProId DESC").list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +50,7 @@ public class ProductDAOImpl implements ProductDAO {
 			} else {
 				name = "%" + name + "%";
 			}
-			List list = session.createQuery("from Products where Name like :name").setParameter("name", name).list();
+			List list = session.createQuery("from Products where Status != 3 and Name like :name ORDER BY ProId DESC").setParameter("name", name).list();
 			return list;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -114,22 +114,6 @@ public class ProductDAOImpl implements ProductDAO {
 		return false;
 	}
 
-	public Products getProductTop() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		try {
-			Products products = (Products) session.createQuery("TOP(1) * FROM Products ORDER BY ProId DESC;").getSingleResult();
-			return products;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return null;
-	}
-
-	public static void main(String[] args) {
-		System.out.print(new ProductDAOImpl().getProductTop());
-	}
 
 	@Override
 	public boolean delete(Integer id) {
