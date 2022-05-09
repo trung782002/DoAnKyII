@@ -35,8 +35,7 @@ public class ConfigurationController {
 		String data = webResource.get(String.class);
 
 		Gson son = new Gson();
-		GenericType<List<ConfigsDTO>> listType = new GenericType<List<ConfigsDTO>>() {
-		};
+		GenericType<List<ConfigsDTO>> listType = new GenericType<List<ConfigsDTO>>() {};
 
 		List<ConfigsDTO> list = son.fromJson(data, listType.getType());
 		model.addAttribute("list", list);

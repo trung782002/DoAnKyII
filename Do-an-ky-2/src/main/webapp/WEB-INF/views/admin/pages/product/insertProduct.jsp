@@ -151,14 +151,14 @@
 					<div class="col-1">
 						<div class="form-check mt-2">
 							<form:radiobutton class="form-check-input" value="1"
-								path="status" />
+								path="status"/>
 							<label class="form-check-label" for="gridRadios1">Show </label>
 						</div>
 					</div>
 					<div class="col-1">
 						<div class="form-check mt-2">
 							<form:radiobutton class="form-check-input" value="2"
-								path="status" />
+								path="status" checked="checked"/>
 							<label class="form-check-label" for="gridRadios1">Hidden
 							</label>
 						</div>

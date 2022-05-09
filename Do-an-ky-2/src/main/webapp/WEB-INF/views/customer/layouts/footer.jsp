@@ -107,8 +107,8 @@
 	src="<c:url value="assets"/>/customer/vendors/counter-up/jquery.counterup.js"></script>
 <script src="<c:url value="assets"/>/customer/js/mail-script.js"></script>
 <script src="<c:url value="assets"/>/customer/js/theme.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$('#exampleModal').modal('show')
-</script>
+</script> -->
 </body>
 </html>

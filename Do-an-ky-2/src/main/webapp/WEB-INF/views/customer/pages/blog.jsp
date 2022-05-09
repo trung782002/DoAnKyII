@@ -46,7 +46,7 @@
 							<ul class="blog-info-link">
 								<!-- <li><a href="#"><i class="ti-user"></i> Travel, Lifestyle</a></li>
 								<li><a href="#"><i class="ti-comments"></i> 03 Comments</a></li> -->
-								<li class="mainColor">${String.valueOf(blog.createdAt).subSequence(0, 10)}</li>
+								<li class="mainColor">${blog.createdAt}</li>
 							</ul>
 						</div>
 					</article>

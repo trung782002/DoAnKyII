@@ -35,7 +35,7 @@
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
-				<th width="">Id</th>
+				<!-- <th width="">Id</th> -->
 				<th width="">Name</th>
 				<th width="">Title</th>
 				<th width="">Main image</th>
@@ -46,12 +46,12 @@
 		<tbody>
 			<c:forEach items="${listBlogs}" var="blog">
 				<tr>
-					<th>${blog.id}</th>
-					<td>${blog.name}</td>
-					<td width="">${blog.title}</td>
-					<td width="25%"><img src="<c:url value="assets"/>/customer/img/blog/${blog.mainImageUrl}" class="card-img"></td>
+					<%-- <th>${blog.id}</th> --%>
+					<td>${blog.name.subSequence(0, 40)} ...</td>
+					<td width="">${blog.title.subSequence(0, 40)} ...</td>
+					<td width="20%"><img src="<c:url value="assets"/>/customer/img/blog/${blog.mainImageUrl}" class="card-img"></td>
 					<td style="color: ${blog.status ? 'green' : 'red'}">${blog.status ? "Show" : "Hidden"}</td>
-					<td>
+					<td width="5%">
 						<a class="mr-3" href="updateBlog?blogId=${blog.id}"><i class="fas fa-edit"></i></a>
 						<a href="deleteBlog?blogId=${blog.id}"><i class="fas fa-trash text-danger"></i></a>
 					</td>

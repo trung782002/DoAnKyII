@@ -29,11 +29,12 @@
 		<div class="row">
 			<div class="col-lg-12 posts-list">
 				<div class="single-post">
+					<h2>${blog.name}</h2>
+					<span class="mb-3 d-block"><i class="fa fa-clock-o mr-1" aria-hidden="true"></i> ${blog.createdAt}</span>
 					<div class="feature-img">
 						<img class="img-fluid" src="<c:url value="assets"/>/customer/img/blog/${blog.mainImageUrl}">
 					</div>
 					<div class="blog_details">
-						<h2>${blog.name}</h2>
 						<!-- <ul class="blog-info-link mt-3 mb-4">
 							<li><a href="#"><i class="ti-user"></i> Travel,
 									Lifestyle</a></li>

@@ -4,7 +4,8 @@
 <jsp:include page="../layouts/menu.jsp" flush="true"></jsp:include>
 
 <!--================Home Banner Area =================-->
-<section class="home_banner_area mb-40" style="background-image: url('<c:url value="assets"/>/customer/img/banner/banner01.jpg')">
+<c:forEach items="${configs}" var="config">
+<section class="home_banner_area mb-40" style="background-image: url('<c:url value="resources"/>/image/${config.bannerImage}')">
 	<div class="banner_inner d-flex align-items-center">
 		<div class="container">
 			<div class="banner_content row">
@@ -20,12 +21,13 @@
 		</div>
 	</div>
 </section>
+</c:forEach>
 <!--================End Home Banner Area =================-->
 
 <!-- Button trigger modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -42,7 +44,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- Start feature Area -->
 <section class="feature-area section_gap_bottom_custom">
