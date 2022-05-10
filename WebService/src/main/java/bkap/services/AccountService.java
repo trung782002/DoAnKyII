@@ -42,10 +42,10 @@ public class AccountService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String insert(String jsonAccount) {
 		Gson son = new Gson();
-		AccountsDTO acocuntDTO = son.fromJson(jsonAccount, AccountsDTO.class);
-		Accounts account = new Accounts(0, acocuntDTO.getAccName(), acocuntDTO.getFullName(), acocuntDTO.getEmail(),
-				acocuntDTO.getAddress(), acocuntDTO.getPhone(), acocuntDTO.getPassword(), acocuntDTO.isStatus(),
-				acocuntDTO.getRememberToken(), acocuntDTO.getCreatedAt(), null, null, null, null);
+		AccountsDTO accountDTO = son.fromJson(jsonAccount, AccountsDTO.class);
+		Accounts account = new Accounts(0, accountDTO.getAccName(), accountDTO.getFullName(), accountDTO.getEmail(),
+				accountDTO.getAddress(), accountDTO.getPhone(), accountDTO.getPassword(), accountDTO.isStatus(),
+				accountDTO.getRememberToken(), accountDTO.getCreatedAt(), null, null, null, null);
 		boolean bl = new AccountDAOImpl().insert(account);
 		String data = son.toJson(bl);
 		return data;
@@ -56,10 +56,10 @@ public class AccountService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String update(String jsonAccount) {
 		Gson son = new Gson();
-		AccountsDTO acocuntDTO = son.fromJson(jsonAccount, AccountsDTO.class);
-		Accounts account = new Accounts(0, acocuntDTO.getAccName(), acocuntDTO.getFullName(), acocuntDTO.getEmail(),
-				acocuntDTO.getAddress(), acocuntDTO.getPhone(), acocuntDTO.getPassword(), acocuntDTO.isStatus(),
-				acocuntDTO.getRememberToken(), acocuntDTO.getCreatedAt(), null, null, null, null);
+		AccountsDTO accountDTO = son.fromJson(jsonAccount, AccountsDTO.class);
+		Accounts account = new Accounts(accountDTO.getAccId(), accountDTO.getAccName(), accountDTO.getFullName(), accountDTO.getEmail(),
+				accountDTO.getAddress(), accountDTO.getPhone(), accountDTO.getPassword(), accountDTO.isStatus(),
+				accountDTO.getRememberToken(), accountDTO.getCreatedAt(), null, null, null, null);
 		boolean bl = new AccountDAOImpl().update(account);
 		String data = son.toJson(bl);
 		return data;

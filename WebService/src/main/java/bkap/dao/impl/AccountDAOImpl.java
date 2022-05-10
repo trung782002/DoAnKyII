@@ -85,6 +85,11 @@ public class AccountDAOImpl implements AccountDAO {
 		}
 		return false;
 	}
+	
+	public static void main(String[] args) {
+		Accounts account = new Accounts(6, "huy", "sfasd", "sdsd", "sdsdsd", "234243234", "sdsd", true, null, null, null, null, null,null);
+		System.out.println(new AccountDAOImpl().update(account));
+	}
 
 	@Override
 	public boolean delete(Integer id) {
