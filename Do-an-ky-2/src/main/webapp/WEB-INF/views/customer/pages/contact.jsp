@@ -14,7 +14,7 @@
 					<p>Very us move be blessed multiply night</p>
 				</div>
 				<div class="page_link">
-					<a href="index.html">Home</a> <a href="contact.html">Contact Us</a>
+					<a href="home">Home</a> <a href="contact">Contact Us</a>
 				</div>
 			</div>
 		</div>

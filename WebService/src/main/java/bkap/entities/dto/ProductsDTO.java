@@ -22,7 +22,7 @@ public class ProductsDTO {
 
 	private String description;
 
-	private Integer quanity;
+	private Integer quantity;
 
 	private Integer status;
 
@@ -33,7 +33,7 @@ public class ProductsDTO {
 	}
 
 	public ProductsDTO(Integer proId, String name, String imageUrl, Double price, Double discount, Integer cateId,
-			Integer brandId, String shortDescription, String description, Integer quanity, Integer status,
+			Integer brandId, String shortDescription, String description, Integer quantity, Integer status,
 			Date createdAt) {
 		super();
 		this.proId = proId;
@@ -45,7 +45,7 @@ public class ProductsDTO {
 		this.brandId = brandId;
 		this.shortDescription = shortDescription;
 		this.description = description;
-		this.quanity = quanity;
+		this.quantity = quantity;
 		this.status = status;
 		this.createdAt = createdAt;
 	}
@@ -122,12 +122,12 @@ public class ProductsDTO {
 		this.description = description;
 	}
 
-	public Integer getQuanity() {
-		return quanity;
+	public Integer getQuantity() {
+		return quantity;
 	}
 
-	public void setQuanity(Integer quanity) {
-		this.quanity = quanity;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public Integer getStatus() {
@@ -146,5 +146,5 @@ public class ProductsDTO {
 		this.createdAt = createdAt;
 	}
 
-		
+	
 }

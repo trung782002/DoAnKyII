@@ -28,9 +28,9 @@ CREATE TABLE Products (
 	Discount MONEY DEFAULT(0),
 	CateId INT FOREIGN KEY REFERENCES Categories(CateId),
 	BrandId INT FOREIGN KEY REFERENCES Brands(BrandId),
-	ShortDescription NVARCHAR(255) NOT NULL,
+	ShortDescription NTEXT NOT NULL,
 	Description NTEXT NOT NULL,
-	Quanity INT NOT NULL,
+	Quantity INT NOT NULL,
 	Status TINYINT DEFAULT 1,
 	CreatedAt DATETIME DEFAULT GETDATE()
 )

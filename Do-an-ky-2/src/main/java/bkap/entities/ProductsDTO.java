@@ -31,8 +31,8 @@ public class ProductsDTO {
 	@NotEmpty(message = "Description is not null !!")
 	private String description;
 
-	@NotNull(message = "Quanity is not null !!")
-	private Integer quanity;
+	@NotNull(message = "Quantity is not null !!")
+	private Integer quantity;
 
 	private Integer status;
 
@@ -50,7 +50,7 @@ public class ProductsDTO {
 			@NotNull(message = "Brand is not null !!") Integer brandId,
 			@NotEmpty(message = "Short description is not null !!") String shortDescription,
 			@NotEmpty(message = "Description is not null !!") String description,
-			@NotNull(message = "Quanity is not null !!") Integer quanity, Integer status, Date createdAt) {
+			@NotNull(message = "Quantity is not null !!") Integer quantity, Integer status, Date createdAt) {
 		super();
 		this.proId = proId;
 		this.name = name;
@@ -61,7 +61,7 @@ public class ProductsDTO {
 		this.brandId = brandId;
 		this.shortDescription = shortDescription;
 		this.description = description;
-		this.quanity = quanity;
+		this.quantity = quantity;
 		this.status = status;
 		this.createdAt = createdAt;
 	}
@@ -138,12 +138,12 @@ public class ProductsDTO {
 		this.description = description;
 	}
 
-	public Integer getQuanity() {
-		return quanity;
+	public Integer getQuantity() {
+		return quantity;
 	}
 
-	public void setQuanity(Integer quanity) {
-		this.quanity = quanity;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public Integer getStatus() {

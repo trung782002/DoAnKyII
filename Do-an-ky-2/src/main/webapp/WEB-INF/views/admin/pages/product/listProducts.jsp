@@ -91,8 +91,8 @@
 									<td>${brand.name}</td>
 								</c:if>
 							</c:forEach>
-							<td>${list.quanity}</td>
-							<td style="color: ${list.status == 2? "red" : "#6699FF"} ">${list.status == 1? "Show" : "Hidden"}</td>
+							<td>${list.quantity}</td>
+							<td class="${list.status == 1 ? 'text-success' : 'text-danger'}">${list.status == 1? "Show" : "Hidden"}</td>
 							<td> <a class="mr-3" href="getByIdProduct?ProId=${list.proId}"> <i
 									class="fas fa-edit"></i>
 							     </a>

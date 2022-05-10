@@ -27,7 +27,7 @@ public class BlogControllerCustomer {
 		GenericType<List<BlogsDTO>> listType = new GenericType<List<BlogsDTO>>() {};
 		List<BlogsDTO> listBlogs = gson.fromJson(data, listType.getType());
 		model.addAttribute("listBlogs", listBlogs);
-		return "customer/pages/blog";
+		return "customer/pages/blog/blog";
 	}
 	
 	@RequestMapping(value = "/blogDetail")
@@ -38,6 +38,6 @@ public class BlogControllerCustomer {
 		String res = webResource.get(String.class);
 		BlogsDTO blog = gson.fromJson(res, BlogsDTO.class);
 		model.addAttribute("blog", blog);
-		return "customer/pages/blogDetail";
+		return "customer/pages/blog/blogDetail";
 	}
 }

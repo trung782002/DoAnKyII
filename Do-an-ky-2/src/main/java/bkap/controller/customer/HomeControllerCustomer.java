@@ -26,7 +26,7 @@ public class HomeControllerCustomer {
 		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/configService/getList");
 		String data = webResource.get(String.class);
 		GenericType<List<ConfigsDTO>> listConfigType = new GenericType<List<ConfigsDTO>>() {};
-		List<ProductsDTO> configs = gson.fromJson(data, listConfigType.getType());
+		List<ConfigsDTO> configs = gson.fromJson(data, listConfigType.getType());
 		model.addAttribute("configs", configs);
 		
 		webResource = client.resource("http://localhost:8080/WebService/rest/productService/getListStatus");

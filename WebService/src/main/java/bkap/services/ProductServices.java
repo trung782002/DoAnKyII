@@ -31,7 +31,7 @@ public class ProductServices {
 		for (Products pr : listProduct) {
 			ProductsDTO prDTO = new ProductsDTO(pr.getProId(), pr.getName(), pr.getImageUrl(), pr.getPrice(), pr.getDiscount(),
 					pr.getObjCategoryOfProduct().getCateId(), pr.getObjBrandOfProduct().getBrandId(),
-					pr.getShortDescription(), pr.getDescription(), pr.getQuanity(), pr.getStatus(), pr.getCreatedAt());
+					pr.getShortDescription(), pr.getDescription(), pr.getQuantity(), pr.getStatus(), pr.getCreatedAt());
 			listData.add(prDTO);
 		}
 		String data = son.toJson(listData);
@@ -48,7 +48,7 @@ public class ProductServices {
 		for (Products pr : listProduct) {
 			ProductsDTO prDTO = new ProductsDTO(pr.getProId(), pr.getName(), pr.getImageUrl(), pr.getPrice(), pr.getDiscount(),
 					pr.getObjCategoryOfProduct().getCateId(), pr.getObjBrandOfProduct().getBrandId(),
-					pr.getShortDescription(), pr.getDescription(), pr.getQuanity(), pr.getStatus(), pr.getCreatedAt());
+					pr.getShortDescription(), pr.getDescription(), pr.getQuantity(), pr.getStatus(), pr.getCreatedAt());
 			listData.add(prDTO);
 		}
 		String data = son.toJson(listData);
@@ -64,7 +64,7 @@ public class ProductServices {
 		ProductsDTO Data = new ProductsDTO(product.getProId(), product.getName(), product.getImageUrl(),
 				product.getPrice(), product.getDiscount(), product.getObjCategoryOfProduct().getCateId(),
 				product.getObjBrandOfProduct().getBrandId(), product.getShortDescription(), product.getDescription(),
-				product.getQuanity(), product.getStatus(), product.getCreatedAt());
+				product.getQuantity(), product.getStatus(), product.getCreatedAt());
 		String data = son.toJson(Data);
 		return data;
 	}
@@ -79,7 +79,7 @@ public class ProductServices {
 		for (Products pr : listProduct) {
 			ProductsDTO prDTO = new ProductsDTO(pr.getProId(), pr.getName(), pr.getImageUrl(), pr.getPrice(), pr.getDiscount(),
 					pr.getObjCategoryOfProduct().getCateId(), pr.getObjBrandOfProduct().getBrandId(),
-					pr.getShortDescription(), pr.getDescription(), pr.getQuanity(), pr.getStatus(), pr.getCreatedAt());
+					pr.getShortDescription(), pr.getDescription(), pr.getQuantity(), pr.getStatus(), pr.getCreatedAt());
 			listData.add(prDTO);
 		}
 		String data = son.toJson(listData);
@@ -98,7 +98,7 @@ public class ProductServices {
 		Brands objBrand = new Brands();
 		objBrand.setBrandId(objDTO.getBrandId());
 		Products objProduct = new Products(0, objDTO.getName(), objDTO.getImageUrl(), objDTO.getPrice(),
-				objDTO.getDiscount(), objDTO.getShortDescription(), objDTO.getDescription(), objDTO.getQuanity(),
+				objDTO.getDiscount(), objDTO.getShortDescription(), objDTO.getDescription(), objDTO.getQuantity(),
 				objDTO.getStatus(), objDTO.getCreatedAt(), objCate, objBrand, null, null, null, null);
 		Products products = new ProductDAOImpl().insert(objProduct);
 		String data = son.toJson(products);
@@ -117,7 +117,7 @@ public class ProductServices {
 		Brands objBrand = new Brands();
 		objBrand.setBrandId(objDTO.getBrandId());
 		Products objProduct = new Products(objDTO.getProId(), objDTO.getName(), objDTO.getImageUrl(), objDTO.getPrice(),
-				objDTO.getDiscount(), objDTO.getShortDescription(), objDTO.getDescription(), objDTO.getQuanity(),
+				objDTO.getDiscount(), objDTO.getShortDescription(), objDTO.getDescription(), objDTO.getQuantity(),
 				objDTO.getStatus(), objDTO.getCreatedAt(), objCate, objBrand, null, null, null, null);
 		boolean bl = new ProductDAOImpl().update(objProduct);
 		String data = son.toJson(bl);

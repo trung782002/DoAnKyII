@@ -41,8 +41,8 @@ public class Products {
 	@Column(name = "Description")
 	private String description;
 	
-	@Column(name = "Quanity")
-	private Integer quanity;
+	@Column(name = "Quantity")
+	private Integer quantity;
 	
 	@Column(name = "Status")
 	private Integer status;
@@ -76,7 +76,7 @@ public class Products {
 	}
 
 	public Products(Integer proId, String name, String imageUrl, Double price, Double discount, String shortDescription,
-			String description, Integer quanity, Integer status, Date createdAt, Categories objCategoryOfProduct,
+			String description, Integer quantity, Integer status, Date createdAt, Categories objCategoryOfProduct,
 			Brands objBrandOfProduct, Set<Product_images> listProductImages, Set<Reviews> listReviews,
 			Set<Carts> listCarts, Set<OrderDetails> listOrderDetails) {
 		super();
@@ -87,7 +87,7 @@ public class Products {
 		this.discount = discount;
 		this.shortDescription = shortDescription;
 		this.description = description;
-		this.quanity = quanity;
+		this.quantity = quantity;
 		this.status = status;
 		this.createdAt = createdAt;
 		this.objCategoryOfProduct = objCategoryOfProduct;
@@ -154,12 +154,12 @@ public class Products {
 		this.description = description;
 	}
 
-	public Integer getQuanity() {
-		return quanity;
+	public Integer getQuantity() {
+		return quantity;
 	}
 
-	public void setQuanity(Integer quanity) {
-		this.quanity = quanity;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public Integer getStatus() {
@@ -226,5 +226,5 @@ public class Products {
 		this.listOrderDetails = listOrderDetails;
 	}
 
-		
+	
 }

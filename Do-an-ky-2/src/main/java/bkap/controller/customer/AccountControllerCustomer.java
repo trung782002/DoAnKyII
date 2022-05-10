@@ -35,7 +35,7 @@ public class AccountControllerCustomer {
 	@RequestMapping(value = "/doSignUp")
 	public String signUp(Model model, @Valid @ModelAttribute("account") AccountsDTO account, BindingResult result) {
 		if(result.hasErrors()) {
-			return "customer/pages/signUp";
+			return "customer/pages/account/signUp";
 		} else {
 			Gson gson = new Gson();
 	        Client client = Client.create();
@@ -51,9 +51,9 @@ public class AccountControllerCustomer {
 	        boolean rs = gson.fromJson(res, boolean.class);
 	        
 	        if(rs) {
-	        	return "customer/pages/login";
+	        	return "customer/pages/account/login";
 	        } else {
-	        	return "customer/pages/signUp";
+	        	return "customer/pages/account/signUp";
 	        }
 		}
 	}
@@ -61,7 +61,7 @@ public class AccountControllerCustomer {
 	@RequestMapping(value = "/login")
 	public String login(Model model) {
 
-		return "customer/pages/login";
+		return "customer/pages/account/login";
 	}
 
 }

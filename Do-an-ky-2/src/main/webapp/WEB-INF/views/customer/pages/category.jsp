@@ -14,8 +14,9 @@
 					<p>Very us move be blessed multiply night</p>
 				</div>
 				<div class="page_link">
-					<a href="index.html">Home</a> <a href="category.html">Shop</a> <a
-						href="category.html">Women Fashion</a>
+					<a href="home">Home</a> 
+					<a href="category">Shop</a> 
+					<!-- <a href="category.html">Women Fashion</a> -->
 				</div>
 			</div>
 		</div>

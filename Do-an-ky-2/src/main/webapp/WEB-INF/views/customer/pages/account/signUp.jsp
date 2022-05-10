@@ -2,9 +2,9 @@
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<jsp:include page="../layouts/header.jsp" flush="true"></jsp:include>
+<jsp:include page="../../layouts/header.jsp" flush="true"></jsp:include>
 
-<jsp:include page="../layouts/menu.jsp" flush="true"></jsp:include>
+<jsp:include page="../../layouts/menu.jsp" flush="true"></jsp:include>
 
 <!--================Home Banner Area =================-->
 <section class="banner_area">
@@ -87,4 +87,4 @@
 	</div>
 </section>
 
-<jsp:include page="../layouts/footer.jsp" flush="true"></jsp:include>
+<jsp:include page="../../layouts/footer.jsp" flush="true"></jsp:include>

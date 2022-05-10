@@ -145,9 +145,9 @@
 						<h5>Quanity</h5>
 					</div>
 					<div class="col-9">
-						<form:input type="number" min="0" placeholder="Product quanity"
-							class="form-control" path="quanity" />
-						<form:errors path="quanity" class="text-danger mt-2 "></form:errors>
+						<form:input type="number" min="0" placeholder="Product quantity"
+							class="form-control" path="quantity" />
+						<form:errors path="quantity" class="text-danger mt-2 "></form:errors>
 					</div>
 				</div>
 
