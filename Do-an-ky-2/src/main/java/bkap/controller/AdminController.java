@@ -16,25 +16,8 @@ public class AdminController {
 		return "admin/pages/index";
 	}
 	
-	@RequestMapping(value = {"/brandManagement"})
-	public String brandManagement(Model model) {
-		return "admin/pages/brandManagement";
-	}
-	
 	@RequestMapping(value = {"/orderManagement"})
 	public String orderManagement(Model model) {
 		return "admin/pages/orderManagement";
 	}
-	
-	@RequestMapping(value = {"/reviewManagement"})
-	public String reviewManagement(Model model) {
-		return "admin/pages/reviewManagement";
-	}
-	
-	@RequestMapping(value = {"/contactManagement"})
-	public String contactManagement(Model model) {
-		return "admin/pages/contactManagement";
-	}
-	
-	
 }

@@ -14,9 +14,9 @@ public class BlogDAOImpl implements BlogDAO{
 	public List<Blogs> getList(Integer status) {
 		String query;
 		if(status == 0)
-			query = "from Blogs";
+			query = "from Blogs order by Id desc";
 		else 
-			query = "from Blogs where Status = " + status;
+			query = "from Blogs where Status = " + status + "order by Id desc";
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {

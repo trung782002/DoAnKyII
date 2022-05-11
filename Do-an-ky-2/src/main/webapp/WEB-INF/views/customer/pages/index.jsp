@@ -346,36 +346,31 @@
 		</div>
 		
 		<div class="row">
-		  <c:forEach items="${products}" var="product">
+			<c:forEach items="${listProducts}" var="product">
 			<div class="col-lg-3 col-md-6">
 				<div class="single-product">
 					<div class="product-img">
-						<img class="img-fluid w-100"
-							src="<c:url value="assets"/>/customer/img/product/inspired-product/i1.jpg" alt="" />
+						<img class="img-fluid w-100" src="<c:url value="resources"/>/image/${product.imageUrl}"/>
 						<div class="p_icon">
-							<a href="#"> <i class="ti-eye"></i>
-							</a> <a href="#"> <i class="ti-heart"></i>
-							</a> <a href="insertcart?proId=${product.proId}"> <i class="ti-shopping-cart"></i>
-							</a>
+							<a href="detailProduct?proId=${product.proId}"><i class="ti-eye"></i></a> 
+							<!-- <a href="#"><i class="ti-heart"></i></a> -->
+							<a href="insertcart?proId=${product.proId}&quantity=1"><i class="ti-shopping-cart"></i></a>
 						</div>
 					</div>
 					<div class="product-btm">
-						<a href="#" class="d-block">
-							<h4>${product.name}</h4>
-						</a>
+						<a href="#" class="d-block"><h4>${product.name}</h4></a>
 						<div class="mt-3">
-						   <c:if test="${product.discount > 0}">
-						       <span class="mr-4">$ ${product.discount}0</span>
-							   <del>$ ${product.price}0</del>
-						   </c:if>
-							<c:if test="${product.discount == 0}">
-						       <span class="mr-4">$ ${product.price}0</span>
-						   </c:if>
+						    <c:if test="${product.discount > 0}">
+						    	<span class="mr-4">$ ${product.price - product.discount}0</span><del>$ ${product.price}0</del>
+						    </c:if>
+						    <c:if test="${product.discount == 0}">
+						        <span class="mr-4">$ ${product.price}0</span>
+						    </c:if>
 						</div>
 					</div>
 				</div>
 			</div>	
-		  </c:forEach>
+			</c:forEach>
 		</div>
 	</div>
 </section>

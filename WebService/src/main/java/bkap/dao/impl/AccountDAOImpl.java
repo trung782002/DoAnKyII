@@ -14,7 +14,7 @@ public class AccountDAOImpl implements AccountDAO {
 	public List<Accounts> getList() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery("from Accounts").list();
+			List list = session.createQuery("from Accounts order by AccId desc").list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();

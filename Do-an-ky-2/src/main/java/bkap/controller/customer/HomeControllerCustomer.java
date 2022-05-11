@@ -32,8 +32,8 @@ public class HomeControllerCustomer {
 		webResource = client.resource("http://localhost:8080/WebService/rest/productService/getListStatus");
 		data = webResource.get(String.class);
 		GenericType<List<ProductsDTO>> listProductType = new GenericType<List<ProductsDTO>>() {};
-		List<ProductsDTO> list = gson.fromJson(data, listProductType.getType());
-        model.addAttribute("products", list);
+		List<ProductsDTO> listProducts = gson.fromJson(data, listProductType.getType());
+        model.addAttribute("listProducts", listProducts);
         
 		webResource = client.resource("http://localhost:8080/WebService/rest/blogService/getList/" + status);
 		data = webResource.get(String.class);

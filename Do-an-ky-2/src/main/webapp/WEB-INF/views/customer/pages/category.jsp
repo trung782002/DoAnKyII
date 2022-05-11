@@ -35,231 +35,42 @@
 							<option value="1">Default sorting</option>
 							<option value="2">Default sorting 01</option>
 							<option value="4">Default sorting 02</option>
-						</select> <select class="show">
+						</select> 
+						<!-- <select class="show">
 							<option value="1">Show 12</option>
 							<option value="2">Show 14</option>
 							<option value="4">Show 16</option>
-						</select>
+						</select> -->
 					</div>
 				</div>
 
 				<div class="latest_product_inner">
 					<div class="row">
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<div class="product-img">
-									<img class="card-img" src="<c:url value="assets"/>/customer/img/product/inspired-product/i1.jpg"
-										alt="" />
-									<div class="p_icon">
-										<a href="#"> <i class="ti-eye"></i>
-										</a> <a href="#"> <i class="ti-heart"></i>
-										</a> <a href="#"> <i class="ti-shopping-cart"></i>
-										</a>
+						<c:forEach items="${listProducts}" var="product">
+							<div class="col-lg-4 col-md-6">
+								<div class="single-product">
+									<div class="product-img">
+										<img class="img-fluid w-100" src="<c:url value="resources"/>/image/${product.imageUrl}"/>
+										<div class="p_icon">
+											<a href="detailProduct?proId=${product.proId}"><i class="ti-eye"></i></a> 
+											<!-- <a href="#"><i class="ti-heart"></i></a> -->
+											<a href="insertcart?proId=${product.proId}&quantity=1"><i class="ti-shopping-cart"></i></a>
+										</div>
+									</div>
+									<div class="product-btm">
+										<a href="#" class="d-block"><h4>${product.name}</h4></a>
+										<div class="mt-3">
+										    <c:if test="${product.discount > 0}">
+										    	<span class="mr-4">$ ${product.price - product.discount}0</span><del>$ ${product.price}0</del>
+										    </c:if>
+										    <c:if test="${product.discount == 0}">
+										        <span class="mr-4">$ ${product.price}0</span>
+										    </c:if>
+										</div>
 									</div>
 								</div>
-								<div class="product-btm">
-									<a href="#" class="d-block">
-										<h4>Latest men’s sneaker</h4>
-									</a>
-									<div class="mt-3">
-										<span class="mr-4">$25.00</span>
-										<del>$35.00</del>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<div class="product-img">
-									<img class="card-img" src="<c:url value="assets"/>/customer/img/product/inspired-product/i2.jpg"
-										alt="" />
-									<div class="p_icon">
-										<a href="#"> <i class="ti-eye"></i>
-										</a> <a href="#"> <i class="ti-heart"></i>
-										</a> <a href="#"> <i class="ti-shopping-cart"></i>
-										</a>
-									</div>
-								</div>
-								<div class="product-btm">
-									<a href="#" class="d-block">
-										<h4>Latest men’s sneaker</h4>
-									</a>
-									<div class="mt-3">
-										<span class="mr-4">$25.00</span>
-										<del>$35.00</del>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<div class="product-img">
-									<img class="card-img" src="<c:url value="assets"/>/customer/img/product/inspired-product/i3.jpg"
-										alt="" />
-									<div class="p_icon">
-										<a href="#"> <i class="ti-eye"></i>
-										</a> <a href="#"> <i class="ti-heart"></i>
-										</a> <a href="#"> <i class="ti-shopping-cart"></i>
-										</a>
-									</div>
-								</div>
-								<div class="product-btm">
-									<a href="#" class="d-block">
-										<h4>Latest men’s sneaker</h4>
-									</a>
-									<div class="mt-3">
-										<span class="mr-4">$25.00</span>
-										<del>$35.00</del>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<div class="product-img">
-									<img class="card-img" src="<c:url value="assets"/>/customer/img/product/inspired-product/i4.jpg"
-										alt="" />
-									<div class="p_icon">
-										<a href="#"> <i class="ti-eye"></i>
-										</a> <a href="#"> <i class="ti-heart"></i>
-										</a> <a href="#"> <i class="ti-shopping-cart"></i>
-										</a>
-									</div>
-								</div>
-								<div class="product-btm">
-									<a href="#" class="d-block">
-										<h4>Latest men’s sneaker</h4>
-									</a>
-									<div class="mt-3">
-										<span class="mr-4">$25.00</span>
-										<del>$35.00</del>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<div class="product-img">
-									<img class="card-img" src="<c:url value="assets"/>/customer/img/product/inspired-product/i5.jpg"
-										alt="" />
-									<div class="p_icon">
-										<a href="#"> <i class="ti-eye"></i>
-										</a> <a href="#"> <i class="ti-heart"></i>
-										</a> <a href="#"> <i class="ti-shopping-cart"></i>
-										</a>
-									</div>
-								</div>
-								<div class="product-btm">
-									<a href="#" class="d-block">
-										<h4>Latest men’s sneaker</h4>
-									</a>
-									<div class="mt-3">
-										<span class="mr-4">$25.00</span>
-										<del>$35.00</del>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<div class="product-img">
-									<img class="card-img" src="<c:url value="assets"/>/customer/img/product/inspired-product/i6.jpg"
-										alt="" />
-									<div class="p_icon">
-										<a href="#"> <i class="ti-eye"></i>
-										</a> <a href="#"> <i class="ti-heart"></i>
-										</a> <a href="#"> <i class="ti-shopping-cart"></i>
-										</a>
-									</div>
-								</div>
-								<div class="product-btm">
-									<a href="#" class="d-block">
-										<h4>Latest men’s sneaker</h4>
-									</a>
-									<div class="mt-3">
-										<span class="mr-4">$25.00</span>
-										<del>$35.00</del>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<div class="product-img">
-									<img class="card-img" src="<c:url value="assets"/>/customer/img/product/inspired-product/i7.jpg"
-										alt="" />
-									<div class="p_icon">
-										<a href="#"> <i class="ti-eye"></i>
-										</a> <a href="#"> <i class="ti-heart"></i>
-										</a> <a href="#"> <i class="ti-shopping-cart"></i>
-										</a>
-									</div>
-								</div>
-								<div class="product-btm">
-									<a href="#" class="d-block">
-										<h4>Latest men’s sneaker</h4>
-									</a>
-									<div class="mt-3">
-										<span class="mr-4">$25.00</span>
-										<del>$35.00</del>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<div class="product-img">
-									<img class="card-img" src="<c:url value="assets"/>/customer/img/product/inspired-product/i8.jpg"
-										alt="" />
-									<div class="p_icon">
-										<a href="#"> <i class="ti-eye"></i>
-										</a> <a href="#"> <i class="ti-heart"></i>
-										</a> <a href="#"> <i class="ti-shopping-cart"></i>
-										</a>
-									</div>
-								</div>
-								<div class="product-btm">
-									<a href="#" class="d-block">
-										<h4>Latest men’s sneaker</h4>
-									</a>
-									<div class="mt-3">
-										<span class="mr-4">$25.00</span>
-										<del>$35.00</del>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<div class="product-img">
-									<img class="card-img" src="<c:url value="assets"/>/customer/img/product/inspired-product/i2.jpg"
-										alt="" />
-									<div class="p_icon">
-										<a href="#"> <i class="ti-eye"></i>
-										</a> <a href="#"> <i class="ti-heart"></i>
-										</a> <a href="#"> <i class="ti-shopping-cart"></i>
-										</a>
-									</div>
-								</div>
-								<div class="product-btm">
-									<a href="#" class="d-block">
-										<h4>Latest men’s sneaker</h4>
-									</a>
-									<div class="mt-3">
-										<span class="mr-4">$25.00</span>
-										<del>$35.00</del>
-									</div>
-								</div>
-							</div>
-						</div>
+							</div>	
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -268,37 +79,31 @@
 				<div class="left_sidebar_area">
 					<aside class="left_widgets p_filter_widgets">
 						<div class="l_w_title">
-							<h3>Browse Categories</h3>
+							<h3>Categories</h3>
 						</div>
 						<div class="widgets_inner">
 							<ul class="list">
-								<li><a href="#">Frozen Fish</a></li>
-								<li><a href="#">Dried Fish</a></li>
-								<li><a href="#">Fresh Fish</a></li>
-								<li><a href="#">Meat Alternatives</a></li>
-								<li><a href="#">Fresh Fish</a></li>
-								<li><a href="#">Meat Alternatives</a></li>
-								<li><a href="#">Meat</a></li>
+							<c:forEach items="${listCategories}" var="category">
+								<li><a href="category?cateId=${category.cateId}">${category.name}</a></li>
+							</c:forEach>
 							</ul>
 						</div>
 					</aside>
 
 					<aside class="left_widgets p_filter_widgets">
 						<div class="l_w_title">
-							<h3>Product Brand</h3>
+							<h3>Brands</h3>
 						</div>
 						<div class="widgets_inner">
 							<ul class="list">
-								<li><a href="#">Apple</a></li>
-								<li><a href="#">Asus</a></li>
-								<li class="active"><a href="#">Gionee</a></li>
-								<li><a href="#">Micromax</a></li>
-								<li><a href="#">Samsung</a></li>
+							<c:forEach items="${listBrands}" var="brand">
+								<li><a href="brand?brandId=${brand.brandId}">${brand.name}</a></li>
+							</c:forEach>
 							</ul>
 						</div>
 					</aside>
 
-					<aside class="left_widgets p_filter_widgets">
+					<!-- <aside class="left_widgets p_filter_widgets">
 						<div class="l_w_title">
 							<h3>Color Filter</h3>
 						</div>
@@ -311,7 +116,7 @@
 								<li><a href="#">Spacegrey</a></li>
 							</ul>
 						</div>
-					</aside>
+					</aside> -->
 
 					<aside class="left_widgets p_filter_widgets">
 						<div class="l_w_title">

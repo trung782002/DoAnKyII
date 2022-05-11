@@ -14,4 +14,9 @@ public class CartControllerCustomer {
 		}
 		return "customer/pages/cart";
 	}
+	
+	@RequestMapping(value = "/checkOut")
+	public String checkOut(Model model) {
+		return "customer/pages/checkOut";
+	}
 }
