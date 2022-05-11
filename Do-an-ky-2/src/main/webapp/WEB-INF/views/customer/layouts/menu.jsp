@@ -13,9 +13,9 @@
 				<div class="col-lg-5">
 					<div class="float-right">
 						<ul class="right_side">
-							<li><a href="cart"> gift card </a></li>
+							<li><a href="listCart"> gift card </a></li>
 							<li><a href="tracking.html"> track order </a></li>
-							<li><a href="contact.html"> Contact Us </a></li>
+							<li><a href="contact"> Contact Us </a></li>
 						</ul>
 					</div>
 				</div>
@@ -60,11 +60,11 @@
 
 						<div class="col-lg-5 pr-0">
 							<ul class="nav navbar-nav navbar-right right_nav pull-right">
-								<li class="nav-item"><a href="#" class="icons"> <i
+								<!-- <li class="nav-item"><a href="#" class="icons"> <i
 										class="ti-search" aria-hidden="true"></i>
-								</a></li>
+								</a></li> -->
 
-								<li class="nav-item"><a href="cart" class="icons"> <i
+								<li class="nav-item"><a href="listCart" class="icons"> <i
 										class="ti-shopping-cart"></i>
 								</a></li>
 

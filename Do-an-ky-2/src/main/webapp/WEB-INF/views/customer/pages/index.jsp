@@ -352,7 +352,7 @@
 					<div class="product-img">
 						<img class="img-fluid w-100" src="<c:url value="resources"/>/image/${product.imageUrl}"/>
 						<div class="p_icon">
-							<a href="detailProduct?proId=${product.proId}"><i class="ti-eye"></i></a> 
+							<a href="productDetail?proId=${product.proId}"><i class="ti-eye"></i></a> 
 							<!-- <a href="#"><i class="ti-heart"></i></a> -->
 							<a href="insertcart?proId=${product.proId}&quantity=1"><i class="ti-shopping-cart"></i></a>
 						</div>
@@ -361,10 +361,10 @@
 						<a href="#" class="d-block"><h4>${product.name}</h4></a>
 						<div class="mt-3">
 						    <c:if test="${product.discount > 0}">
-						    	<span class="mr-4">$ ${product.price - product.discount}0</span><del>$ ${product.price}0</del>
+						    	<span class="mr-4">$ ${product.price - product.discount}</span><del>$ ${product.price}</del>
 						    </c:if>
 						    <c:if test="${product.discount == 0}">
-						        <span class="mr-4">$ ${product.price}0</span>
+						        <span class="mr-4">$ ${product.price}</span>
 						    </c:if>
 						</div>
 					</div>

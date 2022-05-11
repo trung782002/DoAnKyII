@@ -31,7 +31,7 @@ import bkap.entities.Product_imagesDTO;
 import bkap.entities.ProductsDTO;
 
 @Controller
-public class ProductController {
+public class ProductControllerAdmin {
 	
 	public List<CategoriesDTO> getListCategories(Client client, Gson gson) {
 		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/categoryService/getList");

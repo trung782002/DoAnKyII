@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <jsp:include page="../layouts/header.jsp" flush="true"></jsp:include>
 
 <jsp:include page="../layouts/menu.jsp" flush="true"></jsp:include>
@@ -13,7 +14,7 @@
 					<p>Very us move be blessed multiply night</p>
 				</div>
 				<div class="page_link">
-					<a href="index.html">Home</a> <a href="single-product.html">Product
+					<a href="index.html">Home</a> <a href="productDetail?proId=${product.proId}">Product
 						Details</a>
 				</div>
 			</div>
@@ -33,71 +34,82 @@
 						<ol class="carousel-indicators">
 							<li data-target="#carouselExampleIndicators" data-slide-to="0"
 								class="active"><img
-								src="<c:url value="assets"/>/customer/img/product/single-product/s-product-s-2.jpg" alt="" />
-							</li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="1">
-								<img src="<c:url value="assets"/>/customer/img/product/single-product/s-product-s-3.jpg" alt="" />
-							</li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="2">
-								<img src="<c:url value="assets"/>/customer/img/product/single-product/s-product-s-4.jpg" alt="" />
-							</li>
+								src="<c:url value="http://localhost:8080/Do-an-ky-2/resources"/>/image/${product.imageUrl}"
+								alt="" width="100%" /></li>
+							<c:forTokens items="" delims=""></c:forTokens>
+							<c:forEach items="${productimages}" var="productImage">
+								<li data-target="#carouselExampleIndicators" data-slide-to="2">
+									<img
+									src="<c:url value="http://localhost:8080/Do-an-ky-2/resources"/>/image/${productImage.imageUrl}"
+									alt="" width="100%" />
+								</li>
+							</c:forEach>
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
 								<img class="d-block w-100"
-									src="<c:url value="assets"/>/customer/img/product/single-product/s-product-1.jpg"
+									src="<c:url value="http://localhost:8080/Do-an-ky-2/resources"/>/image/${product.imageUrl}"
 									alt="First slide" />
 							</div>
-							<div class="carousel-item">
-								<img class="d-block w-100"
-									src="<c:url value="assets"/>/customer/img/product/single-product/s-product-1.jpg"
-									alt="Second slide" />
-							</div>
-							<div class="carousel-item">
-								<img class="d-block w-100"
-									src="<c:url value="assets"/>/customer/img/product/single-product/s-product-1.jpg"
-									alt="Third slide" />
-							</div>
+							<c:forEach items="${productimages}" var="productImage">
+								<div class="carousel-item">
+									<img class="d-block w-100"
+										src="<c:url value="http://localhost:8080/Do-an-ky-2/resources"/>/image/${productImage.imageUrl}"
+										alt="Second slide" />
+								</div>
+							</c:forEach>
+
+
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-5 offset-lg-1">
 				<div class="s_product_text">
-					<h3>Faded SkyBlu Denim Jeans</h3>
-					<h2>$149.99</h2>
+					<h3>${product.name}</h3>
+					<h2>$ ${product.price - product.discount}</h2>
 					<ul class="list">
-						<li><a class="active" href="#"> <span>Category</span> :
-								Household
+						<li><a class="active" href="#"> <span>Category</span> : <c:forEach
+									items="${categories}" var="category">
+									<c:if test="${product.cateId == category.cateId}">
+										<td>${category.name}</td>
+									</c:if>
+								</c:forEach>
 						</a></li>
-						<li><a href="#"> <span>Availibility</span> : In Stock
+
+						<li><a class="active" href="#"> <span>Brand</span> : <c:forEach
+									items="${brands}" var="brand">
+									<c:if test="${product.brandId == brand.brandId}">
+										<td>${brand.name}</td>
+									</c:if>
+								</c:forEach>
 						</a></li>
 					</ul>
-					<p>Mill Oil is an innovative oil filled radiator with the most
-						modern technology. If you are looking for something that can make
-						your interior look awesome, and at the same time give you the
-						pleasant warm feeling during the winter.</p>
-					<div class="product_count">
-						<label for="qty">Quantity:</label> <input type="text" name="qty"
-							id="sst" maxlength="12" value="1" title="Quantity:"
-							class="input-text qty" />
-						<button
-							onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-							class="increase items-count" type="button">
-							<i class="lnr lnr-chevron-up"></i>
-						</button>
-						<button
-							onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-							class="reduced items-count" type="button">
-							<i class="lnr lnr-chevron-down"></i>
-						</button>
-					</div>
-					<div class="card_area">
-						<a class="main_btn" href="#">Add to Cart</a> <a class="icon_btn"
-							href="#"> <i class="lnr lnr lnr-diamond"></i>
-						</a> <a class="icon_btn" href="#"> <i class="lnr lnr lnr-heart"></i>
-						</a>
-					</div>
+					${product.shortDescription}
+					<form:form method="get" action="insertcart">
+						<div class="product_count">
+							<input name="proId" value="${product.proId}" type="hidden"> <label for="qty">Quantity:</label>
+							<input type="text" name="quantity" id="sst" maxlength="12"
+								value="1" title="Quantity:" class="input-text qty" />
+							<button
+								onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+								class="increase items-count" type="button">
+								<i class="lnr lnr-chevron-up"></i>
+							</button>
+							<button
+								onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+								class="reduced items-count" type="button">
+								<i class="lnr lnr-chevron-down"></i>
+							</button>
+						</div>
+						<span class="ml-3"> ${product.quantity} products available</span>
+						<div class="card_area">
+							<button class="main_btn" type="submit">Add to Cart</button>
+							<a class="icon_btn" href="#"> <i class="lnr lnr lnr-diamond"></i>
+							</a> <a class="icon_btn" href="#"> <i class="lnr lnr lnr-heart"></i>
+							</a>
+						</div>
+					</form:form>
 				</div>
 			</div>
 		</div>
@@ -124,33 +136,7 @@
 		</ul>
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade" id="home" role="tabpanel"
-				aria-labelledby="home-tab">
-				<p>Beryl Cook is one of Britain’s most talented and amusing
-					artists .Beryl’s pictures feature women of all shapes and sizes
-					enjoying themselves .Born between the two world wars, Beryl Cook
-					eventually left Kendrick School in Reading at the age of 15, where
-					she went to secretarial school and then into an insurance office.
-					After moving to London and then Hampton, she eventually married her
-					next door neighbour from Reading, John Cook. He was an officer in
-					the Merchant Navy and after he left the sea in 1956, they bought a
-					pub for a year before John took a job in Southern Rhodesia with a
-					motor company. Beryl bought their young son a box of watercolours,
-					and when showing him how to use it, she decided that she herself
-					quite enjoyed painting. John subsequently bought her a child’s
-					painting set for her birthday and it was with this that she
-					produced her first significant work, a half-length portrait of a
-					dark-skinned lady with a vacant expression and large drooping
-					breasts. It was aptly named ‘Hangover’ by Beryl’s husband and</p>
-				<p>It is often frustrating to attempt to plan meals that are
-					designed for one. Despite this fact, we are seeing more and more
-					recipe books and Internet websites that are dedicated to the act of
-					cooking for one. Divorce and the death of spouses or grown children
-					leaving for college are all reasons that someone accustomed to
-					cooking for more than one would suddenly need to learn how to
-					adjust all the cooking practices utilized before into a streamlined
-					plan of cooking that is more efficient for one person creating less
-				</p>
-			</div>
+				aria-labelledby="home-tab">${product.description}</div>
 			<div class="tab-pane fade" id="profile" role="tabpanel"
 				aria-labelledby="profile-tab">
 				<div class="table-responsive">
@@ -232,7 +218,9 @@
 							<div class="review_item">
 								<div class="media">
 									<div class="d-flex">
-										<img src="<c:url value="assets"/>/customer/img/product/single-product/review-1.png" alt="" />
+										<img
+											src="<c:url value="assets"/>/customer/img/product/single-product/review-1.png"
+											alt="" />
 									</div>
 									<div class="media-body">
 										<h4>Blake Ruiz</h4>
@@ -248,7 +236,9 @@
 							<div class="review_item reply">
 								<div class="media">
 									<div class="d-flex">
-										<img src="<c:url value="assets"/>/customer/img/product/single-product/review-2.png" alt="" />
+										<img
+											src="<c:url value="assets"/>/customer/img/product/single-product/review-2.png"
+											alt="" />
 									</div>
 									<div class="media-body">
 										<h4>Blake Ruiz</h4>
@@ -264,7 +254,9 @@
 							<div class="review_item">
 								<div class="media">
 									<div class="d-flex">
-										<img src="<c:url value="assets"/>/customer/img/product/single-product/review-3.png" alt="" />
+										<img
+											src="<c:url value="assets"/>/customer/img/product/single-product/review-3.png"
+											alt="" />
 									</div>
 									<div class="media-body">
 										<h4>Blake Ruiz</h4>
@@ -333,30 +325,25 @@
 								<div class="rating_list">
 									<h3>Based on 3 Reviews</h3>
 									<ul class="list">
-										<li><a href="#">5 Star
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+										<li><a href="#">5 Star <i class="fa fa-star"></i> <i
 												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-												class="fa fa-star"></i> 01
+												class="fa fa-star"></i> <i class="fa fa-star"></i> 01
 										</a></li>
-										<li><a href="#">4 Star
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+										<li><a href="#">4 Star <i class="fa fa-star"></i> <i
 												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-												class="fa fa-star"></i> 01
+												class="fa fa-star"></i> <i class="fa fa-star"></i> 01
 										</a></li>
-										<li><a href="#">3 Star
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+										<li><a href="#">3 Star <i class="fa fa-star"></i> <i
 												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-												class="fa fa-star"></i> 01
+												class="fa fa-star"></i> <i class="fa fa-star"></i> 01
 										</a></li>
-										<li><a href="#">2 Star
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+										<li><a href="#">2 Star <i class="fa fa-star"></i> <i
 												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-												class="fa fa-star"></i> 01
+												class="fa fa-star"></i> <i class="fa fa-star"></i> 01
 										</a></li>
-										<li><a href="#">1 Star
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+										<li><a href="#">1 Star <i class="fa fa-star"></i> <i
 												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-												class="fa fa-star"></i> 01
+												class="fa fa-star"></i> <i class="fa fa-star"></i> 01
 										</a></li>
 									</ul>
 								</div>
@@ -366,7 +353,9 @@
 							<div class="review_item">
 								<div class="media">
 									<div class="d-flex">
-										<img src="<c:url value="assets"/>/customer/img/product/single-product/review-1.png" alt="" />
+										<img
+											src="<c:url value="assets"/>/customer/img/product/single-product/review-1.png"
+											alt="" />
 									</div>
 									<div class="media-body">
 										<h4>Blake Ruiz</h4>
@@ -383,7 +372,9 @@
 							<div class="review_item">
 								<div class="media">
 									<div class="d-flex">
-										<img src="<c:url value="assets"/>/customer/img/product/single-product/review-2.png" alt="" />
+										<img
+											src="<c:url value="assets"/>/customer/img/product/single-product/review-2.png"
+											alt="" />
 									</div>
 									<div class="media-body">
 										<h4>Blake Ruiz</h4>
@@ -400,7 +391,9 @@
 							<div class="review_item">
 								<div class="media">
 									<div class="d-flex">
-										<img src="<c:url value="assets"/>/customer/img/product/single-product/review-3.png" alt="" />
+										<img
+											src="<c:url value="assets"/>/customer/img/product/single-product/review-3.png"
+											alt="" />
 									</div>
 									<div class="media-body">
 										<h4>Blake Ruiz</h4>

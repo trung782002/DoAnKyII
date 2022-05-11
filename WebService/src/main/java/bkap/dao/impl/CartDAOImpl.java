@@ -12,11 +12,26 @@ import bkap.util.HibernateUtil;
 public class CartDAOImpl implements CartDAO {
 
 	@Override
-	public List<Carts> getList() {
+	public List<Carts> getList(Integer accId) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery("from Carts").list();
+			List list = session.createQuery("from Carts where AccId = :accId ORDER BY CartId DESC").setParameter("accId",accId).list();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Carts> check(Integer accId,Integer proId) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			List list = session.createQuery("from Carts where AccId = :accId and ProId = :proId ORDER BY CartId DESC").setParameter("accId",accId).setParameter("proId", proId).list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,15 +98,19 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	@Override
-	public Carts getById(Integer id) {
+	public Carts getById(Integer cartId) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			Carts cart = session.get(Carts.class, id);
+			Carts cart = session.get(Carts.class, cartId);
+			return cart;
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return null;
+	}
+	public static void main(String[] args) {
+		System.out.print(new CartDAOImpl().getById(9).getCartId());
 	}
 
 }

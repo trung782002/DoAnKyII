@@ -26,7 +26,7 @@ import com.sun.jersey.api.client.WebResource;
 import bkap.entities.CategoriesDTO;
 
 @Controller
-public class CategoryController {
+public class CategoryControllerAdmin {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");

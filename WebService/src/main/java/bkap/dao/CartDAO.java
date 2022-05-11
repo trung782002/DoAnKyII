@@ -5,7 +5,9 @@ import java.util.List;
 import bkap.entities.Carts;
 
 public interface CartDAO {
-	public List<Carts> getList();
+	public List<Carts> getList(Integer accId);
+	
+	public List<Carts> check(Integer accId,Integer proId);
 
 	public boolean insert(Carts carts);
 
@@ -13,5 +15,5 @@ public interface CartDAO {
 
 	public boolean delete(Integer id);
 
-	public Carts getById(Integer id);
+	public Carts getById(Integer cartId);
 }

@@ -34,11 +34,6 @@ public class CategoryControllerCustomer {
 		return listBrands;
 	}
 	
-	@RequestMapping(value = "/productDetail")
-	public String productDetail(Model model) {
-		return "customer/pages/product";
-	}
-	
 	@RequestMapping(value = "/allCategory")
 	public String allCategory(Model model) {
 		Client client = Client.create();
