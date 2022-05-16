@@ -6,21 +6,17 @@ public class AccountsDTO {
 	
 	private Integer accId;
 	
-	private String accName;
-	
-	private String fullName;
-
 	private String email;
 	
-	private String address;
+	private String fullName;
 	
 	private String phone;
+	
+	private String address;
 	
 	private String password;
 	
 	private boolean status;
-	
-	private String rememberToken;
 	
 	private Date createdAt;
 	
@@ -28,18 +24,16 @@ public class AccountsDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AccountsDTO(Integer accId, String accName, String fullName, String email, String address, String phone,
-			String password, boolean status, String rememberToken, Date createdAt) {
+	public AccountsDTO(Integer accId, String email, String fullName, String phone, String address, String password,
+			boolean status, Date createdAt) {
 		super();
 		this.accId = accId;
-		this.accName = accName;
-		this.fullName = fullName;
 		this.email = email;
-		this.address = address;
+		this.fullName = fullName;
 		this.phone = phone;
+		this.address = address;
 		this.password = password;
 		this.status = status;
-		this.rememberToken = rememberToken;
 		this.createdAt = createdAt;
 	}
 
@@ -51,12 +45,12 @@ public class AccountsDTO {
 		this.accId = accId;
 	}
 
-	public String getAccName() {
-		return accName;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setAccName(String accName) {
-		this.accName = accName;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getFullName() {
@@ -67,12 +61,12 @@ public class AccountsDTO {
 		this.fullName = fullName;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getAddress() {
@@ -81,14 +75,6 @@ public class AccountsDTO {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 
 	public String getPassword() {
@@ -107,14 +93,6 @@ public class AccountsDTO {
 		this.status = status;
 	}
 
-	public String getRememberToken() {
-		return rememberToken;
-	}
-
-	public void setRememberToken(String rememberToken) {
-		this.rememberToken = rememberToken;
-	}
-
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -123,5 +101,4 @@ public class AccountsDTO {
 		this.createdAt = createdAt;
 	}
 
-	
 }

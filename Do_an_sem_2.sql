@@ -5,7 +5,7 @@ USE Do_an_sem_2
 GO
 CREATE TABLE Categories (
 	CateId INT PRIMARY KEY IDENTITY(1,1),
-	Name NVARCHAR(150) UNIQUE NOT NULL,
+	Name NVARCHAR(255) UNIQUE NOT NULL,
 	Status BIT DEFAULT 1,
 	CreatedAt DATETIME DEFAULT GETDATE()
 )
@@ -13,7 +13,7 @@ CREATE TABLE Categories (
 GO
 CREATE TABLE Brands (
 	BrandId INT PRIMARY KEY IDENTITY(1,1),
-	Name NVARCHAR(150) UNIQUE NOT NULL,
+	Name NVARCHAR(255) UNIQUE NOT NULL,
 	ImageUrl VARCHAR(255) NOT NULL,
 	Status BIT DEFAULT 1,
 	CreatedAt DATETIME DEFAULT GETDATE()
@@ -22,7 +22,7 @@ CREATE TABLE Brands (
 GO
 CREATE TABLE Products (
 	ProId INT PRIMARY KEY IDENTITY(1,1),
-	Name NVARCHAR(150) NOT NULL,
+	Name NVARCHAR(255) NOT NULL,
 	ImageUrl VARCHAR(255) NOT NULL,
 	Price MONEY NOT NULL,
 	Discount MONEY DEFAULT(0),
@@ -45,21 +45,19 @@ CREATE TABLE Product_images (
 GO
 CREATE TABLE Accounts (
 	AccId INT PRIMARY KEY IDENTITY(1,1),
-	AccName NVARCHAR(100) UNIQUE NOT NULL,
-	FullName NVARCHAR(150) NOT NULL,
-	Email VARCHAR(150) UNIQUE NOT NULL,
-	Address NVARCHAR(255) NOT NULL,
+	Email VARCHAR(255) UNIQUE NOT NULL,
+	FullName NVARCHAR(255) NOT NULL,
 	Phone VARCHAR(20) NOT NULL,
+	Address NVARCHAR(255) NOT NULL,
 	Password VARCHAR(255) NOT NULL,
 	Status BIT DEFAULT 1,
-	RememberToken VARCHAR(150) NULL,
 	CreatedAt DATETIME DEFAULT GETDATE()
 )
 
 GO
 CREATE TABLE Roles (
 	RoleId INT PRIMARY KEY IDENTITY(1,1),
-	Name NVARCHAR(100) UNIQUE NOT NULL,
+	Name NVARCHAR(255) UNIQUE NOT NULL,
 	Status BIT DEFAULT 1
 )
 
@@ -74,8 +72,8 @@ GO
 CREATE TABLE Contacts (
 	Id INT PRIMARY KEY IDENTITY(1,1),
 	AccId INT NULL,
-	FullName NVARCHAR(150) NOT NULL,
-	Email NVARCHAR(150) NOT NULL,
+	FullName NVARCHAR(255) NOT NULL,
+	Email NVARCHAR(255) NOT NULL,
 	Phone VARCHAR(20) NOT NULL,
 	Message NTEXT NOT NULL,
 	Status BIT DEFAULT 1,
@@ -85,12 +83,12 @@ CREATE TABLE Contacts (
 GO
 CREATE TABLE Configs (
 	Id INT PRIMARY KEY IDENTITY(1,1),
-	LogoImage NVARCHAR(250) NOT NULL,
-	BannerImage NVARCHAR(250) NOT NULL,
-	Address NVARCHAR(250) NOT NULL,
+	LogoImage NVARCHAR(255) NOT NULL,
+	BannerImage NVARCHAR(255) NOT NULL,
+	Address NVARCHAR(255) NOT NULL,
 	Map TEXT NOT NULL,
 	Phone VARCHAR(20) NOT NULL,
-	Email NVARCHAR(150) NOT NULL,
+	Email NVARCHAR(255) NOT NULL,
 	UpdatedAt DATETIME NULL
 )
 
@@ -101,6 +99,7 @@ CREATE TABLE Reviews (
 	ProId INT FOREIGN KEY REFERENCES Products(ProId),
 	ProductQuality INT NOT NULL,
 	ContentRated NTEXT NOT NULL,
+	Reply NTEXT NULL,
 	Status BIT DEFAULT 1,
 	CreatedAt DATETIME DEFAULT GETDATE()
 )
@@ -110,16 +109,15 @@ CREATE TABLE Carts (
 	CartId INT PRIMARY KEY IDENTITY(1,1),
 	AccId INT FOREIGN KEY REFERENCES Accounts(AccId),
 	ProId INT FOREIGN KEY REFERENCES Products(ProId),
-	Quantity INT NOT NULL,
-	TotalPrice MONEY NOT NULL
+	Quantity INT NOT NULL
 )
 
 GO
 CREATE TABLE Orders (
 	OrderId INT PRIMARY KEY IDENTITY(1,1),
 	AccId INT FOREIGN KEY REFERENCES Accounts(AccId),
-	FullName NVARCHAR(150) NOT NULL,
-	Address NVARCHAR(150) NOT NULL,
+	FullName NVARCHAR(255) NOT NULL,
+	Address NVARCHAR(255) NOT NULL,
 	Phone VARCHAR(20) NOT NULL,
 	Note NTEXT NULL,
 	TotalPrice MONEY NOT NULL,
@@ -140,8 +138,8 @@ CREATE TABLE OrderDetails (
 GO
 CREATE TABLE Blogs (
 	Id INT PRIMARY KEY IDENTITY(1,1),
-	Name NVARCHAR(255) NOT NULL,
-	Title NVARCHAR(255) NOT NULL,
+	Name NTEXT NOT NULL,
+	Title NTEXT NOT NULL,
 	MainImageUrl VARCHAR(255) NOT NULL,
 	Content_1 NTEXT NOT NULL,
 	SecondImageUrl VARCHAR(255) NOT NULL,
@@ -168,10 +166,13 @@ INSERT INTO Brands(Name, ImageUrl) VALUES ('Rolex', 'rolex.jpg'), ('Casio', 'cas
 GO
 INSERT INTO Roles(Name) VALUES ('ROLE_ADMIN'), ('ROLE_USER')
 GO
-INSERT INTO Configs VALUES ('logoImage.png', 'bannerImage.jpg', N'Số 238 Hoàng Quốc Việt, Cầu GIấy, Hà nội', 
-'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4331.764921528694!2d105.71224085080011!3d18.6438196872751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3139cc46daf9fc6b%3A0x9332dd7c2df8d550!2zTMOqIER1eSDEkGnhur9tLCB0dC4gWHXDom4gQW4sIE5naGkgWHXDom4sIEjDoCBUxKluaCwgVmnhu4d0IE5hbQ!5e1!3m2!1svi!2s!4v1649836718565!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>', 'Eiser@gamil.com', '0398888888', '2022-02-02')
+INSERT INTO Configs VALUES ('logoImage.png', 'service-center-5.jpg', N'Số 238 Hoàng Quốc Việt, Cầu Giấy, Hà nội.', 
+'<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1455.0111587501103!2d105.78426245540275!3d21.046832990622818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab3b4220c2bd%3A0x1c9e359e2a4f618c!2sB%C3%A1ch%20Khoa%20Aptech!5e1!3m2!1svi!2s!4v1652431210865!5m2!1svi!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+, '024 3755 4010', 'Eiser@gmail.com', '2022-05-13')
 
 select * from Accounts
-
 select * from Account_Roles
+--insert into Account_Roles values(1,1)
+select * from Blogs
+
 

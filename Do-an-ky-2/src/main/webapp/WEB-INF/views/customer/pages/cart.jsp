@@ -59,10 +59,10 @@
 												<c:if test="${product.proId == cart.proId}">
 													<div class="media">
 														<div class="col-5">
-															<img width="85%" src="<c:url value="resources"/>/image/${product.imageUrl}"/>
+															<a href="productDetail?proId=${cart.proId}"><img width="85%" src="<c:url value="resources"/>/image/${product.imageUrl}"/></a>
 														</div>
 														<div class="media-body">
-															<p>${product.name}</p>
+															<a class="text-secondary" href="productDetail?proId=${cart.proId}">${product.name}</a>
 														</div>
 													</div>
 												</c:if>
@@ -89,6 +89,15 @@
 													<i class="lnr lnr-chevron-down"></i>
 												</button>
 											</div>
+										   <c:forEach items="${listCartIds}" var="listCartId">
+							                 <c:if test="${listCartId == cart.cartId}">
+							                 	<c:forEach items="${products}" var="product">
+								                 	<c:if test="${product.proId == cart.proId}">
+											        	<div class="text-danger mt-1">${quantity} ${product.quantity} quantity remaining for this item</div>
+											     	</c:if>
+										     	</c:forEach>
+										     </c:if>
+									       </c:forEach>
 										</td>
 										<c:forEach items="${products}" var="product">
 											<c:if test="${product.proId == cart.proId}">
@@ -111,7 +120,7 @@
 								</tr>
 								<tr>
 									<td colspan="2"></td>
-									<td colspan="2" class="text-right"><a href="" class="main_btn">Proceed to checkout</a></td>
+									<td colspan="2" class="text-right"><a href="checkOut" class="main_btn">Proceed to checkout</a></td>
 								</tr>
 							</form>
 						</tbody>

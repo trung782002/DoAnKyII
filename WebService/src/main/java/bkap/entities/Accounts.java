@@ -19,29 +19,23 @@ public class Accounts {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer accId;
 	
-	@Column(name = "AccName")
-	private String accName;
+	@Column(name = "Email")
+	private String email;
 	
 	@Column(name = "FullName")
 	private String fullName;
 	
-	@Column(name = "Email")
-	private String email;
+	@Column(name = "Phone")
+	private String phone;
 	
 	@Column(name = "Address")
 	private String address;
-	
-	@Column(name = "Phone")
-	private String phone;
 	
 	@Column(name = "Password")
 	private String password;
 	
 	@Column(name = "Status")
 	private boolean status;
-	
-	@Column(name = "RememberToken")
-	private String rememberToken;
 	
 	@Column(name = "CreatedAt")
 	private Date createdAt;
@@ -62,19 +56,17 @@ public class Accounts {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Accounts(Integer accId, String accName, String fullName, String email, String address, String phone,
-			String password, boolean status, String rememberToken, Date createdAt, Set<Account_Roles> listAccountRoles,
-			Set<Reviews> listReviews, Set<Carts> listCarts, Set<Orders> listOrders) {
+	public Accounts(Integer accId, String email, String fullName, String phone, String address, String password,
+			boolean status, Date createdAt, Set<Account_Roles> listAccountRoles, Set<Reviews> listReviews,
+			Set<Carts> listCarts, Set<Orders> listOrders) {
 		super();
 		this.accId = accId;
-		this.accName = accName;
-		this.fullName = fullName;
 		this.email = email;
-		this.address = address;
+		this.fullName = fullName;
 		this.phone = phone;
+		this.address = address;
 		this.password = password;
 		this.status = status;
-		this.rememberToken = rememberToken;
 		this.createdAt = createdAt;
 		this.listAccountRoles = listAccountRoles;
 		this.listReviews = listReviews;
@@ -90,12 +82,12 @@ public class Accounts {
 		this.accId = accId;
 	}
 
-	public String getAccName() {
-		return accName;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setAccName(String accName) {
-		this.accName = accName;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getFullName() {
@@ -106,12 +98,12 @@ public class Accounts {
 		this.fullName = fullName;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getAddress() {
@@ -120,14 +112,6 @@ public class Accounts {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 
 	public String getPassword() {
@@ -144,14 +128,6 @@ public class Accounts {
 
 	public void setStatus(boolean status) {
 		this.status = status;
-	}
-
-	public String getRememberToken() {
-		return rememberToken;
-	}
-
-	public void setRememberToken(String rememberToken) {
-		this.rememberToken = rememberToken;
 	}
 
 	public Date getCreatedAt() {

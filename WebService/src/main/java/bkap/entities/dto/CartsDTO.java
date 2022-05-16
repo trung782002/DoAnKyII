@@ -10,19 +10,16 @@ public class CartsDTO {
 
 	private Integer quantity;
 
-	private Double totalPrice;
-	
 	public CartsDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CartsDTO(Integer cartId, Integer accId, Integer proId, Integer quantity, Double totalPrice) {
+	public CartsDTO(Integer cartId, Integer accId, Integer proId, Integer quantity) {
 		super();
 		this.cartId = cartId;
 		this.accId = accId;
 		this.proId = proId;
 		this.quantity = quantity;
-		this.totalPrice = totalPrice;
 	}
 
 	public Integer getCartId() {
@@ -57,13 +54,5 @@ public class CartsDTO {
 		this.quantity = quantity;
 	}
 
-	public Double getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(Double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-	
 	
 }

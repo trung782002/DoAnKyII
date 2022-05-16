@@ -17,25 +17,28 @@ public class ReviewsDTO {
 
 	@NotNull(message = "Content rated is null")
 	private Integer contentRated;
+	
+	private String reply;
 
 	private boolean status;
 
 	private Date createdAt;
 
 	public ReviewsDTO() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public ReviewsDTO(Integer id, Integer accId, Integer proId,
 			@NotNull(message = "Product quality is null") Integer productQuality,
-			@NotNull(message = "Content rated is null") Integer contentRated, boolean status, Date createdAt) {
+			@NotNull(message = "Content rated is null") Integer contentRated, String reply, boolean status,
+			Date createdAt) {
 		super();
 		this.id = id;
 		this.accId = accId;
 		this.proId = proId;
 		this.productQuality = productQuality;
 		this.contentRated = contentRated;
+		this.reply = reply;
 		this.status = status;
 		this.createdAt = createdAt;
 	}
@@ -78,6 +81,14 @@ public class ReviewsDTO {
 
 	public void setContentRated(Integer contentRated) {
 		this.contentRated = contentRated;
+	}
+
+	public String getReply() {
+		return reply;
+	}
+
+	public void setReply(String reply) {
+		this.reply = reply;
 	}
 
 	public boolean isStatus() {

@@ -1,7 +1,5 @@
 package bkap.dao.impl;
 
-import java.util.List;
-
 import org.hibernate.Session;
 
 import bkap.dao.ConfigDAO;
@@ -11,11 +9,12 @@ import bkap.util.HibernateUtil;
 public class ConfigDAOImpl implements ConfigDAO {
 
 	@Override
-	public List<Configs> getList() {
+	public Configs getConfig() {
+		Integer id = 1;
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery("from Configs").list();
-			return list;
+			Configs config = session.get(Configs.class, id);
+			return config;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -41,16 +40,4 @@ public class ConfigDAOImpl implements ConfigDAO {
 		return false;
 	}
 
-	@Override
-	public Configs getById(Integer id) {
-		// TODO Auto-generated method stub
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		try {
-			Configs config = session.get(Configs.class, id);
-			return config;
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return null;
-	}
 }

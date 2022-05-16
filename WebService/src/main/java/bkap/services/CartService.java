@@ -32,7 +32,7 @@ public class CartService {
 		List<CartsDTO> data = new ArrayList<CartsDTO>();
 		for (Carts c : list) {
 			CartsDTO cDTO = new CartsDTO(c.getCartId(), c.getObjAccountOfCart().getAccId(),
-					c.getObjProductOfCart().getProId(), c.getQuantity(), c.getTotalPrice());
+					c.getObjProductOfCart().getProId(), c.getQuantity());
 			data.add(cDTO);
 		}
 		String Data = son.toJson(data);
@@ -48,7 +48,7 @@ public class CartService {
 		List<CartsDTO> data = new ArrayList<CartsDTO>();
 		for (Carts c : list) {
 			CartsDTO cDTO = new CartsDTO(c.getCartId(), c.getObjAccountOfCart().getAccId(),
-					c.getObjProductOfCart().getProId(), c.getQuantity(), c.getTotalPrice());
+					c.getObjProductOfCart().getProId(), c.getQuantity());
 			data.add(cDTO);
 		}
 		String Data = son.toJson(data);
@@ -65,7 +65,7 @@ public class CartService {
 		objAccounts.setAccId(objDTO.getAccId());
 		Products objProducts = new Products();
 		objProducts.setProId(objDTO.getProId());
-		Carts objCart = new Carts(0, objDTO.getQuantity(), objDTO.getTotalPrice(), objAccounts, objProducts);
+		Carts objCart = new Carts(0, objDTO.getQuantity(), objAccounts, objProducts);
 		boolean bl = new CartDAOImpl().insert(objCart);
 		String data = son.toJson(bl);
 		return data;
@@ -81,7 +81,7 @@ public class CartService {
 		objAccounts.setAccId(objDTO.getAccId());
 		Products objProducts = new Products();
 		objProducts.setProId(objDTO.getProId());
-		Carts objCart = new Carts(objDTO.getCartId(), objDTO.getQuantity(), objDTO.getTotalPrice(), objAccounts, objProducts);
+		Carts objCart = new Carts(objDTO.getCartId(), objDTO.getQuantity(), objAccounts, objProducts);
 		boolean bl = new CartDAOImpl().update(objCart);
 		String data = son.toJson(bl);
 		return data;
@@ -105,7 +105,7 @@ public class CartService {
 		Carts c = new CartDAOImpl().getById(cartId);
 		Gson son = new Gson();
 		CartsDTO cDTO = new CartsDTO(c.getCartId(), c.getObjAccountOfCart().getAccId(),
-				c.getObjProductOfCart().getProId(), c.getQuantity(), c.getTotalPrice());
+				c.getObjProductOfCart().getProId(), c.getQuantity());
 		String Data = son.toJson(cDTO);
 		return Data;
 	}

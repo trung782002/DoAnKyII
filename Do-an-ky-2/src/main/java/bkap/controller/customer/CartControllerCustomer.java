@@ -1,11 +1,15 @@
 package bkap.controller.customer;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.sun.jersey.api.client.Client;
@@ -47,18 +51,20 @@ public class CartControllerCustomer {
 	}
 
 	public CartsDTO getById(Client client, Gson gson, Integer cartId) {
-		WebResource webResource = client
-				.resource("http://localhost:8080/WebService/rest/cartService/getById/" + cartId);
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/cartService/getById/" + cartId);
 		String data = webResource.get(String.class);
 		CartsDTO carts = gson.fromJson(data, CartsDTO.class);
 		return carts;
 	}
 
 	@RequestMapping(value = "/listCart")
-	public String listCart(Model model) {
+	public String listCart(Model model, HttpSession session) {
 		Client client = Client.create();
 		Gson gson = new Gson();
 		Integer accId = 1;
+		if(session.getAttribute("accId") != null) {
+			System.out.println(session.getAttribute("accId"));
+		}
 		if (accId != null) {
 			WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getList");
 			String data = webResource.get(String.class);
@@ -73,40 +79,42 @@ public class CartControllerCustomer {
 			model.addAttribute("carts", cartsDTOs);
 			return "customer/pages/cart";
 		} else {
-			return "redirect:/signUp";
+			return "redirect:/login";
 		}
 	}
 
 	@RequestMapping(value = "/insertcart")
 	public String insertcart(@RequestParam("proId") Integer proId, @RequestParam("quantity") Integer quantitycart,
-			Model model) {
+			RedirectAttributes redirAttrs,Model model) {
 		Client client = Client.create();
 		Gson gson = new Gson();
 		Integer accId = 1;
 		if (accId != null) {
 			List<CartsDTO> listCart = getCartproIdaccId(client, gson, accId, proId);
+			ProductsDTO dto = getByIdProduct(client, gson, proId);
 			if (listCart.size() > 0) {
 				Integer cartId = null;
 				for (CartsDTO cartsDTO : listCart) {
 					cartId = cartsDTO.getCartId();
 				}
-				Integer quantity = null;
 				CartsDTO cartsDTO = getById(client, gson, cartId);
-				quantity = cartsDTO.getQuantity() + quantitycart;
-				Double TotalPrice = (double) (getByIdProduct(client, gson, proId).getPrice()
-						- getByIdProduct(client, gson, proId).getDiscount()) * quantity;
-				CartsDTO cartsDTO2 = new CartsDTO(cartId, accId, proId, quantity, TotalPrice);
-
+				if(quantitycart == 0 || quantitycart + cartsDTO.getQuantity() > dto.getQuantity()) {
+					redirAttrs.addFlashAttribute("quantity", "The quantity does not match");
+					return "redirect:/productDetail?proId="+proId;
+				}				
+				quantitycart += cartsDTO.getQuantity(); 			
+				CartsDTO cartsDTO2 = new CartsDTO(cartId, accId, proId, quantitycart);
 				String data = gson.toJson(cartsDTO2);
 				WebResource webResource = client.resource("http://localhost:8080/WebService/rest/cartService/update");
 				ClientResponse clientResponse = webResource.type("application/json").put(ClientResponse.class, data);
 				String re = clientResponse.getEntity(String.class);
 				boolean bt = gson.fromJson(re, boolean.class);
-			} else {
-				Integer quantity = quantitycart;
-				Double TotalPrice = (double) (getByIdProduct(client, gson, proId).getPrice()
-						- getByIdProduct(client, gson, proId).getDiscount()) * quantity;
-				CartsDTO cartsDTO = new CartsDTO(0, 1, proId, quantity, TotalPrice);
+			} else {				
+				if(quantitycart == 0 || quantitycart > dto.getQuantity()) {
+					redirAttrs.addFlashAttribute("quantity", "The quantity does not match");
+					return "redirect:/productDetail?proId="+proId;
+				}
+				CartsDTO cartsDTO = new CartsDTO(0, accId, proId, quantitycart);
 				String datacart = gson.toJson(cartsDTO);
 				WebResource webResourcecart = client
 						.resource("http://localhost:8080/WebService/rest/cartService/insert");
@@ -121,31 +129,39 @@ public class CartControllerCustomer {
 		return "redirect:/listCart";
 	}
 	@RequestMapping(value = "/updateCart")
-	public String updateCart(@RequestParam("cartId") Integer[] cartId,@RequestParam("quantity") Integer[] quantity, Model model) {
+	public String updateCart(@RequestParam("cartId") Integer[] cartId,@RequestParam("quantity") Integer[] quantity,RedirectAttributes redirAttrs, Model model) {
 		Client client = Client.create();
 		Gson gson = new Gson();
+		List<Integer> listCartId = new ArrayList<Integer>();
 		for (int i = 0; i < cartId.length; i++) {
 			for (int j = 0; j < quantity.length; j++) {
 				if(i == j) {
-					WebResource webResource = client.resource("http://localhost:8080/WebService/rest/cartService/getById/"+cartId[i]);
-					String data = webResource.get(String.class);
-					CartsDTO cartsDTO = gson.fromJson(data, CartsDTO.class);
-					
-					CartsDTO cartsDTO2 = new CartsDTO(cartId[i], cartsDTO.getAccId(), cartsDTO.getProId(), quantity[j],cartsDTO.getTotalPrice());
-					
-					data = gson.toJson(cartsDTO2);
-					webResource = client.resource("http://localhost:8080/WebService/rest/cartService/update");
-					ClientResponse clientResponse = webResource.type("application/json").put(ClientResponse.class, data);
-					String re = clientResponse.getEntity(String.class);
-					boolean bt = gson.fromJson(re, boolean.class);
+					if(quantity[j] == 0) {
+						WebResource webResource1 = client.resource("http://localhost:8080/WebService/rest/cartService/delete/"+cartId[i]);
+						String data1 = webResource1.type("application/json").delete(String.class);
+					    boolean bl = gson.fromJson(data1,boolean.class);
+					}else {												
+						CartsDTO cartsDTO = getById(client, gson, cartId[i]);						
+						ProductsDTO dto = getByIdProduct(client, gson, cartsDTO.getProId());
+						
+						if(quantity[j] > dto.getQuantity()) {
+							listCartId.add(cartId[i]);
+ 						    redirAttrs.addFlashAttribute("quantity", "There are only");
+						}else {
+							CartsDTO cartsDTO2 = new CartsDTO(cartId[i], cartsDTO.getAccId(), cartsDTO.getProId(), quantity[j]);				
+						    String data = gson.toJson(cartsDTO2);
+						    WebResource webResource = client.resource("http://localhost:8080/WebService/rest/cartService/update");
+							ClientResponse clientResponse = webResource.type("application/json").put(ClientResponse.class, data);
+							String re = clientResponse.getEntity(String.class);
+							boolean bt = gson.fromJson(re, boolean.class);
+						}					
+					}					
 				}
 			} 			
 		}
-		
+		redirAttrs.addFlashAttribute("listCartIds",listCartId);
 		return "redirect:/listCart";
 	}
-	
-	
 	
 	@RequestMapping(value = "/deleteCart")
 	public String deleteCart(@RequestParam("cartId") Integer cartId,Model model) {
@@ -155,5 +171,11 @@ public class CartControllerCustomer {
 		String data1 = webResource1.type("application/json").delete(String.class);
 	    boolean bl = gson.fromJson(data1,boolean.class);
 	    return "redirect:/listCart";
+	}
+	
+	@RequestMapping(value = "/checkOut")
+	public String checkOut(Model model) {
+		
+	    return "customer/pages/checkOut";
 	}
 }

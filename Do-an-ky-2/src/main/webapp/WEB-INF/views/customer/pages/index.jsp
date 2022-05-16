@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <jsp:include page="../layouts/header.jsp" flush="true"></jsp:include>
 
 <jsp:include page="../layouts/menu.jsp" flush="true"></jsp:include>
 
 <!--================Home Banner Area =================-->
-<c:forEach items="${configs}" var="config">
 <section class="home_banner_area mb-40" style="background-image: url('<c:url value="resources"/>/image/${config.bannerImage}')">
 	<div class="banner_inner d-flex align-items-center">
 		<div class="container">
@@ -15,13 +15,12 @@
 						<span>Show</span> Your <br />Personal <span>Style</span>
 					</h3>
 					<h4>Fowl saw dry which a above together place.</h4>
-					<a class="main_btn mt-40" href="#">View Collection</a>
+					<a class="main_btn mt-40" href="allCategory">Shop now</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
-</c:forEach>
 <!--================End Home Banner Area =================-->
 
 <!-- Button trigger modal -->
@@ -351,14 +350,14 @@
 				<div class="single-product">
 					<div class="product-img">
 						<img class="img-fluid w-100" src="<c:url value="resources"/>/image/${product.imageUrl}"/>
-						<div class="p_icon">
-							<a href="productDetail?proId=${product.proId}"><i class="ti-eye"></i></a> 
+					<!-- 	<div class="p_icon"> -->
+							<%-- <a href="productDetail?proId=${product.proId}"><i class="ti-eye"></i></a>  --%>
 							<!-- <a href="#"><i class="ti-heart"></i></a> -->
-							<a href="insertcart?proId=${product.proId}&quantity=1"><i class="ti-shopping-cart"></i></a>
-						</div>
+							<%-- <a href="insertcart?proId=${product.proId}&quantity=1"><i class="ti-shopping-cart"></i></a> --%>
+						<!-- </div> -->
 					</div>
 					<div class="product-btm">
-						<a href="#" class="d-block"><h4>${product.name}</h4></a>
+						<a href="productDetail?proId=${product.proId}" class="d-block"><h4>${product.name}</h4></a>
 						<div class="mt-3">
 						    <c:if test="${product.discount > 0}">
 						    	<span class="mr-4">$ ${product.price - product.discount}</span><del>$ ${product.price}</del>

@@ -38,7 +38,7 @@
 								alt="" width="100%" /></li>
 							<c:forTokens items="" delims=""></c:forTokens>
 							<c:forEach items="${productimages}" var="productImage">
-								<li data-target="#carouselExampleIndicators" data-slide-to="2">
+								<li data-target="#carouselExampleIndicators" data-slide-to="${productImage.id}">
 									<img
 									src="<c:url value="http://localhost:8080/Do-an-ky-2/resources"/>/image/${productImage.imageUrl}"
 									alt="" width="100%" />
@@ -87,8 +87,9 @@
 					</ul>
 					${product.shortDescription}
 					<form:form method="get" action="insertcart">
-						<div class="product_count">
-							<input name="proId" value="${product.proId}" type="hidden"> <label for="qty">Quantity:</label>
+						<div class="product_count" style="margin-bottom: 5px">
+							<input name="proId" value="${product.proId}" type="hidden"> 
+							<label for="qty">Quantity:</label>
 							<input type="text" name="quantity" id="sst" maxlength="12"
 								value="1" title="Quantity:" class="input-text qty" />
 							<button
@@ -101,13 +102,15 @@
 								class="reduced items-count" type="button">
 								<i class="lnr lnr-chevron-down"></i>
 							</button>
-						</div>
+						</div>				
 						<span class="ml-3"> ${product.quantity} products available</span>
+						
+						<div class="text-danger">${quantity}</div>
 						<div class="card_area">
-							<button class="main_btn" type="submit">Add to Cart</button>
-							<a class="icon_btn" href="#"> <i class="lnr lnr lnr-diamond"></i>
+							<button class="main_btn mt-2" type="submit">Add to Cart</button>
+							<!-- <a class="icon_btn" href="#"> <i class="lnr lnr lnr-diamond"></i>
 							</a> <a class="icon_btn" href="#"> <i class="lnr lnr lnr-heart"></i>
-							</a>
+							</a> -->
 						</div>
 					</form:form>
 				</div>

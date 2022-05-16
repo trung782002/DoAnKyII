@@ -12,30 +12,29 @@ public class ConfigsDTO {
 	
 	private String bannerImage;	
 	
-	@NotEmpty(message = "Address is not null !!")
+	@NotEmpty(message = "Please enter address.")
 	private String address;
 	
-	@NotEmpty(message = "Map is not null !!")
+	@NotEmpty(message = "Please enter map.")
 	private String map;
 	
-	@NotEmpty(message = "Email is not null !!")
+	@NotEmpty(message = "Please enter email.")
 	private String email;
 	
-	@NotEmpty(message = "Phone is not null !!")
+	@NotEmpty(message = "Please enter phone.")
 	private String phone;
 	
 	private Date updatedAt;
 	
 	public ConfigsDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public ConfigsDTO(Integer id, String logoImage, String bannerImage,
-			@NotEmpty(message = "Address is not null !!") String address,
-			@NotEmpty(message = "Map is not null !!") String map,
-			@NotEmpty(message = "Email is not null !!") String email,
-			@NotEmpty(message = "Phone is not null !!") String phone, Date updatedAt) {
+			@NotEmpty(message = "Please enter address.") String address,
+			@NotEmpty(message = "Please enter map.") String map,
+			@NotEmpty(message = "Please enter email.") String email,
+			@NotEmpty(message = "Please enter phone.") String phone, Date updatedAt) {
 		super();
 		this.id = id;
 		this.logoImage = logoImage;

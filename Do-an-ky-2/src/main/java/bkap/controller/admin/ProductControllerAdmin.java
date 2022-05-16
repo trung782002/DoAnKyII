@@ -31,6 +31,7 @@ import bkap.entities.Product_imagesDTO;
 import bkap.entities.ProductsDTO;
 
 @Controller
+@RequestMapping(value = {"/admin"})
 public class ProductControllerAdmin {
 	
 	public List<CategoriesDTO> getListCategories(Client client, Gson gson) {
@@ -111,9 +112,16 @@ public class ProductControllerAdmin {
 	{
 		Client client = Client.create();
 		Gson gson = new Gson();
-		Date date = new Date();
-
 		Integer flag = 0;
+		
+		product.setDiscount(product.getDiscount() == null ? 0 : product.getDiscount());
+		if(product.getPrice() != null) {
+			if(product.getPrice() <= product.getDiscount()) {
+				model.addAttribute("discount", " Discount must be less than the price");
+				flag++;
+			}
+		}
+		
 		if (multipartFile.getOriginalFilename().length() == 0) {
 			model.addAttribute("ImageNull", "Image is not null !!");
 			flag++;
@@ -125,62 +133,48 @@ public class ProductControllerAdmin {
 			model.addAttribute("product", product);
 			return "admin/pages/product/insertProduct";
 		} else {
-			product.setDiscount(product.getDiscount() == null ? 0 : product.getDiscount());
-			if(product.getPrice() <= product.getDiscount()) {
-				model.addAttribute("discount", " Discount must be less than the price");
-				flag++;
-			}
-			
-			if (flag > 0) {
-				model.addAttribute("brand", getListBrands(client, gson));
-				model.addAttribute("category", getListCategories(client, gson));
-				model.addAttribute("product", product);
-				return "admin/pages/product/insertProduct";
-			} else {
-				String path = request.getServletContext().getRealPath("resources/image");
-				File file = new File(path);
-				File dest = new File(file.getAbsolutePath() + "/" + multipartFile.getOriginalFilename());
-				if (!dest.exists()) {
-					try {
-						Files.write(dest.toPath(), multipartFile.getBytes(), StandardOpenOption.CREATE);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+			String path = request.getServletContext().getRealPath("resources/image");
+			File file = new File(path);
+			File dest = new File(file.getAbsolutePath() + "/" + multipartFile.getOriginalFilename());
+			if (!dest.exists()) {
+				try {
+					Files.write(dest.toPath(), multipartFile.getBytes(), StandardOpenOption.CREATE);
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-				product.setCreatedAt(date);
-				product.setImageUrl(multipartFile.getOriginalFilename());
-	
-				String data = gson.toJson(product);
-				WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/insert");
-				ClientResponse clientResponse = webResource.type("application/json").post(ClientResponse.class, data);
-				String re = clientResponse.getEntity(String.class);
-				ProductsDTO dto = gson.fromJson(re, ProductsDTO.class);
-				if (dto != null) {
-					if (multipartFiles.length != 1) {
-						for (MultipartFile multipartFile2 : multipartFiles) {
-							File dest1 = new File(file.getAbsolutePath() + "/" + multipartFile2.getOriginalFilename());
-							if (!dest1.exists()) {
-								try {
-									Files.write(dest1.toPath(), multipartFile2.getBytes(), StandardOpenOption.CREATE);
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
+			}
+			product.setCreatedAt(new Date());
+			product.setImageUrl(multipartFile.getOriginalFilename());
+
+			String data = gson.toJson(product);
+			WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/insert");
+			ClientResponse clientResponse = webResource.type("application/json").post(ClientResponse.class, data);
+			String re = clientResponse.getEntity(String.class);
+			ProductsDTO dto = gson.fromJson(re, ProductsDTO.class);
+			if (dto != null) {
+				if (multipartFiles.length != 1) {
+					for (MultipartFile multipartFile2 : multipartFiles) {
+						File dest1 = new File(file.getAbsolutePath() + "/" + multipartFile2.getOriginalFilename());
+						if (!dest1.exists()) {
+							try {
+								Files.write(dest1.toPath(), multipartFile2.getBytes(), StandardOpenOption.CREATE);
+							} catch (IOException e) {
+								e.printStackTrace();
 							}
-							Product_imagesDTO product_imagesDTO = new Product_imagesDTO(0, dto.getProId(), multipartFile2.getOriginalFilename());
-							String data2 = gson.toJson(product_imagesDTO);
-							WebResource webResource2 = client.resource("http://localhost:8080/WebService/rest/product_imageService/insert");
-							ClientResponse clientResponse1 = webResource2.type("application/json").post(ClientResponse.class, data2);
-							String re1 = clientResponse1.getEntity(String.class);
-							boolean c = gson.fromJson(re1, boolean.class);
 						}
+						Product_imagesDTO product_imagesDTO = new Product_imagesDTO(0, dto.getProId(), multipartFile2.getOriginalFilename());
+						String data2 = gson.toJson(product_imagesDTO);
+						WebResource webResource2 = client.resource("http://localhost:8080/WebService/rest/product_imageService/insert");
+						ClientResponse clientResponse1 = webResource2.type("application/json").post(ClientResponse.class, data2);
+						String re1 = clientResponse1.getEntity(String.class);
+						boolean c = gson.fromJson(re1, boolean.class);
 					}
-					redirAttrs.addFlashAttribute("success", "Successfully added new");
-					return "redirect:/listProducts";
-				} else {
-					redirAttrs.addFlashAttribute("errors", "Add failed");
-					return "redirect:/listProducts";
 				}
+				redirAttrs.addFlashAttribute("success", "Successfully added new");
+			} else {
+				redirAttrs.addFlashAttribute("errors", "Add failed");
 			}
+			return "redirect:/admin/listProducts";
 		}
 	}
 
@@ -270,16 +264,16 @@ public class ProductControllerAdmin {
 							boolean c = gson.fromJson(re1, boolean.class);
 						}
 						redirAttrs.addFlashAttribute("success", "Update Successfully");
-						return "redirect:/listProducts";
+						return "redirect:/admin/listProducts";
 					}
 					redirAttrs.addFlashAttribute("errors", "Update Successfully");
-					return "redirect:/listProducts";
+					return "redirect:/admin/listProducts";
 				}
 				redirAttrs.addFlashAttribute("success", "Update Successfully");
-				return "redirect:/listProducts";
+				return "redirect:/admin/listProducts";
 			} else {
 				redirAttrs.addFlashAttribute("success", "Update failed");
-				return "redirect:/listProducts";
+				return "redirect:/admin/listProducts";
 			}
 		}
 	}
@@ -299,10 +293,10 @@ public class ProductControllerAdmin {
 		boolean bt = gson.fromJson(re, boolean.class);
 		if(bt) {
 			redirAttrs.addFlashAttribute("success", "Delete Successfully");
-			return "redirect:/listProducts";
+			return "redirect:/admin/listProducts";
 		}else {
 			redirAttrs.addFlashAttribute("success", "Delete failed");
-			return "redirect:/listProducts";
+			return "redirect:/admin/listProducts";
 		}
 	}
 }

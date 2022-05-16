@@ -4,20 +4,11 @@
 	<div class="top_menu">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-7">
-					<div class="float-left">
-						<p>Phone: +01 256 25 235</p>
-						<p>email: info@eiser.com</p>
-					</div>
+				<div class="col-lg-6 text-left">
+					<p class="pt-2 font-weight-light">Phone: ${config.phone}</p>
 				</div>
-				<div class="col-lg-5">
-					<div class="float-right">
-						<ul class="right_side">
-							<li><a href="listCart"> gift card </a></li>
-							<li><a href="tracking.html"> track order </a></li>
-							<li><a href="contact"> Contact Us </a></li>
-						</ul>
-					</div>
+				<div class="col-lg-6 text-right">
+					<p class="pt-2 font-weight-light">Email: ${config.email}</p>
 				</div>
 			</div>
 		</div>
@@ -63,14 +54,20 @@
 								<!-- <li class="nav-item"><a href="#" class="icons"> <i
 										class="ti-search" aria-hidden="true"></i>
 								</a></li> -->
-
-								<li class="nav-item"><a href="listCart" class="icons"> <i
-										class="ti-shopping-cart"></i>
-								</a></li>
-
-								<li class="nav-item"><a href="login" class="icons"> <i
-										class="ti-user" aria-hidden="true"></i>
-								</a></li>
+								<c:if test="${not empty accFullName}">
+									<li class="nav-item">
+										<a href="listCart" class="icons"><i class="ti-shopping-cart"></i></a>
+									</li>
+									
+									<li class="nav-item">
+										<a href="login" class="icons">${accFullName}</a>
+									</li>
+								</c:if>
+								<c:if test="${empty accFullName}">
+									<li class="nav-item">
+										<a href="login" class="icons"><i class="ti-user" aria-hidden="true"></i></a>
+									</li>
+								</c:if>
 							</ul>
 						</div>
 					</div>

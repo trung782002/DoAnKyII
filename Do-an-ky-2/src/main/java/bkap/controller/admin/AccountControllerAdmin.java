@@ -18,6 +18,7 @@ import bkap.entities.Account_RolesDTO;
 import bkap.entities.AccountsDTO;
 
 @Controller
+@RequestMapping(value = {"/admin"})
 public class AccountControllerAdmin {
 	@RequestMapping(value = {"/accountManagement"})
 	public String accountManagement(Model model) {
@@ -40,7 +41,8 @@ public class AccountControllerAdmin {
 	}
 	
 	@RequestMapping(value = {"/accountStatus"})
-	public String accountStatus(Model model, @RequestParam("accId")Integer accId, @RequestParam("status")boolean status, RedirectAttributes redirAttrs) {
+	public String accountStatus(@RequestParam("accId")Integer accId, @RequestParam("status")boolean status, 
+			RedirectAttributes redirAttrs, Model model) {
 		Gson gson = new Gson();
 		Client client = Client.create();
 		
@@ -56,6 +58,6 @@ public class AccountControllerAdmin {
 		res = clientResponse.getEntity(String.class);
 		boolean rs = gson.fromJson(res, boolean.class);
 
-		return "redirect:/accountManagement";
+		return "redirect:/admin/accountManagement";
 	}
 }

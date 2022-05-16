@@ -7,11 +7,11 @@
 		<div class="row align-items-center">
 			<div class="col-md-12">
 				<div class="page-header-title">
-					<h5 class="m-b-10">Form Elements</h5>
+					<h5 class="m-b-10">Esier admin</h5>
 				</div>
 				<ul class="breadcrumb">
 					<li class="breadcrumb-item">
-						<a href="admin"><i class="feather icon-home"></i></a>
+						<a href="dashboard"><i class="feather icon-home"></i></a>
 					</li>
 					<li class="breadcrumb-item">Blog management</li>
 					<li class="breadcrumb-item"><a href="listBlogs">List blogs</a></li>
@@ -32,33 +32,33 @@
 		</div>
 	</c:if>
 	<div class="table-responsive">
-	<table class="table">
-		<thead class="thead-dark">
-			<tr>
-				<!-- <th width="">Id</th> -->
-				<th width="">Name</th>
-				<th width="">Title</th>
-				<th width="">Main image</th>
-				<th width="">Status</th>
-				<th width=""></th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${listBlogs}" var="blog">
+		<table class="table">
+			<thead class="thead-dark">
 				<tr>
-					<%-- <th>${blog.id}</th> --%>
-					<td>${blog.name.subSequence(0, 40)} ...</td>
-					<td width="">${blog.title.subSequence(0, 40)} ...</td>
-					<td width="20%"><img src="<c:url value="assets"/>/customer/img/blog/${blog.mainImageUrl}" class="card-img"></td>
-					<td style="color: ${blog.status ? 'green' : 'red'}">${blog.status ? "Show" : "Hidden"}</td>
-					<td width="5%">
-						<a class="mr-3" href="updateBlog?blogId=${blog.id}"><i class="fas fa-edit"></i></a>
-						<a href="deleteBlog?blogId=${blog.id}"><i class="fas fa-trash text-danger"></i></a>
-					</td>
+					<!-- <th width="">Id</th> -->
+					<th width="">Name</th>
+					<th width="">Title</th>
+					<th width="">Main image</th>
+					<th width="">Status</th>
+					<th width=""></th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<c:forEach items="${listBlogs}" var="blog">
+					<tr>
+						<%-- <th>${blog.id}</th> --%>
+						<td>${blog.name.subSequence(0, 40)} ...</td>
+						<td width="">${blog.title.subSequence(0, 40)} ...</td>
+						<td width="20%"><img src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/img/blog/${blog.mainImageUrl}" class="card-img"></td>
+						<td width="10%" style="color: ${blog.status ? 'green' : 'red'}">${blog.status ? "Show" : "Hidden"}</td>
+						<td width="8%">
+							<a class="mr-3" href="updateBlog?blogId=${blog.id}"><i class="fas fa-edit"></i></a>
+							<a href="deleteBlog?blogId=${blog.id}"><i class="fas fa-trash text-danger"></i></a>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </div>
 

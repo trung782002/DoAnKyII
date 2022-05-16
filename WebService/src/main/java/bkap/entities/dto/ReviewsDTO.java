@@ -14,6 +14,8 @@ public class ReviewsDTO {
 	
 	private Integer contentRated;
 	
+	private String reply;
+	
 	private boolean status;
 	
 	private Date createdAt;
@@ -23,13 +25,14 @@ public class ReviewsDTO {
 	}
 
 	public ReviewsDTO(Integer id, Integer accId, Integer proId, Integer productQuality, Integer contentRated,
-			boolean status, Date createdAt) {
+			String reply, boolean status, Date createdAt) {
 		super();
 		this.id = id;
 		this.accId = accId;
 		this.proId = proId;
 		this.productQuality = productQuality;
 		this.contentRated = contentRated;
+		this.reply = reply;
 		this.status = status;
 		this.createdAt = createdAt;
 	}
@@ -72,6 +75,14 @@ public class ReviewsDTO {
 
 	public void setContentRated(Integer contentRated) {
 		this.contentRated = contentRated;
+	}
+
+	public String getReply() {
+		return reply;
+	}
+
+	public void setReply(String reply) {
+		this.reply = reply;
 	}
 
 	public boolean isStatus() {

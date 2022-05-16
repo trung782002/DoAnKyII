@@ -15,7 +15,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery("from Reviews").list();
+			List list = session.createQuery("from Reviews order by Id desc").list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();

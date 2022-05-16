@@ -6,13 +6,13 @@
 		<div class="row align-items-center">
 			<div class="col-md-12">
 				<div class="page-header-title">
-					<h5 class="m-b-10">Form Elements</h5>
+					<h5 class="m-b-10">Esier admin</h5>
 				</div>
 				<ul class="breadcrumb">
 					<li class="breadcrumb-item">
-						<a href="admin"><i class="feather icon-home"></i></a>
+						<a href="dashboard"><i class="feather icon-home"></i></a>
 					</li>
-					<li class="breadcrumb-item"><a href="categoryManagement">Account management</a></li>
+					<li class="breadcrumb-item"><a href="accountManagement">Account management</a></li>
 				</ul>
 			</div>
 		</div>
@@ -36,9 +36,9 @@
 				<!-- <th width="">Id</th> -->
 				<th width="">Full name</th>
 				<th width="">Email</th>
-				<th width="">Address</th>
 				<th width="">Phone</th>
-				<th>Administrator role</th>
+				<th width="">Address</th>
+				<!-- <th>Administrator role</th> -->
 				<th width="">Status</th>
 				<th></th>
 			</tr>
@@ -49,16 +49,16 @@
 					<%-- <th>${blog.id}</th> --%>
 					<td>${account.fullName}</td>
 					<td width="">${account.email}</td>
-					<td width="">${account.address}</td>
-					<td >${account.phone}</td>
-					<c:forEach items="${listAccount_Roles}" var="account_role">
+					<td width="">${account.phone}</td>
+					<td >${account.address}</td>
+					<%-- <c:forEach items="${listAccount_Roles}" var="account_role">
 						<c:if test="${account.accId == account_role.accId && account_role.roleId == 1}">
 							<td width=""><a class="btn btn-info btn-sm" href="">Admin</a></td>
 						</c:if>
 						<c:if test="${account.accId == account_role.accId && account_role.roleId == 2}">
 							<td width=""><a class="btn btn-info btn-sm" href="">Customer</a></td>
 						</c:if>
-					</c:forEach>
+					</c:forEach> --%>
 					<c:if test="${account.status}">
 						<td width="" class="text-success"><span class="btn btn-success btn-sm active">Active</span></td>
 						<td width=""><a class="btn btn-danger btn-sm" href="accountStatus?accId=${account.accId}&status=false">Ban</a></td>

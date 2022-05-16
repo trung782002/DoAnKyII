@@ -9,11 +9,11 @@
 		<div class="row align-items-center">
 			<div class="col-md-12">
 				<div class="page-header-title">
-					<h5 class="m-b-10">Form Elements</h5>
+					<h5 class="m-b-10">Esier admin</h5>
 				</div>
 				<ul class="breadcrumb">
 					<li class="breadcrumb-item">
-						<a href="admin"><i class="feather icon-home"></i></a>
+						<a href="dashboard"><i class="feather icon-home"></i></a>
 					</li>
 					<li class="breadcrumb-item">Blog management</li>
 					<li class="breadcrumb-item"><a href="insertBlog">Add blog</a></li>
@@ -26,7 +26,7 @@
 <div class="container-fluid">
 	<h4>Add blog</h4>
 	<form:form action="doInsertBlog" modelAttribute="blog" method="post" enctype="multipart/form-data">
-		<div class="form-group">
+		<div class="form-group mt-3">
 		    <label>Blog name <span class="text-danger">*</span></label>
 		    <form:input class="form-control" autocomplete="off" path="name" placeholder="enter blog name"/>
 		    <form:errors class="text-danger mt-2 d-block d-block" path="name"></form:errors>

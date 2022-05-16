@@ -27,20 +27,21 @@
 
 <section class="section_gap">
 	<div class="container">
-		<div class="text-center mb-4">
+		<div class="text-center mb-5">
 			<h2>Sign up</h2>
-			<h6 class="font-weight-light">Welcome to Eiser, fill out the information below to register an account and start shopping</h6>
+			<h6 class="font-weight-light">Welcome to Eiser, fill out the information below to sign up an account and start shopping</h6>
 		</div>
 		<div class="col-12 col-lg-7 m-auto">
 			<form:form action="doSignUp" modelAttribute="account" method="post">
-				<form:input path="accId" type="hidden"/>
-			
 				<div class="form-group">
-				    <label>Account name <span class="text-danger">*</span></label>
-				    <form:input class="form-control" autocomplete="off" path="accName" placeholder="enter account name"/>
-				    <form:errors class="text-danger mt-1 d-block" path="accName"></form:errors>
+				    <label>Email address <span class="text-danger">*</span></label>
+				    <form:input type="email" class="form-control" autocomplete="off" path="email" placeholder="enter email address"/>
+				    <form:errors class="text-danger mt-1 d-block" path="email"></form:errors>
+				    <c:if test="${not empty emailExist}">
+						<span class="text-danger mt-1 d-block">${emailExist}</span>
+					</c:if>
 				</div>
-				
+			
 				<div class="form-group">
 				    <label>Full name <span class="text-danger">*</span></label>
 				    <form:input class="form-control" autocomplete="off" path="fullName" placeholder="enter full name"/>
@@ -48,21 +49,15 @@
 				</div>
 				
 				<div class="form-group">
-				    <label>Email address <span class="text-danger">*</span></label>
-				    <form:input type="email" class="form-control" autocomplete="off" path="email" placeholder="enter email"/>
-				    <form:errors class="text-danger mt-1 d-block" path="email"></form:errors>
+				    <label>Phone <span class="text-danger">*</span></label>
+				    <form:input class="form-control" autocomplete="off" type="number" min="0" path="phone" placeholder="enter phone number"/>
+				    <form:errors class="text-danger mt-1 d-block" path="phone"></form:errors>
 				</div>
 				
 				<div class="form-group">
 				    <label>Address <span class="text-danger">*</span></label>
-				    <form:input class="form-control" autocomplete="off" path="address" placeholder="enter address"/>
+				    <form:input class="form-control" autocomplete="off" path="address" placeholder="enter your address"/>
 				    <form:errors class="text-danger mt-1 d-block" path="address"></form:errors>
-				</div>
-				
-				<div class="form-group">
-				    <label>Phone <span class="text-danger">*</span></label>
-				    <form:input class="form-control" autocomplete="off" type="number" min="0" path="phone" placeholder="enter phone"/>
-				    <form:errors class="text-danger mt-1 d-block" path="phone"></form:errors>
 				</div>
 				
 				<div class="form-group">
@@ -71,15 +66,18 @@
 				    <form:errors class="text-danger mt-1 d-block" path="password"></form:errors>
 				</div>
 				
-				<%-- <div class="form-group">
+				<div class="form-group">
 				    <label>Confirm password <span class="text-danger">*</span></label>
-				    <form:input class="form-control" autocomplete="off" path="" placeholder="enter confirm password"/>
-				</div> --%>
+				    <input type="password" class="form-control" autocomplete="off" name="confirmPassword" placeholder="enter confirm password"/>
+					<c:if test="${not empty confirmPassword}">
+						<span class="text-danger mt-1 d-block">${confirmPassword}</span>
+					</c:if>
+				</div>
 				
 				<div class="d-flex justify-content-center">
 					<input class="main_btn px-5" type="submit" value="Sign up">
 				</div>
-				<div class="text-center mt-2">
+				<div class="text-center mt-3">
 	                <span>Already have an account? </span> <a href="login" class="mainColor">Login</a>
 	            </div>
 			</form:form>

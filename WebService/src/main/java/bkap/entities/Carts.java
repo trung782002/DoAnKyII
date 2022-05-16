@@ -20,9 +20,6 @@ public class Carts {
 	@Column(name = "Quantity")
 	private Integer quantity;
 	
-	@Column(name = "TotalPrice")
-	private Double totalPrice;
-	
 	@ManyToOne
 	@JoinColumn(name = "AccId", referencedColumnName = "AccId")
 	private Accounts objAccountOfCart;
@@ -32,16 +29,13 @@ public class Carts {
 	private Products objProductOfCart;
 
 	public Carts() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Carts(Integer cartId, Integer quantity, Double totalPrice, Accounts objAccountOfCart,
-			Products objProductOfCart) {
+	public Carts(Integer cartId, Integer quantity, Accounts objAccountOfCart, Products objProductOfCart) {
 		super();
 		this.cartId = cartId;
 		this.quantity = quantity;
-		this.totalPrice = totalPrice;
 		this.objAccountOfCart = objAccountOfCart;
 		this.objProductOfCart = objProductOfCart;
 	}
@@ -60,14 +54,6 @@ public class Carts {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
-	}
-
-	public Double getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(Double totalPrice) {
-		this.totalPrice = totalPrice;
 	}
 
 	public Accounts getObjAccountOfCart() {

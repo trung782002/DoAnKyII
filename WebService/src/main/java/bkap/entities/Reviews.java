@@ -25,6 +25,9 @@ public class Reviews {
 	@Column(name = "ContentRated")
 	private Integer contentRated;
 	
+	@Column(name = "Reply")
+	private String reply;
+	
 	@Column(name = "Status")
 	private boolean status;
 	
@@ -40,16 +43,16 @@ public class Reviews {
 	private Products objProductOfReview;
 
 	public Reviews() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reviews(Integer id, Integer productQuality, Integer contentRated, boolean status, Date createdAt,
-			Accounts objAccountOfReview, Products objProductOfReview) {
+	public Reviews(Integer id, Integer productQuality, Integer contentRated, String reply, boolean status,
+			Date createdAt, Accounts objAccountOfReview, Products objProductOfReview) {
 		super();
 		this.id = id;
 		this.productQuality = productQuality;
 		this.contentRated = contentRated;
+		this.reply = reply;
 		this.status = status;
 		this.createdAt = createdAt;
 		this.objAccountOfReview = objAccountOfReview;
@@ -78,6 +81,14 @@ public class Reviews {
 
 	public void setContentRated(Integer contentRated) {
 		this.contentRated = contentRated;
+	}
+
+	public String getReply() {
+		return reply;
+	}
+
+	public void setReply(String reply) {
+		this.reply = reply;
 	}
 
 	public boolean isStatus() {

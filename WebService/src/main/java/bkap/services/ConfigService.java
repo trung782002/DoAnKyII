@@ -1,12 +1,9 @@
 package bkap.services;
 
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -17,13 +14,14 @@ import bkap.entities.Configs;
 
 @Path("/configService/")
 public class ConfigService {
+	
 	@GET
-	@Path("/getList")
+	@Path("/getConfig")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getList() {
-		List<Configs> list = new ConfigDAOImpl().getList();
+	public String getConfig() {
+		Configs config = new ConfigDAOImpl().getConfig();
 		Gson son = new Gson();
-		String data = son.toJson(list);
+		String data = son.toJson(config);
 		return data;
 	}
 	
@@ -38,13 +36,4 @@ public class ConfigService {
 		return data;
 	}
 	
-	@GET
-	@Path("/getById/{configId}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getById(@PathParam("configId") Integer configId) {
-		Configs configById = new ConfigDAOImpl().getById(configId) ;
-		Gson son = new Gson();
-		String data = son.toJson(configById);
-		return data;
-	}
 }

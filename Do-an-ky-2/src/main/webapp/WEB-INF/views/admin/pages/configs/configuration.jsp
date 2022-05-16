@@ -6,11 +6,11 @@
 		<div class="row align-items-center">
 			<div class="col-md-12">
 				<div class="page-header-title">
-					<h5 class="m-b-10">Form Elements</h5>
+					<h5 class="m-b-10">Esier admin</h5>
 				</div>
 				<ul class="breadcrumb">
 					<li class="breadcrumb-item">
-						<a href="admin"><i class="feather icon-home"></i></a>
+						<a href="dashboard"><i class="feather icon-home"></i></a>
 					</li>
 					<li class="breadcrumb-item"><a href="configuration">Configuration</a></li>
 				</ul>
@@ -19,45 +19,41 @@
 	</div>
 </div>
 
-<div class="row m-1 m-lg-3">
-	<div class="col-12">
-		<h3>ListConfig</h3>
-		<c:forEach items="${list}" var="c">
-			<a href="initUpdateConfig?id=${c.id}"><button type="button"
-					class="btn btn-primary btn-sm">Update</button></a>
-			<div class="mt-4">
-				<h5 class="fw-bold mb-1">LogoImage</h5>
-				<div>
-					<img
-						src="<c:url value="http://localhost:8080/Do-an-ky-2/resources"/>/image/${c.logoImage }"
-						alt="brand" class="img-fluid img-thumbnail">
-				</div>
-			</div>
-			<div class="mt-4">
-				<h5 class="fw-bold mb-1">BannerImage</h5>
-				<div>
-					<img
-						src="<c:url value="http://localhost:8080/Do-an-ky-2/resources"/>/image/${c.bannerImage }"
-						alt="brand" class="img-fluid img-thumbnail">
-				</div>
-			</div>
-			<div class="mt-4">
-				<h5 class="fw-bold mb-1">Address</h5>
-				<div>${c.address }</div>
-			</div>
-			<div class="mt-4">
-				<h5 class="fw-bold mb-1">Map</h5>
-				<div style="width: 100%;">${c.map }</div>
-			</div>
-			<div class="mt-4">
-				<h5 class="fw-bold ">Email</h5>
-				<div>${c.email }</div>
-			</div>
-			<div class="mt-4">
-				<h5 class="fw-bold ">Phone</h5>
-				<div>${c.phone }</div>
-			</div>
-		</c:forEach>
+<div class="container-fluid">
+	<h4>Configuration</h4>
+	<a href="initUpdateConfig" class="btn btn-success mt-3">Config update</a>
+	<c:if test="${not empty alertConfig}">
+		<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+	  		<strong>${alertConfig}</strong>
+	  		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	    		<span aria-hidden="true">&times;</span>
+	  		</button>
+		</div>
+	</c:if>
+	<div class="mt-4">
+		<h5 class="mb-3">Logo image</h5>
+		<div class="col-2">
+			<img src="${pageContext.request.contextPath}/<c:url value="resources"/>/image/${config.logoImage}" class="card-img">
+		</div>
+	</div>
+	<div class="mt-4">
+		<h5 class="mb-3">Banner image</h5>
+		<div>
+			<img src="${pageContext.request.contextPath}/<c:url value="resources"/>/image/${config.bannerImage}" class="card-img">
+		</div>
+	</div>
+	<div class="mt-4">
+		<span class="font-weight-bold">Address: </span><span>${config.address}</span>
+	</div>
+	<div class="mt-4">
+		<h5 class="mb-3">Map</h5>
+		<div>${config.map}</div>
+	</div>
+	<div class="mt-4">
+		<span class="font-weight-bold">Phone: </span><span>${config.phone}</span>
+	</div>
+	<div class="mt-4">
+		<span class="font-weight-bold">Email: </span><span>${config.email}</span>
 	</div>
 </div>
 

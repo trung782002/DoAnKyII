@@ -10,11 +10,10 @@
 					<h5 class="m-b-10">Form Elements</h5>
 				</div>
 				<ul class="breadcrumb">
-					<li class="breadcrumb-item"><a href="admin"><i
+					<li class="breadcrumb-item"><a href="dashboard"><i
 							class="feather icon-home"></i></a></li>
 					<li class="breadcrumb-item">Product management</li>
-					<li class="breadcrumb-item"><a href="insertProduct">Update
-							product</a></li>
+					<li class="breadcrumb-item"><a href="getByIdProduct?ProId=${product.proId}">Update product</a></li>
 				</ul>
 			</div>
 		</div>
@@ -69,7 +68,7 @@
 					<div class="col-9">
 						<input type="file" class="form-control-file" 
 							name="image" id="exampleFormControlFile1"> <img
-							src="<c:url value="http://localhost:8080/Do-an-ky-2/resources"/>/image/${product.imageUrl}"
+							src="${pageContext.request.contextPath}/<c:url value="resources"/>/image/${product.imageUrl}"
 							alt="product" class="img-fluid img-thumbnail mt-3" width="15%">
 							<form:input type="hidden" path="imageUrl"/>
 					</div>
@@ -84,7 +83,7 @@
 							name="images" id="exampleFormControlFile1" multiple>
 						<c:forEach items="${productimages}" var="list">
 							<img
-								src="<c:url value="http://localhost:8080/Do-an-ky-2/resources"/>/image/${list.imageUrl}"
+								src="${pageContext.request.contextPath}/<c:url value="resources"/>/image/${list.imageUrl}"
 								alt="product" class="img-fluid img-thumbnail mt-3 ml-3" width="10%">
 						</c:forEach>
 					</div>
@@ -142,7 +141,7 @@
 
 				<div class="row mt-3">
 					<div class="col-2 ml-4">
-						<h5>Quanity</h5>
+						<h5>Quantity</h5>
 					</div>
 					<div class="col-9">
 						<form:input type="number" min="0" placeholder="Product quantity"

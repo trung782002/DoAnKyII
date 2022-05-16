@@ -39,10 +39,10 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 	
 	@Override
-	public List<Accounts> checkUnique(String accName) {
+	public List<Accounts> getEmail(String email) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery("from Accounts where AccName = :accName").setParameter("accName", accName).list();
+			List list = session.createQuery("from Accounts where Email = :email").setParameter("email", email).list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,11 +86,6 @@ public class AccountDAOImpl implements AccountDAO {
 		return false;
 	}
 	
-	public static void main(String[] args) {
-		Accounts account = new Accounts(6, "huy", "sfasd", "sdsd", "sdsdsd", "234243234", "sdsd", true, null, null, null, null, null,null);
-		System.out.println(new AccountDAOImpl().update(account));
-	}
-
 	@Override
 	public boolean delete(Integer id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -105,12 +100,6 @@ public class AccountDAOImpl implements AccountDAO {
 		} finally {
 			session.close();
 		}
-		return false;
-	}
-
-	@Override
-	public boolean checkAccName(String accName) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

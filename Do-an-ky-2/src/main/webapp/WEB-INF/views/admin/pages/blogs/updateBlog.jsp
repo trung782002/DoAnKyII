@@ -9,11 +9,11 @@
 		<div class="row align-items-center">
 			<div class="col-md-12">
 				<div class="page-header-title">
-					<h5 class="m-b-10">Form Elements</h5>
+					<h5 class="m-b-10">Esier admin</h5>
 				</div>
 				<ul class="breadcrumb">
 					<li class="breadcrumb-item">
-						<a href="admin"><i class="feather icon-home"></i></a>
+						<a href="dashboard"><i class="feather icon-home"></i></a>
 					</li>
 					<li class="breadcrumb-item">Blog management</li>
 					<li class="breadcrumb-item"><a href="#">Update blog</a></li>
@@ -27,10 +27,11 @@
 	<h4>Add blog</h4>
 	<form:form action="doUpdateBlog" modelAttribute="blog" method="post" enctype="multipart/form-data">
 		<form:hidden path="id"/>
+		
 		<div class="form-group">
 		    <label>Blog name <span class="text-danger">*</span></label>
 		    <form:input class="form-control" autocomplete="off" path="name" placeholder="enter blog name"/>
-		    <form:errors class="text-danger mt-2 d-block d-block" path="name"></form:errors>
+		    <form:errors class="text-danger mt-2 d-block" path="name"></form:errors>
 		</div>
 		
 		<div class="form-group">
@@ -41,10 +42,10 @@
 		<hr>
 		<div class="row">
 			<div class="form-group col-3">
-			    <label>Main image <span class="text-danger">*</span></label>
+			    <label>Main image</label>
 			    <input type="file" class="form-control-file" name="mainImagePath">
 			    <form:hidden path="mainImageUrl"/>
-			    <img src="<c:url value="assets"/>/customer/img/blog/${blog.mainImageUrl}" class="card-img mt-3">
+			    <img src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/img/blog/${blog.mainImageUrl}" class="card-img mt-3">
 			</div>
 			<div class="form-group col-9">
 			    <label>First content <span class="text-danger">*</span></label>
@@ -55,10 +56,10 @@
 		<hr>
 		<div class="row">
 			<div class="form-group col-3">
-			    <label>Second image <span class="text-danger">*</span></label>
+			    <label>Second image</label>
 		    	<input type="file" class="form-control-file" name="secondImagePath">
 		    	<form:hidden path="secondImageUrl"/>
-		    	<img src="<c:url value="assets"/>/customer/img/blog/${blog.secondImageUrl}" class="card-img mt-3">
+		    	<img src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/img/blog/${blog.secondImageUrl}" class="card-img mt-3">
 			</div>
 			<div class="form-group col-9">
 			    <label>Second content <span class="text-danger">*</span></label>
@@ -73,7 +74,7 @@
 		    	<input type="file" class="form-control-file" name="thirdImagePath">
 		    	<c:if test="${not empty blog.thirdImageUrl}">
 			    	<form:hidden path="thirdImageUrl"/>
-			    	<img src="<c:url value="assets"/>/customer/img/blog/${blog.thirdImageUrl}" class="card-img mt-3">
+			    	<img src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/img/blog/${blog.thirdImageUrl}" class="card-img mt-3">
 		    	</c:if>
 			</div>
 			<div class="form-group col-9">

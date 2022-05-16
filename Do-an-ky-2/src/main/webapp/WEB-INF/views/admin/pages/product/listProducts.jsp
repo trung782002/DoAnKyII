@@ -7,10 +7,10 @@
 		<div class="row align-items-center">
 			<div class="col-md-12">
 				<div class="page-header-title">
-					<h5 class="m-b-10">Form Elements</h5>
+					<h5 class="m-b-10">Esier admin</h5>
 				</div>
 				<ul class="breadcrumb">
-					<li class="breadcrumb-item"><a href="admin"><i
+					<li class="breadcrumb-item"><a href="dashboard"><i
 							class="feather icon-home"></i></a></li>
 					<li class="breadcrumb-item">Product management</li>
 					<li class="breadcrumb-item"><a href="listProducts">List
@@ -61,14 +61,14 @@
 			<table class="table">
 				<thead class="thead-dark">
 					<tr>
-						<th scope="col" width="12%">Name</th>
-						<th scope="col" width="10%">ImageUrl</th>
-						<th scope="col">Price</th>
-						<th scope="col">Discount</th>
-						<th scope="col">CateId</th>
-						<th scope="col">BrandId</th>
-						<th scope="col">Quanity</th>
-						<th scope="col">Status</th>
+						<th>Name</th>
+						<th>ImageUrl</th>
+						<th>Price</th>
+						<th>Discount</th>
+						<th>CateId</th>
+						<th>BrandId</th>
+						<th>Quantity</th>
+						<th>Status</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -76,9 +76,7 @@
 					<c:forEach items="${list}" var="list">
 						<tr>
 							<td>${list.name}</td>
-							<td><img
-								src="<c:url value="http://localhost:8080/Do-an-ky-2/resources"/>/image/${list.imageUrl}"
-								alt="product" class="img-fluid img-thumbnail" width="100%"></td>
+							<td width="12%"><img src="${pageContext.request.contextPath}/<c:url value="resources"/>/image/${list.imageUrl}" class="card-img"></td>
 							<td>${list.price}</td>
 							<td>${list.discount}</td>
 						    <c:forEach items="${categories}" var="category">
@@ -97,7 +95,7 @@
 									class="fas fa-edit"></i>
 							     </a>
 							     <a class="mr-3" href="deleteProduct?ProId=${list.proId}">
-									<i class="fas fa-backspace text-danger"></i>
+									<i class="fas fa-trash text-danger"></i>
 							     </a>
 							</td>
 						</tr>

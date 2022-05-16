@@ -32,6 +32,7 @@ import com.sun.jersey.api.client.WebResource;
 import bkap.entities.BlogsDTO;
 
 @Controller
+@RequestMapping(value = {"/admin"})
 public class BlogControllerAdmin {
 	@InitBinder
 	public void initBinder(WebDataBinder data) {
@@ -129,11 +130,10 @@ public class BlogControllerAdmin {
 				
 				if (rs) {
 					redirAttrs.addFlashAttribute("blog", "Successfully added new");
-					return "redirect:/listBlogs";
 				} else {
-					model.addAttribute("blog", "Add failed");
-					return "admin/pages/blogs/insertBlog";
+					redirAttrs.addFlashAttribute("blog", "Add failed");
 				}
+				return "redirect:/admin/listBlogs";
 			}
 		}
 	}
@@ -229,11 +229,10 @@ public class BlogControllerAdmin {
 
 			if (rs) {
 				redirAttrs.addFlashAttribute("blog", "Update Successfully");
-				return "redirect:/listBlogs";
 			} else {
-				model.addAttribute("blog", "Update failed");
-				return "admin/pages/blogs/updateBlog";
+				redirAttrs.addFlashAttribute("blog", "Update failed");
 			}
+			return "redirect:/admin/listBlogs";
 		}
 	}
 	
@@ -248,10 +247,9 @@ public class BlogControllerAdmin {
 		
 		if (rs) {
 			redirAttrs.addFlashAttribute("blog", "Delete successful");
-			return "redirect:/listBlogs";
 		} else {
 			redirAttrs.addFlashAttribute("blog", "Deletion failed");
-			return "redirect:/listBlogs";
 		}
+		return "redirect:/admin/listBlogs";
 	}
 }

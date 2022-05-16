@@ -28,9 +28,39 @@ public class AccountService {
 		List<Accounts> listAccount = new AccountDAOImpl().getList();
 		List<AccountsDTO> listAccountDTO = new ArrayList<AccountsDTO>();
 		for (Accounts account : listAccount) {
-			AccountsDTO accountDTO = new AccountsDTO(account.getAccId(), account.getAccName(), account.getFullName(),
-					account.getEmail(), account.getAddress(), account.getPhone(), account.getPassword(),
-					account.isStatus(), account.getRememberToken(), account.getCreatedAt());
+			AccountsDTO accountDTO = new AccountsDTO(account.getAccId(), account.getEmail(), account.getFullName(),
+					account.getPhone(), account.getAddress(), account.getPassword(), account.isStatus(),
+					account.getCreatedAt());
+			listAccountDTO.add(accountDTO);
+		}
+		String Data = son.toJson(listAccountDTO);
+		return Data;
+	}
+
+	@GET
+	@Path("/getById/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getById(@PathParam("id") Integer id) {
+		Accounts account = new AccountDAOImpl().getById(id);
+		Gson son = new Gson();
+		AccountsDTO accountDTO = new AccountsDTO(account.getAccId(), account.getEmail(), account.getFullName(),
+				account.getPhone(), account.getAddress(), account.getPassword(), account.isStatus(),
+				account.getCreatedAt());
+		String Data = son.toJson(accountDTO);
+		return Data;
+	}
+
+	@GET
+	@Path("/getEmail/{email}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String checkUnique(@PathParam("email") String email) {
+		Gson son = new Gson();
+		List<Accounts> listAccount = new AccountDAOImpl().getEmail(email);
+		List<AccountsDTO> listAccountDTO = new ArrayList<AccountsDTO>();
+		for (Accounts account : listAccount) {
+			AccountsDTO accountDTO = new AccountsDTO(account.getAccId(), account.getEmail(), account.getFullName(),
+					account.getPhone(), account.getAddress(), account.getPassword(), account.isStatus(),
+					account.getCreatedAt());
 			listAccountDTO.add(accountDTO);
 		}
 		String Data = son.toJson(listAccountDTO);
@@ -43,9 +73,9 @@ public class AccountService {
 	public String insert(String jsonAccount) {
 		Gson son = new Gson();
 		AccountsDTO accountDTO = son.fromJson(jsonAccount, AccountsDTO.class);
-		Accounts account = new Accounts(0, accountDTO.getAccName(), accountDTO.getFullName(), accountDTO.getEmail(),
-				accountDTO.getAddress(), accountDTO.getPhone(), accountDTO.getPassword(), accountDTO.isStatus(),
-				accountDTO.getRememberToken(), accountDTO.getCreatedAt(), null, null, null, null);
+		Accounts account = new Accounts(0, accountDTO.getEmail(), accountDTO.getFullName(), accountDTO.getPhone(),
+				accountDTO.getAddress(), accountDTO.getPassword(), accountDTO.isStatus(), accountDTO.getCreatedAt(),
+				null, null, null, null);
 		boolean bl = new AccountDAOImpl().insert(account);
 		String data = son.toJson(bl);
 		return data;
@@ -57,9 +87,9 @@ public class AccountService {
 	public String update(String jsonAccount) {
 		Gson son = new Gson();
 		AccountsDTO accountDTO = son.fromJson(jsonAccount, AccountsDTO.class);
-		Accounts account = new Accounts(accountDTO.getAccId(), accountDTO.getAccName(), accountDTO.getFullName(), accountDTO.getEmail(),
-				accountDTO.getAddress(), accountDTO.getPhone(), accountDTO.getPassword(), accountDTO.isStatus(),
-				accountDTO.getRememberToken(), accountDTO.getCreatedAt(), null, null, null, null);
+		Accounts account = new Accounts(accountDTO.getAccId(), accountDTO.getEmail(), accountDTO.getFullName(), accountDTO.getPhone(),
+				accountDTO.getAddress(), accountDTO.getPassword(), accountDTO.isStatus(), accountDTO.getCreatedAt(),
+				null, null, null, null);
 		boolean bl = new AccountDAOImpl().update(account);
 		String data = son.toJson(bl);
 		return data;
@@ -74,18 +104,5 @@ public class AccountService {
 		String data = son.toJson(bl);
 		return data;
 
-	}
-
-	@GET
-	@Path("/getById/{Id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getById(@PathParam("Id") Integer Id) {
-		Accounts account = new AccountDAOImpl().getById(Id);
-		Gson son = new Gson();
-		AccountsDTO accountDTO = new AccountsDTO(account.getAccId(), account.getAccName(), account.getFullName(),
-				account.getEmail(), account.getAddress(), account.getPhone(), account.getPassword(), account.isStatus(),
-				account.getRememberToken(), account.getCreatedAt());
-		String Data = son.toJson(accountDTO);
-		return Data;
 	}
 }
