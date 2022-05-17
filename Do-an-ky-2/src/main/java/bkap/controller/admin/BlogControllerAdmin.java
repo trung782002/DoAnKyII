@@ -34,6 +34,7 @@ import bkap.entities.BlogsDTO;
 @Controller
 @RequestMapping(value = {"/admin"})
 public class BlogControllerAdmin {
+	
 	@InitBinder
 	public void initBinder(WebDataBinder data) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

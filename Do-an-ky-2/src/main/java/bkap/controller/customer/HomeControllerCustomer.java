@@ -23,11 +23,18 @@ import bkap.entities.ProductsDTO;
 @Controller
 public class HomeControllerCustomer {
 	
+	public ConfigsDTO getConfig(Client client, Gson gson) {
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/configService/getConfig"); 
+		String data = webResource.get(String.class); 
+		ConfigsDTO config = gson.fromJson(data,ConfigsDTO.class);
+		return config;
+	}
+	
 	@RequestMapping(value = {"/", "/home"})
 	public String home(Model model, HttpSession session) {
+		WebResource webResource;
 		Client client = Client.create();
 		Gson gson = new Gson();
-		WebResource webResource;
 		Integer status = 1;
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -48,13 +55,8 @@ public class HomeControllerCustomer {
 			model.addAttribute("accFullName", session.getAttribute("accFullName"));
 		}
 		
-		webResource = client.resource("http://localhost:8080/WebService/rest/configService/getConfig");
-		String data = webResource.get(String.class);
-		ConfigsDTO config = gson.fromJson(data, ConfigsDTO.class);
-		model.addAttribute("config", config);
-		
 		webResource = client.resource("http://localhost:8080/WebService/rest/productService/getListStatus");
-		data = webResource.get(String.class);
+		String data = webResource.get(String.class);
 		GenericType<List<ProductsDTO>> listProductType = new GenericType<List<ProductsDTO>>() {};
 		List<ProductsDTO> listProducts = gson.fromJson(data, listProductType.getType());
         model.addAttribute("listProducts", listProducts);
@@ -64,6 +66,8 @@ public class HomeControllerCustomer {
 		GenericType<List<BlogsDTO>> listType = new GenericType<List<BlogsDTO>>() {};
 		List<BlogsDTO> listBlogs = gson.fromJson(data, listType.getType());
 		model.addAttribute("listBlogs", listBlogs);
+		
+		model.addAttribute("config", getConfig(client, gson));
         
 		return "customer/pages/index";
 	}

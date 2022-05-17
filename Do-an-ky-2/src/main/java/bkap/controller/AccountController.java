@@ -4,6 +4,7 @@ package bkap.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
 import bkap.entities.AccountsDTO;
+import bkap.entities.ConfigsDTO;
 
 @Controller
 public class AccountController {
@@ -30,19 +32,34 @@ public class AccountController {
 	@Autowired
 	private PasswordEncoder pe;
 	
+	public ConfigsDTO getConfig(Client client, Gson gson) {
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/configService/getConfig"); 
+		String data = webResource.get(String.class); 
+		ConfigsDTO config = gson.fromJson(data,ConfigsDTO.class);
+		return config;
+	}
+	
 	@RequestMapping(value = "/signUp")
-	public String initSignUp(Model model) {
-		AccountsDTO account = new AccountsDTO();
-		model.addAttribute("account", account);
-		return "customer/pages/account/signUp";
+	public String initSignUp(Model model, HttpSession session) {
+		if (session.getAttribute("accId") != null) {
+			return "redirect:/home";
+		} else {
+			Client client = Client.create();
+			Gson gson = new Gson();
+			AccountsDTO account = new AccountsDTO();
+			
+			model.addAttribute("account", account);
+			model.addAttribute("config", getConfig(client, gson));
+			return "customer/pages/account/signUp";
+		}
 	}
 
 	@RequestMapping(value = "/doSignUp")
 	public String signUp(@Valid @ModelAttribute("account") AccountsDTO account, BindingResult result, 
 			@RequestParam("confirmPassword") String confirmPassword, Model model, RedirectAttributes redirAttrs) {
 		Integer flag = 0;
-		Gson gson = new Gson();
 		Client client = Client.create();
+		Gson gson = new Gson();
 		WebResource webResource;
 		
 		if(account.getEmail().length() > 0) {
@@ -62,6 +79,7 @@ public class AccountController {
 		}
 
 		if (result.hasErrors() == true || flag > 0) {
+			model.addAttribute("config", getConfig(client, gson));
 			return "customer/pages/account/signUp";
 		} else {
 			account.setPassword(pe.encode(account.getPassword()));
@@ -74,6 +92,7 @@ public class AccountController {
 	        String res = clientResponse.getEntity(String.class);
 	        boolean rs = gson.fromJson(res, boolean.class);
 	        
+	        model.addAttribute("config", getConfig(client, gson));
 	        if(rs)
 	        	return "customer/pages/account/login";
 	        else 
@@ -82,11 +101,18 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/login")
-	public String login(@RequestParam(value = "error", required = false) String error, Model model) {
-		if (error != null) {
-			model.addAttribute("login", "Your email or password is incorrect, please try again");
+	public String login(@RequestParam(value = "error", required = false) String error, Model model, HttpSession session) {
+		if(session.getAttribute("accId") != null) {
+			return "redirect:/home";
+		} else {
+			Client client = Client.create();
+			Gson gson = new Gson();
+			if (error != null) {
+				model.addAttribute("login", "Your email or password is incorrect, please try again");
+			}
+			model.addAttribute("config", getConfig(client, gson));
+			return "customer/pages/account/login";
 		}
-		return "customer/pages/account/login";
 	}
 
 	@RequestMapping("/logout")

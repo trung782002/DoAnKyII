@@ -9,11 +9,12 @@ public interface OrderDetailDAO {
 	
 	public List<OrderDetails> getByOrderId(Integer orderId);
 	
-	/* public List<OrderDetails> searchByName(String name); */
+	public List<OrderDetails> getOrderStatus(Integer orderId, Integer status);
 	
 	/* public OrderDetails getById(Integer id); */
 	
 	public boolean insert(OrderDetails order);
+
 	
 	/* public boolean update(OrderDetails order); */
 	

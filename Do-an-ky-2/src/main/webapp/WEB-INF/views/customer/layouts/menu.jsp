@@ -56,11 +56,27 @@
 								</a></li> -->
 								<c:if test="${not empty accFullName}">
 									<li class="nav-item">
-										<a href="listCart" class="icons"><i class="ti-shopping-cart"></i></a>
+						                <a href="listCart" class="icons"><i class="ti-shopping-cart"></i></a>
 									</li>
 									
 									<li class="nav-item">
-										<a href="login" class="icons">${accFullName}</a>
+										<div class="dropdown show">
+											<a class="icons" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											    ${accFullName}
+											</a>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+											    <div class="mb-1">
+											    	<a class="textDrop ml-3" href="myAccount">My account</a>
+											    </div>
+												<div class="mb-1">
+													<a class="textDrop ml-3" href="theOrder">The order</a>
+												</div>
+												<form action="<c:url value='/j_spring_security_logout'/>" method="post">
+													<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+													<input class="textDrop ml-3 p-0" type="submit" value="Logout" style="background-color: white; border: 0px; cursor: pointer;"/>
+												</form>
+											</div>
+										</div>
 									</li>
 								</c:if>
 								<c:if test="${empty accFullName}">

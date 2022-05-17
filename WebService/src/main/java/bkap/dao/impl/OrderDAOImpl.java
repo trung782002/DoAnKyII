@@ -24,6 +24,20 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<Orders> getOrderAccId(Integer accId) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			List list = session.createQuery("from Orders where AccId = :accId").setParameter("accId", accId).list();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
 
 	@Override
 	public Orders getById(Integer id) {
@@ -40,20 +54,20 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public boolean insert(Orders order) {
+	public Orders insert(Orders order) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
 			session.save(order);
 			session.getTransaction().commit();
-			return true;
+			return order;
 		} catch (Exception e){
 			e.printStackTrace();
 			session.getTransaction().rollback();
 		} finally {
 			session.close();
 		}
-		return false;
+		return null;
 	}
 
 	@Override

@@ -20,7 +20,7 @@
 	<link rel="stylesheet" href="<c:url value="assets"/>/customer/vendors/animate-css/animate.css" />
 	<link rel="stylesheet" href="<c:url value="assets"/>/customer/vendors/jquery-ui/jquery-ui.css" />
 	<!-- main css -->
-	<link rel="stylesheet" href="<c:url value="assets"/>/customer/css/style.css" />
+	<link rel="stylesheet" href="<c:url value="assets"/>/customer/css/style2.css" />
 	<link rel="stylesheet" href="<c:url value="assets"/>/customer/css/web.css" />
 	<link rel="stylesheet" href="<c:url value="assets"/>/customer/css/responsive.css" />
 </head>

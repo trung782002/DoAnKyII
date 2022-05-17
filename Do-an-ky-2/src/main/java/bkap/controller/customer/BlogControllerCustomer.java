@@ -13,31 +13,47 @@ import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
 import bkap.entities.BlogsDTO;
+import bkap.entities.ConfigsDTO;
 
 @Controller
 public class BlogControllerCustomer {
+	
+	public ConfigsDTO getConfig(Client client, Gson gson) {
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/configService/getConfig"); 
+		String data = webResource.get(String.class); 
+		ConfigsDTO config = gson.fromJson(data,ConfigsDTO.class);
+		return config;
+	}
+	
 	@RequestMapping(value = "/blog")
 	public String listBlogs(Model model) {
-		Gson gson = new Gson();
 		Client client = Client.create();
+		Gson gson = new Gson();
 		Integer status = 1;
-
+		
 		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/blogService/getList/" + status);
 		String data = webResource.get(String.class);
 		GenericType<List<BlogsDTO>> listType = new GenericType<List<BlogsDTO>>() {};
 		List<BlogsDTO> listBlogs = gson.fromJson(data, listType.getType());
 		model.addAttribute("listBlogs", listBlogs);
-		return "customer/pages/blog/blog";
+		
+		model.addAttribute("config", getConfig(client, gson));
+		
+		return "customer/pages/blogs/blog";
 	}
 	
 	@RequestMapping(value = "/blogDetail")
 	public String blogDetail(Model model, @RequestParam("blogId")Integer blogId) {
-		Gson gson = new Gson();
 		Client client = Client.create();
+		Gson gson = new Gson();
+		
 		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/blogService/getById/"+blogId);
 		String res = webResource.get(String.class);
 		BlogsDTO blog = gson.fromJson(res, BlogsDTO.class);
 		model.addAttribute("blog", blog);
-		return "customer/pages/blog/blogDetail";
+		
+		model.addAttribute("config", getConfig(client, gson));
+		
+		return "customer/pages/blogs/blogDetail";
 	}
 }

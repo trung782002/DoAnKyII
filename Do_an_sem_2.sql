@@ -173,6 +173,7 @@ INSERT INTO Configs VALUES ('logoImage.png', 'service-center-5.jpg', N'Số 238 
 select * from Accounts
 select * from Account_Roles
 --insert into Account_Roles values(1,1)
-select * from Blogs
+select * from Orders
+select * from OrderDetails
 
 

@@ -20,6 +20,7 @@ import bkap.entities.AccountsDTO;
 @Controller
 @RequestMapping(value = {"/admin"})
 public class AccountControllerAdmin {
+	
 	@RequestMapping(value = {"/accountManagement"})
 	public String accountManagement(Model model) {
 		Gson gson = new Gson();

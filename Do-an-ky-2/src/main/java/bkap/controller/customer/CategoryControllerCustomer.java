@@ -13,10 +13,18 @@ import com.sun.jersey.api.client.WebResource;
 
 import bkap.entities.BrandsDTO;
 import bkap.entities.CategoriesDTO;
+import bkap.entities.ConfigsDTO;
 import bkap.entities.ProductsDTO;
 
 @Controller
 public class CategoryControllerCustomer {
+	
+	public ConfigsDTO getConfig(Client client, Gson gson) {
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/configService/getConfig"); 
+		String data = webResource.get(String.class); 
+		ConfigsDTO config = gson.fromJson(data,ConfigsDTO.class);
+		return config;
+	}
 	
 	public List<CategoriesDTO> getListCategories(Client client, Gson gson) {
 		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/categoryService/getList");
@@ -47,6 +55,7 @@ public class CategoryControllerCustomer {
 		
 		model.addAttribute("listCategories", getListCategories(client, gson));
 		model.addAttribute("listBrands", getListBrands(client, gson));
+		model.addAttribute("config", getConfig(client, gson));
 		return "customer/pages/category";
 	}
 	
@@ -63,6 +72,7 @@ public class CategoryControllerCustomer {
 		
 		model.addAttribute("listCategories", getListCategories(client, gson));
 		model.addAttribute("listBrands", getListBrands(client, gson));
+		model.addAttribute("config", getConfig(client, gson));
 		return "customer/pages/category";
 	}
 	
@@ -79,6 +89,7 @@ public class CategoryControllerCustomer {
 		
 		model.addAttribute("listCategories", getListCategories(client, gson));
 		model.addAttribute("listBrands", getListBrands(client, gson));
+		model.addAttribute("config", getConfig(client, gson));
 		return "customer/pages/category";
 	}
 }

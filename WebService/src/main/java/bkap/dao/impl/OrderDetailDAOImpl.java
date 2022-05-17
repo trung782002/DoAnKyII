@@ -23,6 +23,20 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<OrderDetails> getOrderStatus(Integer orderId, Integer status){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			List list = session.createQuery("from OrderDetails where OrderId = :orderId and Status = :status").setParameter("orderId", orderId).setParameter("status", status).list();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
 
 	@Override
 	public boolean insert(OrderDetails order) {

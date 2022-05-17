@@ -33,7 +33,7 @@
 		class="navbar pcoded-header navbar-expand-lg navbar-light header-dark">
 		<div class="m-header">
 			<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
-			<a href="dashboard" class="b-brand"> <!-- ========   change your logo hear   ============ -->
+			<a href="../home" class="b-brand"> <!-- ========   change your logo hear   ============ -->
 				<img src="${pageContext.request.contextPath}/<c:url value="resources"/>/image/logoImage.png" alt=""
 				class="logo"> 
 				<%-- <img src="<c:url value="assets"/>/admin/images/logo-icon.png" alt=""

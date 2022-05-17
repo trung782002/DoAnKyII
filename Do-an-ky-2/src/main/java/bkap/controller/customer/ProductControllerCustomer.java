@@ -14,11 +14,20 @@ import com.sun.jersey.api.client.WebResource;
 
 import bkap.entities.BrandsDTO;
 import bkap.entities.CategoriesDTO;
+import bkap.entities.ConfigsDTO;
 import bkap.entities.Product_imagesDTO;
 import bkap.entities.ProductsDTO;
 
 @Controller
 public class ProductControllerCustomer {
+	
+	public ConfigsDTO getConfig(Client client, Gson gson) {
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/configService/getConfig"); 
+		String data = webResource.get(String.class); 
+		ConfigsDTO config = gson.fromJson(data,ConfigsDTO.class);
+		return config;
+	}
+	
 	public List<CategoriesDTO> getListCategories(Client client, Gson gson) {
 		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/categoryService/getList");
 		String data = webResource.get(String.class);
@@ -56,6 +65,7 @@ public class ProductControllerCustomer {
         model.addAttribute("categories", getListCategories(client, gson));
 		model.addAttribute("brands", getListBrands(client, gson));
 		model.addAttribute("productimages", getListProduct_images(client, gson, id));
+		model.addAttribute("config", getConfig(client, gson));
         
 		return "customer/pages/product";
 	}

@@ -1,6 +1,7 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <jsp:include page="../layouts/header.jsp" flush="true"></jsp:include>
 
 <jsp:include page="../layouts/menu.jsp" flush="true"></jsp:include>
@@ -26,12 +27,17 @@
 
 <!--================Cart Area =================-->
 <c:if test="${empty carts}">
-	<div class="container">
-		<div class="cart_inner mt-4 mb-4">
-			cart has no <a href="">products</a>
+	<section class="cart_area">
+		<div class="container">
+			<div class="cart_inner">
+				<img src="<c:url value="assets"/>/customer/img/empty-cart.png" class="card-img">
+				<h4 class="d-flex justify-content-center mb-5">There are no products in the cart</h4>
+				<div class="continue d-flex justify-content-center">
+					<a class="main_btn" href="allCategory">Continue shopping</a>
+				</div>
+			</div>
 		</div>
-	</div>
-
+	</section>
 </c:if>
 
 <c:if test="${not empty carts}">

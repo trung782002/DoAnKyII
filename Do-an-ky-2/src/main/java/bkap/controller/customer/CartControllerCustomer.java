@@ -18,34 +18,38 @@ import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
 import bkap.entities.CartsDTO;
+import bkap.entities.ConfigsDTO;
 import bkap.entities.ProductsDTO;
 
 @Controller
 public class CartControllerCustomer {
+	
+	public ConfigsDTO getConfig(Client client, Gson gson) {
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/configService/getConfig"); 
+		String data = webResource.get(String.class); 
+		ConfigsDTO config = gson.fromJson(data,ConfigsDTO.class);
+		return config;
+	}
 
 	public List<CartsDTO> getListCart(Client client, Gson gson, Integer accId) {
 		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/cartService/getList/" + accId);
 		String cart = webResource.get(String.class);
-		GenericType<List<CartsDTO>> listtypecart = new GenericType<List<CartsDTO>>() {
-		};
+		GenericType<List<CartsDTO>> listtypecart = new GenericType<List<CartsDTO>>() {};
 		List<CartsDTO> carts = gson.fromJson(cart, listtypecart.getType());
 		return carts;
 	}
 
 	public ProductsDTO getByIdProduct(Client client, Gson gson, Integer proId) {
-		WebResource webResource2 = client
-				.resource("http://localhost:8080/WebService/rest/productService/getById/" + proId);
+		WebResource webResource2 = client.resource("http://localhost:8080/WebService/rest/productService/getById/" + proId);
 		String data = webResource2.get(String.class);
 		ProductsDTO productsDTO = gson.fromJson(data, ProductsDTO.class);
 		return productsDTO;
 	}
 
 	public List<CartsDTO> getCartproIdaccId(Client client, Gson gson, Integer accId, Integer proId) {
-		WebResource webResource = client
-				.resource("http://localhost:8080/WebService/rest/cartService/check/" + accId + "/" + proId);
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/cartService/check/" + accId + "/" + proId);
 		String cart = webResource.get(String.class);
-		GenericType<List<CartsDTO>> listtypecart = new GenericType<List<CartsDTO>>() {
-		};
+		GenericType<List<CartsDTO>> listtypecart = new GenericType<List<CartsDTO>>() {};
 		List<CartsDTO> carts = gson.fromJson(cart, listtypecart.getType());
 		return carts;
 	}
@@ -61,15 +65,12 @@ public class CartControllerCustomer {
 	public String listCart(Model model, HttpSession session) {
 		Client client = Client.create();
 		Gson gson = new Gson();
-		Integer accId = 1;
+		
 		if(session.getAttribute("accId") != null) {
-			System.out.println(session.getAttribute("accId"));
-		}
-		if (accId != null) {
+			Integer accId = (Integer) session.getAttribute("accId");
 			WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getList");
 			String data = webResource.get(String.class);
-			GenericType<List<ProductsDTO>> listtype = new GenericType<List<ProductsDTO>>() {
-			};
+			GenericType<List<ProductsDTO>> listtype = new GenericType<List<ProductsDTO>>() {};
 			List<ProductsDTO> products = gson.fromJson(data, listtype.getType());
 
 			List<CartsDTO> cartsDTOs = getListCart(client, gson, accId);
@@ -77,6 +78,7 @@ public class CartControllerCustomer {
 			model.addAttribute("cart", cartDTO);
 			model.addAttribute("products", products);
 			model.addAttribute("carts", cartsDTOs);
+			model.addAttribute("config", getConfig(client, gson));
 			return "customer/pages/cart";
 		} else {
 			return "redirect:/login";
@@ -85,11 +87,13 @@ public class CartControllerCustomer {
 
 	@RequestMapping(value = "/insertcart")
 	public String insertcart(@RequestParam("proId") Integer proId, @RequestParam("quantity") Integer quantitycart,
-			RedirectAttributes redirAttrs,Model model) {
+			RedirectAttributes redirAttrs, Model model, HttpSession session) 
+	{
 		Client client = Client.create();
 		Gson gson = new Gson();
-		Integer accId = 1;
-		if (accId != null) {
+		
+		if(session.getAttribute("accId") != null) {
+			Integer accId = (Integer) session.getAttribute("accId");
 			List<CartsDTO> listCart = getCartproIdaccId(client, gson, accId, proId);
 			ProductsDTO dto = getByIdProduct(client, gson, proId);
 			if (listCart.size() > 0) {
@@ -101,7 +105,8 @@ public class CartControllerCustomer {
 				if(quantitycart == 0 || quantitycart + cartsDTO.getQuantity() > dto.getQuantity()) {
 					redirAttrs.addFlashAttribute("quantity", "The quantity does not match");
 					return "redirect:/productDetail?proId="+proId;
-				}				
+				}			
+				
 				quantitycart += cartsDTO.getQuantity(); 			
 				CartsDTO cartsDTO2 = new CartsDTO(cartId, accId, proId, quantitycart);
 				String data = gson.toJson(cartsDTO2);
@@ -116,15 +121,13 @@ public class CartControllerCustomer {
 				}
 				CartsDTO cartsDTO = new CartsDTO(0, accId, proId, quantitycart);
 				String datacart = gson.toJson(cartsDTO);
-				WebResource webResourcecart = client
-						.resource("http://localhost:8080/WebService/rest/cartService/insert");
-				ClientResponse clientResponse = webResourcecart.type("application/json").post(ClientResponse.class,
-						datacart);
+				WebResource webResource = client.resource("http://localhost:8080/WebService/rest/cartService/insert");
+				ClientResponse clientResponse = webResource.type("application/json").post(ClientResponse.class, datacart);
 				String re = clientResponse.getEntity(String.class);
 				boolean bt = gson.fromJson(re, boolean.class);
 			}
 		} else {
-			return "redirect:/signUp";
+			return "redirect:/login";
 		}
 		return "redirect:/listCart";
 	}
@@ -171,11 +174,5 @@ public class CartControllerCustomer {
 		String data1 = webResource1.type("application/json").delete(String.class);
 	    boolean bl = gson.fromJson(data1,boolean.class);
 	    return "redirect:/listCart";
-	}
-	
-	@RequestMapping(value = "/checkOut")
-	public String checkOut(Model model) {
-		
-	    return "customer/pages/checkOut";
 	}
 }

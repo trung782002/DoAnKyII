@@ -12,6 +12,7 @@ import bkap.entities.ConfigsDTO;
 
 @Controller
 public class ContactControllerCustomer {
+	
 	@RequestMapping(value = "/contact")
 	public String contact(Model model) {
 		Client client = Client.create();
