@@ -7,9 +7,9 @@ import bkap.entities.Products;
 
 public interface CategoryDAO {
 	
-    public List<Categories> getList();
+    public List<Categories> getList(Integer status);
     
-    public boolean insert(Categories cat);
+    public boolean insert(Categories cate);
     
     public Categories getById(Integer id);
     

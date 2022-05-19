@@ -8,7 +8,7 @@
 					src="<c:url value="assets"/>/admin/images/user/avatar-2.jpg"
 					alt="User-Profile-Image"> --%>
 				<div class="user-details" style="cursor: context-menu;">
-					<span>John Doe</span>
+					<span>${accFullName}</span>
 					<div id="more-details">
 						Eiser administrator <!-- <i class="fa fa-chevron-down m-l-5"></i> -->
 					</div>

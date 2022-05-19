@@ -25,10 +25,10 @@ import bkap.entities.dto.ProductsDTO;
 public class CategoryService {
 	
 	@GET
-	@Path("/getList")
+	@Path("/getList/{status}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getListBrand() {
-		List<Categories> listCategory = new CategoryDAOlmpl().getList();
+	public String getListBrand(@PathParam("status")Integer status) {
+		List<Categories> listCategory = new CategoryDAOlmpl().getList(status);
 		Gson son = new Gson();
 		List<CategoriesDTO> listData = new ArrayList<CategoriesDTO>();
 		for (Categories cat : listCategory) {

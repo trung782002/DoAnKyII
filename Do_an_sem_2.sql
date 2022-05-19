@@ -175,5 +175,7 @@ select * from Account_Roles
 --insert into Account_Roles values(1,1)
 select * from Orders
 select * from OrderDetails
+delete from Orders where OrderId = 14
+select * from Blogs
 
 

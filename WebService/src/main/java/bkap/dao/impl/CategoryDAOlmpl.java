@@ -12,11 +12,16 @@ import bkap.util.HibernateUtil;
 public class CategoryDAOlmpl implements CategoryDAO{
 
 	@Override
-	public List<Categories> getList() {
-		// TODO Auto-generated method stub
+	public List<Categories> getList(Integer status) {
+		String query;
+		if(status == 0)
+			query = "from Categories order by CateId desc";
+		else 
+			query = "from Categories where Status = " + status + "order by CateId desc";
+		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery("from Categories").list();
+			List list = session.createQuery(query).list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -25,10 +30,11 @@ public class CategoryDAOlmpl implements CategoryDAO{
 		}
 		return null;
 	}
-	
+	public static void main(String[] args) {
+		System.out.println(new CategoryDAOlmpl().getList(0));
+	}
 	@Override
 	public Categories getById(Integer id) {
-		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			Categories category = session.get(Categories.class, id);
@@ -42,12 +48,12 @@ public class CategoryDAOlmpl implements CategoryDAO{
 	}
 
 	@Override
-	public boolean insert(Categories cat) {
+	public boolean insert(Categories cate) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
-			session.save(cat);
+			session.save(cate);
 			session.getTransaction().commit();
 			return true;
 		} catch (Exception e) {

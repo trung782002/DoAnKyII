@@ -11,12 +11,11 @@
 			<div
 				class="banner_content d-md-flex justify-content-between align-items-center">
 				<div class="mb-3 mb-md-0">
-					<h2>Product Checkout</h2>
+					<h2>Checkout</h2>
 					<p>Very us move be blessed multiply night</p>
 				</div>
 				<div class="page_link">
-					<a href="home">Home</a> <a href="checkOut">Product
-						Checkout</a>
+					<a href="home">Home</a> <a href="checkOut">Checkout</a>
 				</div>
 			</div>
 		</div>
@@ -36,29 +35,29 @@
 						<h3>Billing Details</h3>
 						<div class="row contact_form">
 							<div class="col-md-12 form-group">
-								<H5>Full Name</H5>
+								<h5>Full name <span class="text-danger">*</span></h5>
 								<form:input type="text" class="form-control" path="fullName"
-									placeholder="Full Name" />
+									placeholder="enter full name" autocomplete="off" value="${accFullName}"/>
 									<form:errors path="fullName" class="text-danger mt-2 d-block"></form:errors>
 							</div>
 
 							<div class="col-md-12 form-group p_star">
-								<H5>Address</H5>
+								<h5>Address <span class="text-danger">*</span></h5>
 								<form:input type="text" class="form-control" path="address"
-									placeholder="Address" />
+									placeholder="enter your address" autocomplete="off" value="${accAddress}"/>
 									<form:errors path="address" class="text-danger mt-2 d-block"></form:errors>
 							</div>
 
 							<div class="col-md-12 form-group p_star">
-								<H5>Phone</H5>
+								<h5>Phone number <span class="text-danger">*</span></h5>
 								<form:input type="text" class="form-control" path="phone"
-									placeholder="Phone" />
+									placeholder="enter your phone number" autocomplete="off" value="${accPhone}"/>
 									<form:errors path="phone" class="text-danger mt-2 d-block"></form:errors>
 							</div>
 
 							<div class="col-md-12 form-group">
-								<H5>Note</H5>
-								<form:textarea class="form-control" placeholder="Order Notes"
+								<h5>Note</h5>
+								<form:textarea class="form-control" placeholder="Order notes"
 									path="note" />
 									<form:errors path="note" class="text-danger mt-2 d-block"></form:errors>
 							</div>
@@ -69,25 +68,28 @@
 						<div class="order_box">
 							<h2>Your Order</h2>
 							<ul class="list">
-								<li><a href="#">Product <span>Total</span>
-								</a></li>
+								<li>
+									<a style="cursor: context-menu;" href="#">Product <span>Total</span></a>
+								</li>
 								<c:forEach items="${carts}" var="cart">
 									<li><c:forEach items="${products}" var="product">
 											<c:if test="${product.proId == cart.proId}">
-												<a href="#">${product.name}<span class="middle">x
-														${cart.quantity}</span> <span class="last">$${(product.price
-														- product.discount) * cart.quantity}</span></a>
+												<a class="font-weight-light" style="cursor: context-menu;" href="#">${product.name}
+													<span class="middle">x ${cart.quantity}</span> 
+													<span class="last">$${(product.price - product.discount) * cart.quantity}</span>
+												</a>
 											</c:if>
 										</c:forEach></li>
 								</c:forEach>
 							</ul>
 							<ul class="list list_2">
-								<li><a href="#">Total <span>$ ${total}</span>
-								</a></li>
+								<li>
+									<a style="cursor: context-menu;" href="#">Total <span>$${total}</span></a>
+								</li>
 							</ul>
-							<input class="main_btn mt-3 ml-4" type="submit"
-								value="place order">
-
+							<div class="d-flex justify-content-center mt-3">
+								<input class="main_btn px-5" type="submit" value="place order">
+							</div>
 						</div>
 					</div>
 				</div>

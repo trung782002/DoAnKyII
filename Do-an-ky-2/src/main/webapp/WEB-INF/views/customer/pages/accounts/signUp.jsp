@@ -34,8 +34,8 @@
 		<div class="col-12 col-lg-7 m-auto">
 			<form:form action="doSignUp" modelAttribute="account" method="post">
 				<div class="form-group">
-				    <label>Email address <span class="text-danger">*</span></label>
-				    <form:input type="email" class="form-control" autocomplete="off" path="email" placeholder="enter email address"/>
+				    <label>Email <span class="text-danger">*</span></label>
+				    <form:input type="email" class="form-control" autocomplete="off" path="email" placeholder="enter your email"/>
 				    <form:errors class="text-danger mt-1 d-block" path="email"></form:errors>
 				    <c:if test="${not empty emailExist}">
 						<span class="text-danger mt-1 d-block">${emailExist}</span>
@@ -49,8 +49,8 @@
 				</div>
 				
 				<div class="form-group">
-				    <label>Phone <span class="text-danger">*</span></label>
-				    <form:input class="form-control" autocomplete="off" type="number" min="0" path="phone" placeholder="enter phone number"/>
+				    <label>Phone number <span class="text-danger">*</span></label>
+				    <form:input class="form-control" autocomplete="off" type="number" min="0" path="phone" placeholder="enter your phone number"/>
 				    <form:errors class="text-danger mt-1 d-block" path="phone"></form:errors>
 				</div>
 				

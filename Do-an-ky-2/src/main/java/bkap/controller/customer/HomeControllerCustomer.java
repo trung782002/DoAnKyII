@@ -38,21 +38,19 @@ public class HomeControllerCustomer {
 		Integer status = 1;
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if(principal!=null && principal!="anonymousUser") {
+		if(principal != null && principal != "anonymousUser") {
 			User user = (User) principal;
 			String email = user.getUsername();
+			
 			webResource = client.resource("http://localhost:8080/WebService/rest/accountService/getEmail/" + email);
-			String data = webResource.get(String.class);
-			GenericType<List<AccountsDTO>> listType = new GenericType<List<AccountsDTO>>() {};
-			List<AccountsDTO> listAccount = gson.fromJson(data, listType.getType());
-			for (AccountsDTO account : listAccount) {
-				session.setAttribute("accId", account.getAccId());
-				session.setAttribute("accEmail", account.getEmail());
-				session.setAttribute("accFullName", account.getFullName());
-				session.setAttribute("accPhone", account.getPhone());
-				session.setAttribute("accAddress", account.getAddress());
-			}
-			model.addAttribute("accFullName", session.getAttribute("accFullName"));
+			String res = webResource.get(String.class);
+			AccountsDTO account = gson.fromJson(res, AccountsDTO.class);
+			
+			session.setAttribute("accId", account.getAccId());
+			session.setAttribute("accEmail", account.getEmail());
+			session.setAttribute("accFullName", account.getFullName());
+			session.setAttribute("accPhone", account.getPhone());
+			session.setAttribute("accAddress", account.getAddress());
 		}
 		
 		webResource = client.resource("http://localhost:8080/WebService/rest/productService/getListStatus");

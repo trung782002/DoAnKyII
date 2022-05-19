@@ -231,7 +231,7 @@
 						<div class="dropdown-menu dropdown-menu-right profile-notification">
 							<div class="pro-head">
 								<!-- <img src="assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image"> -->
-								<span>John Doe</span>
+								<span>${accFullName}</span>
 								<!-- <a href="auth-signin.html" class="dud-logout" title="Logout">
 									<i class="feather icon-log-out"></i>
 								</a> -->

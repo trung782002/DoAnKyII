@@ -34,8 +34,8 @@ import bkap.entities.ProductsDTO;
 @RequestMapping(value = {"/admin"})
 public class ProductControllerAdmin {
 	
-	public List<CategoriesDTO> getListCategories(Client client, Gson gson) {
-		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/categoryService/getList");
+	public List<CategoriesDTO> getListCategories(Client client, Gson gson, Integer status) {
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/categoryService/getList/" + status);
 		String category = webResource.get(String.class);
 		GenericType<List<CategoriesDTO>> listtypecategory = new GenericType<List<CategoriesDTO>>() {};
 		List<CategoriesDTO> categories = gson.fromJson(category, listtypecategory.getType());
@@ -62,6 +62,7 @@ public class ProductControllerAdmin {
 	public String listProducts(Model model) {
 		Client client = Client.create();
 		Gson gson = new Gson();
+		Integer status = 0;
 		
 		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getList");
 		String data = webResource.get(String.class);
@@ -69,7 +70,7 @@ public class ProductControllerAdmin {
 		List<ProductsDTO> list = gson.fromJson(data, listtype.getType());
 
 		model.addAttribute("brands", getListBrands(client, gson));
-		model.addAttribute("categories", getListCategories(client, gson));
+		model.addAttribute("categories", getListCategories(client, gson, status));
 		model.addAttribute("list", list);
 
 		return "admin/pages/product/listProducts";
@@ -79,6 +80,7 @@ public class ProductControllerAdmin {
 	public String searchProduct(@RequestParam("Name") String name, Model model) {
 		Client client = Client.create();
 		Gson gson = new Gson();
+		Integer status = 0;
 
 		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/searchByName/" + name);
 		String data = webResource.get(String.class);
@@ -86,7 +88,7 @@ public class ProductControllerAdmin {
 		List<ProductsDTO> list = gson.fromJson(data, listtype.getType());
 
 		model.addAttribute("brands", getListBrands(client, gson));
-		model.addAttribute("categories", getListCategories(client, gson));
+		model.addAttribute("categories", getListCategories(client, gson, status));
 		model.addAttribute("list", list);
 
 		return "admin/pages/product/listProducts";
@@ -96,10 +98,11 @@ public class ProductControllerAdmin {
 	public String createProduct(Model model) {
 		Client client = Client.create();
 		Gson gson = new Gson();
+		Integer status = 0;
 		ProductsDTO product = new ProductsDTO();
 
 		model.addAttribute("brand", getListBrands(client, gson));
-		model.addAttribute("category", getListCategories(client, gson));
+		model.addAttribute("category", getListCategories(client, gson, status));
 		model.addAttribute("product", product);
 
 		return "admin/pages/product/insertProduct";
@@ -127,9 +130,10 @@ public class ProductControllerAdmin {
 			flag++;
 		}
 		
-		if (result.hasErrors()) {
+		if (result.hasErrors() == true || flag > 0) {
+			Integer status = 0;
 			model.addAttribute("brand", getListBrands(client, gson));
-			model.addAttribute("category", getListCategories(client, gson));
+			model.addAttribute("category", getListCategories(client, gson, status));
 			model.addAttribute("product", product);
 			return "admin/pages/product/insertProduct";
 		} else {
@@ -182,6 +186,7 @@ public class ProductControllerAdmin {
 	public String getByIdProduct(@RequestParam("ProId") Integer id, Model model) {
 		Client client = Client.create();
 		Gson gson = new Gson();
+		Integer status = 0;
 
 		WebResource webResource2 = client.resource("http://localhost:8080/WebService/rest/productService/getById/" + id);
 		String data = webResource2.get(String.class);
@@ -190,7 +195,7 @@ public class ProductControllerAdmin {
 		model.addAttribute("productimages", getListProduct_images(client, gson, id));
 		model.addAttribute("product", productsDTO);
 		model.addAttribute("brand", getListBrands(client, gson));
-		model.addAttribute("category", getListCategories(client, gson));
+		model.addAttribute("category", getListCategories(client, gson, status));
 
 		return "admin/pages/product/updateProduct";
 	}
@@ -202,11 +207,13 @@ public class ProductControllerAdmin {
 	{
 		Client client = Client.create();
 		Gson gson = new Gson();
+		Integer status = 0;
+		
 		product.setDiscount(product.getDiscount() == null ? 0 : product.getDiscount());
 		if (result.hasErrors() == true) {
 			model.addAttribute("productimages", getListProduct_images(client, gson, product.getProId()));
 			model.addAttribute("brand", getListBrands(client, gson));
-			model.addAttribute("category", getListCategories(client, gson));
+			model.addAttribute("category", getListCategories(client, gson, status));
 			model.addAttribute("product", product);
 
 			return "admin/pages/product/updateProduct";
@@ -214,7 +221,7 @@ public class ProductControllerAdmin {
 			model.addAttribute("discount", " Discount must be less than the price");
 			model.addAttribute("productimages", getListProduct_images(client, gson, product.getProId()));
 			model.addAttribute("brand", getListBrands(client, gson));
-			model.addAttribute("category", getListCategories(client, gson));
+			model.addAttribute("category", getListCategories(client, gson, status));
 			model.addAttribute("product", product);
 
 			return "admin/pages/product/updateProduct";

@@ -28,8 +28,8 @@ public class ProductControllerCustomer {
 		return config;
 	}
 	
-	public List<CategoriesDTO> getListCategories(Client client, Gson gson) {
-		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/categoryService/getList");
+	public List<CategoriesDTO> getListCategories(Client client, Gson gson, Integer status) {
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/categoryService/getList/" + status);
 		String data = webResource.get(String.class);
 		GenericType<List<CategoriesDTO>> listCategoryType = new GenericType<List<CategoriesDTO>>() {};
 		List<CategoriesDTO> listCategories = gson.fromJson(data, listCategoryType.getType());
@@ -55,14 +55,15 @@ public class ProductControllerCustomer {
 	@RequestMapping(value = "/productDetail")
 	public String detailProduct(@RequestParam("proId") Integer id ,Model model) {
 		Client client = Client.create();
-		Gson gson = new Gson();	
+		Gson gson = new Gson();
+		Integer status = 0;
 		
 		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getById/" + id);
 		String data = webResource.get(String.class);
 		ProductsDTO product = gson.fromJson(data, ProductsDTO.class);
 		
         model.addAttribute("product", product);
-        model.addAttribute("categories", getListCategories(client, gson));
+        model.addAttribute("categories", getListCategories(client, gson, status));
 		model.addAttribute("brands", getListBrands(client, gson));
 		model.addAttribute("productimages", getListProduct_images(client, gson, id));
 		model.addAttribute("config", getConfig(client, gson));

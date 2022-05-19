@@ -12,24 +12,10 @@ import bkap.util.HibernateUtil;
 public class OrderDAOImpl implements OrderDAO {
 
 	@Override
-	public List<Orders> getList() {
+	public List<Orders> getList(Integer accId,Integer status) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery("from Orders").list();
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return null;
-	}
-	
-	@Override
-	public List<Orders> getOrderAccId(Integer accId) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		try {
-			List list = session.createQuery("from Orders where AccId = :accId").setParameter("accId", accId).list();
+			List list = session.createQuery("from Orders where AccId = :accId and Status = :status").setParameter("accId", accId).setParameter("status", status).list();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -16,7 +16,7 @@ public class AccountsDTO {
 	@NotEmpty(message = "Please enter your fullname.")
 	private String fullName;
 	
-	@NotEmpty(message = "Please enter your phone.")
+	@NotEmpty(message = "Please enter your phone number.")
 	@Pattern(regexp = "(^$|[0-9]{10})", message = "Phone wrong format.")
 	private String phone;
 

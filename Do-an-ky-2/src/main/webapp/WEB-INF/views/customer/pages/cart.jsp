@@ -58,6 +58,7 @@
 						<tbody>
 							<form method="post" action="updateCart">
 								<c:forEach items="${carts}" var="cart">
+					
 									<input type="hidden" name="cartId" value="${cart.cartId}" />
 									<tr>
 										<td>

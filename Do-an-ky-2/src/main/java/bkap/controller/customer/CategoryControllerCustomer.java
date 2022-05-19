@@ -26,8 +26,8 @@ public class CategoryControllerCustomer {
 		return config;
 	}
 	
-	public List<CategoriesDTO> getListCategories(Client client, Gson gson) {
-		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/categoryService/getList");
+	public List<CategoriesDTO> getListCategories(Client client, Gson gson, Integer status) {
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/categoryService/getList/" + status);
 		String data = webResource.get(String.class);
 		GenericType<List<CategoriesDTO>> listCategoryType = new GenericType<List<CategoriesDTO>>() {};
 		List<CategoriesDTO> listCategories = gson.fromJson(data, listCategoryType.getType());
@@ -46,6 +46,7 @@ public class CategoryControllerCustomer {
 	public String allCategory(Model model) {
 		Client client = Client.create();
 		Gson gson = new Gson();
+		Integer status = 1;
 		
 		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getList");
 		String data = webResource.get(String.class);
@@ -53,7 +54,7 @@ public class CategoryControllerCustomer {
 		List<BrandsDTO> listProducts = gson.fromJson(data, listProductType.getType());
 		model.addAttribute("listProducts", listProducts);
 		
-		model.addAttribute("listCategories", getListCategories(client, gson));
+		model.addAttribute("listCategories", getListCategories(client, gson, status));
 		model.addAttribute("listBrands", getListBrands(client, gson));
 		model.addAttribute("config", getConfig(client, gson));
 		return "customer/pages/category";
@@ -63,6 +64,7 @@ public class CategoryControllerCustomer {
 	public String category(Model model) {
 		Client client = Client.create();
 		Gson gson = new Gson();
+		Integer status = 1;
 		
 		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getList");
 		String data = webResource.get(String.class);
@@ -70,7 +72,7 @@ public class CategoryControllerCustomer {
 		List<BrandsDTO> listProducts = gson.fromJson(data, listProductType.getType());
 		model.addAttribute("listProducts", listProducts);
 		
-		model.addAttribute("listCategories", getListCategories(client, gson));
+		model.addAttribute("listCategories", getListCategories(client, gson, status));
 		model.addAttribute("listBrands", getListBrands(client, gson));
 		model.addAttribute("config", getConfig(client, gson));
 		return "customer/pages/category";
@@ -80,6 +82,7 @@ public class CategoryControllerCustomer {
 	public String brand(Model model) {
 		Client client = Client.create();
 		Gson gson = new Gson();
+		Integer status = 1;
 		
 		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getList");
 		String data = webResource.get(String.class);
@@ -87,7 +90,7 @@ public class CategoryControllerCustomer {
 		List<BrandsDTO> listProducts = gson.fromJson(data, listProductType.getType());
 		model.addAttribute("listProducts", listProducts);
 		
-		model.addAttribute("listCategories", getListCategories(client, gson));
+		model.addAttribute("listCategories", getListCategories(client, gson, status));
 		model.addAttribute("listBrands", getListBrands(client, gson));
 		model.addAttribute("config", getConfig(client, gson));
 		return "customer/pages/category";

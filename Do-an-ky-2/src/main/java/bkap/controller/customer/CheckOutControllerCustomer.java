@@ -1,7 +1,9 @@
 package bkap.controller.customer;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -61,33 +63,47 @@ public class CheckOutControllerCustomer {
 	}
 	
 	@RequestMapping(value = {"checkOut"})
-     public String checkout(Model model, HttpSession session) {
+     public String checkout(Model model, HttpSession session, RedirectAttributes redirAttrs) {
 		Client client = Client.create();
 		Gson gson = new Gson();
 		if(session.getAttribute("accId") != null) {
 			Integer accId = (Integer) session.getAttribute("accId");
-			WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getList");
-			String data = webResource.get(String.class);
-			GenericType<List<ProductsDTO>> listtype = new GenericType<List<ProductsDTO>>() {};
-			List<ProductsDTO> products = gson.fromJson(data, listtype.getType());
-			model.addAttribute("products", products);
-			
 			List<CartsDTO> cartsDTOs = getListCart(client, gson, accId);
-			model.addAttribute("carts", cartsDTOs);
-			
-			OrdersDTO ordersDTO = new OrdersDTO();
-			model.addAttribute("order", ordersDTO);
-		
-			Double Total = (double) 0;
-			
+			List<Integer> listCartId = new ArrayList<Integer>();
 			for (CartsDTO cartsDTO : cartsDTOs) {
-				Double TotalPrice = (double) (getByIdProduct(client, gson, cartsDTO.getProId()).getPrice() - getByIdProduct(client, gson, cartsDTO.getProId()).getDiscount()) * cartsDTO.getQuantity();
-				Total = (double) Total + TotalPrice; 
-			}		
-			model.addAttribute("total", Total);
-			model.addAttribute("config", getConfig(client, gson));
+				ProductsDTO dto = getByIdProduct(client, gson, cartsDTO.getProId());
+				if(cartsDTO.getQuantity() > dto.getQuantity()) {
+					listCartId.add(cartsDTO.getCartId());
+				}
+			}
+			if(listCartId.size() == 0) {
+				WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getList");
+				String data = webResource.get(String.class);
+				GenericType<List<ProductsDTO>> listtype = new GenericType<List<ProductsDTO>>() {};
+				List<ProductsDTO> products = gson.fromJson(data, listtype.getType());
+				model.addAttribute("products", products);
+				
+				model.addAttribute("carts", cartsDTOs);
+				
+				OrdersDTO ordersDTO = new OrdersDTO();
+				model.addAttribute("order", ordersDTO);
 			
-			return "customer/pages/checkOut";
+				Double Total = (double) 0;
+				
+				for (CartsDTO cartsDTO : cartsDTOs) {
+					Double TotalPrice = (double) (getByIdProduct(client, gson, cartsDTO.getProId()).getPrice() - getByIdProduct(client, gson, cartsDTO.getProId()).getDiscount()) * cartsDTO.getQuantity();
+					Total = (double) Total + TotalPrice; 
+				}		
+				model.addAttribute("total", Total);
+				model.addAttribute("config", getConfig(client, gson));
+				
+				return "customer/pages/checkOut";
+			}else {
+				redirAttrs.addFlashAttribute("quantity", "There are only");
+				redirAttrs.addFlashAttribute("listCartIds",listCartId);
+				return "redirect:/listCart";
+			}
+			
 		} else {
 			return "redirect:/login";
 		}	
@@ -121,36 +137,45 @@ public class CheckOutControllerCustomer {
 				model.addAttribute("config", getConfig(client, gson));
 				
 				return "customer/pages/checkOut";	
-			} else {
+			} else { 				
 				List<CartsDTO> cartsDTOs = getListCart(client, gson, accId);
-				Double Total = (double) 0;
-				for (CartsDTO cartsDTO : cartsDTOs) {
-					Double TotalPrice = (double) (getByIdProduct(client, gson, cartsDTO.getProId()).getPrice()
-							- getByIdProduct(client, gson, cartsDTO.getProId()).getDiscount()) * cartsDTO.getQuantity();
-					Total   =  (double) Total + TotalPrice; 
-				}
-				OrdersDTO Order = new OrdersDTO(0, accId, ordersDTO.getFullName(), ordersDTO.getAddress(), ordersDTO.getPhone(), ordersDTO.getNote(),Total, 1, new Date(), null);
-				String data = gson.toJson(Order);
-				WebResource webResource = client.resource("http://localhost:8080/WebService/rest/orderService/insert");
-				ClientResponse clientResponse = webResource.type("application/json").post(ClientResponse.class, data);
-				String re = clientResponse.getEntity(String.class);
-				OrdersDTO dto = gson.fromJson(re, OrdersDTO.class);
-				if(dto != null) {
+				List<Integer> listCartId = new ArrayList<Integer>();
+				
+					Double Total = (double) 0;
 					for (CartsDTO cartsDTO : cartsDTOs) {
-						Double Price = (double) (getByIdProduct(client, gson, cartsDTO.getProId()).getPrice()
+						Double TotalPrice = (double) (getByIdProduct(client, gson, cartsDTO.getProId()).getPrice()
 								- getByIdProduct(client, gson, cartsDTO.getProId()).getDiscount()) * cartsDTO.getQuantity();
-						OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO(0, dto.getOrderId(), accId,cartsDTO.getQuantity(), Price);
-						 data = gson.toJson(orderDetailsDTO);
-						 webResource = client.resource("http://localhost:8080/WebService/rest/orderDetailService/insert");
-						clientResponse = webResource.type("application/json").post(ClientResponse.class, data);									
-					}				
-					for (CartsDTO cartsDTO : cartsDTOs) {
-						WebResource webResource1 = client.resource("http://localhost:8080/WebService/rest/cartService/delete/"+cartsDTO.getCartId());
-						String data1 = webResource1.type("application/json").delete(String.class);
-					}					
-				}
-				return "redirect:/home";
-			}
+						Total   =  (double) Total + TotalPrice; 
+					}
+					OrdersDTO Order = new OrdersDTO(0, accId, ordersDTO.getFullName(), ordersDTO.getAddress(), ordersDTO.getPhone(), ordersDTO.getNote(),Total, 1, new Date(), null);
+					String data = gson.toJson(Order);
+					WebResource webResource = client.resource("http://localhost:8080/WebService/rest/orderService/insert");
+					ClientResponse clientResponse = webResource.type("application/json").post(ClientResponse.class, data);
+					String re = clientResponse.getEntity(String.class);
+					OrdersDTO dto = gson.fromJson(re, OrdersDTO.class);
+					if(dto != null) {
+						for (CartsDTO cartsDTO : cartsDTOs) {
+							Double Price = (double) (getByIdProduct(client, gson, cartsDTO.getProId()).getPrice()
+									- getByIdProduct(client, gson, cartsDTO.getProId()).getDiscount()) * cartsDTO.getQuantity();
+							OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO(0, dto.getOrderId(), cartsDTO.getProId(), cartsDTO.getQuantity(), Price);
+							data = gson.toJson(orderDetailsDTO);
+							webResource = client.resource("http://localhost:8080/WebService/rest/orderDetailService/insert");
+							clientResponse = webResource.type("application/json").post(ClientResponse.class, data);	
+							
+							ProductsDTO product = getByIdProduct(client, gson, cartsDTO.getProId());
+							Integer quantity = product.getQuantity() - orderDetailsDTO.getQuantity();						 
+							product.setQuantity(quantity);
+							data = gson.toJson(product);
+							webResource = client.resource("http://localhost:8080/WebService/rest/productService/update");
+							clientResponse = webResource.type("application/json").put(ClientResponse.class, data);						
+						}				
+						for (CartsDTO cartsDTO : cartsDTOs) {
+							WebResource webResource1 = client.resource("http://localhost:8080/WebService/rest/cartService/delete/"+cartsDTO.getCartId());
+							String data1 = webResource1.type("application/json").delete(String.class);
+						}					
+					}
+				return "redirect:/theOrder";		
+			}		
 		} else {
 			return "redirect:/login";
 		}

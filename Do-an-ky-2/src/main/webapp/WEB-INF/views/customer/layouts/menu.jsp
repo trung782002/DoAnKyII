@@ -81,6 +81,9 @@
 								</c:if>
 								<c:if test="${empty accFullName}">
 									<li class="nav-item">
+						                <a href="listCart" class="icons"><i class="ti-shopping-cart"></i></a>
+									</li>
+									<li class="nav-item">
 										<a href="login" class="icons"><i class="ti-user" aria-hidden="true"></i></a>
 									</li>
 								</c:if>

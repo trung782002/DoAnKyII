@@ -102,11 +102,10 @@ public class CartControllerCustomer {
 					cartId = cartsDTO.getCartId();
 				}
 				CartsDTO cartsDTO = getById(client, gson, cartId);
-				if(quantitycart == 0 || quantitycart + cartsDTO.getQuantity() > dto.getQuantity()) {
+				if(quantitycart <= 0 || quantitycart + cartsDTO.getQuantity() > dto.getQuantity()) {
 					redirAttrs.addFlashAttribute("quantity", "The quantity does not match");
 					return "redirect:/productDetail?proId="+proId;
-				}			
-				
+				}							
 				quantitycart += cartsDTO.getQuantity(); 			
 				CartsDTO cartsDTO2 = new CartsDTO(cartId, accId, proId, quantitycart);
 				String data = gson.toJson(cartsDTO2);
@@ -115,7 +114,7 @@ public class CartControllerCustomer {
 				String re = clientResponse.getEntity(String.class);
 				boolean bt = gson.fromJson(re, boolean.class);
 			} else {				
-				if(quantitycart == 0 || quantitycart > dto.getQuantity()) {
+				if(quantitycart <= 0 || quantitycart > dto.getQuantity()) {
 					redirAttrs.addFlashAttribute("quantity", "The quantity does not match");
 					return "redirect:/productDetail?proId="+proId;
 				}
@@ -139,7 +138,7 @@ public class CartControllerCustomer {
 		for (int i = 0; i < cartId.length; i++) {
 			for (int j = 0; j < quantity.length; j++) {
 				if(i == j) {
-					if(quantity[j] == 0) {
+					if(quantity[j] <= 0) {
 						WebResource webResource1 = client.resource("http://localhost:8080/WebService/rest/cartService/delete/"+cartId[i]);
 						String data1 = webResource1.type("application/json").delete(String.class);
 					    boolean bl = gson.fromJson(data1,boolean.class);

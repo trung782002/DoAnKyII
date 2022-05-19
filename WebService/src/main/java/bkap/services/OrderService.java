@@ -16,24 +16,21 @@ import com.google.gson.Gson;
 
 import bkap.dao.impl.OrderDAOImpl;
 import bkap.entities.Accounts;
-import bkap.entities.Brands;
 import bkap.entities.Orders;
 import bkap.entities.dto.OrdersDTO;
 
 @Path("/orderService/")
 public class OrderService {
 	@GET
-	@Path("/getList")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getList() {
-		List<Orders> listOrder = new OrderDAOImpl().getList();
+	@Path("/getList/{accId}/{status}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String getList(@PathParam("accId") Integer accId,@PathParam("status") Integer status) {
 		Gson son = new Gson();
+		List<Orders> listOrder = new OrderDAOImpl().getList(accId, status);
 		List<OrdersDTO> listOrderDTO = new ArrayList<OrdersDTO>();
-		for (Orders order : listOrder) {
-			OrdersDTO orderDTO = new OrdersDTO(order.getOrderId(), order.getObjAccountOfOrder().getAccId(),
-					order.getFullName(), order.getAddress(), order.getPhone(), order.getNote(), order.getTotalPrice(),
-					order.getStatus(), order.getCreatedAt(), order.getUpdatedAt());
-			listOrderDTO.add(orderDTO);
+		for (Orders ordersDTO : listOrder) {
+			OrdersDTO dto = new OrdersDTO(ordersDTO.getOrderId(), ordersDTO.getObjAccountOfOrder().getAccId(), ordersDTO.getFullName(), ordersDTO.getAddress(), ordersDTO.getPhone(), ordersDTO.getNote(), ordersDTO.getTotalPrice(), ordersDTO.getStatus(), ordersDTO.getCreatedAt(), ordersDTO.getUpdatedAt());
+		    listOrderDTO.add(dto);
 		}
 		String data = son.toJson(listOrderDTO);
 		return data;
@@ -45,10 +42,10 @@ public class OrderService {
 	public String insert(String jsonOrder) {
 		Gson son = new Gson();
 		OrdersDTO orderDTO = son.fromJson(jsonOrder, OrdersDTO.class);
-		Accounts objaccounts = new Accounts();
-		objaccounts.setAccId(orderDTO.getAccId());
-		Orders order = new Orders(0, orderDTO.getFullName(), orderDTO.getAddress(), orderDTO.getPhone(), orderDTO.getNote(),orderDTO.getTotalPrice(),orderDTO.getStatus(), orderDTO.getCreatedAt(), orderDTO.getUpdatedAt(), objaccounts, null);
-	    Orders orders = new OrderDAOImpl().insert(order);
+		Accounts accounts = new Accounts();
+		accounts.setAccId(orderDTO.getAccId());
+		Orders order = new Orders(0, orderDTO.getFullName(), orderDTO.getAddress(), orderDTO.getPhone(), orderDTO.getNote(), orderDTO.getTotalPrice(), orderDTO.getStatus(), orderDTO.getCreatedAt(), orderDTO.getUpdatedAt(), accounts, null);
+		Orders orders = new OrderDAOImpl().insert(order);
 		String data = son.toJson(orders);
 		return data;
 	}
@@ -59,17 +56,18 @@ public class OrderService {
 	public String update(String jsonOrder) {
 		Gson son = new Gson();
 		OrdersDTO orderDTO = son.fromJson(jsonOrder, OrdersDTO.class);
-		Orders order = new Orders(orderDTO.getOrderId(), orderDTO.getFullName(), orderDTO.getAddress(), orderDTO.getPhone(),
-				orderDTO.getNote(), orderDTO.getTotalPrice(), orderDTO.getStatus(), orderDTO.getCreatedAt(), null, null, null);
+		Accounts accounts = new Accounts();
+		accounts.setAccId(orderDTO.getAccId());
+		Orders order = new Orders(orderDTO.getOrderId(), orderDTO.getFullName(), orderDTO.getAddress(), orderDTO.getPhone(), orderDTO.getNote(), orderDTO.getTotalPrice(), orderDTO.getStatus(), orderDTO.getCreatedAt(), orderDTO.getUpdatedAt(), accounts, null);
 		boolean bl = new OrderDAOImpl().update(order);
 		String data = son.toJson(bl);
 		return data;
 	}
 
 	@GET
-	@Path("/getById/{id}")
+	@Path("/getById/{orderId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getById(@PathParam("id") Integer id) {
+	public String getById(@PathParam("orderId") Integer id) {
 		Gson son = new Gson();
 		Orders order = new OrderDAOImpl().getById(id);
 		OrdersDTO orderDTO = new OrdersDTO(order.getOrderId(), order.getObjAccountOfOrder().getAccId(),
@@ -78,22 +76,5 @@ public class OrderService {
 		String Data = son.toJson(orderDTO);
 		return Data;
 
-	}
-	
-	@GET
-	@Path("/getOrderAccId/{accId}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getOrderAccId(@PathParam("accId") Integer id) {		
-		Gson son = new Gson();
-		List<Orders> listOrder = new OrderDAOImpl().getOrderAccId(id);
-		List<OrdersDTO> listOrderDTO = new ArrayList<OrdersDTO>();
-		for (Orders order : listOrder) {
-			OrdersDTO orderDTO = new OrdersDTO(order.getOrderId(), order.getObjAccountOfOrder().getAccId(),
-					order.getFullName(), order.getAddress(), order.getPhone(), order.getNote(), order.getTotalPrice(),
-					order.getStatus(), order.getCreatedAt(), order.getUpdatedAt());
-			listOrderDTO.add(orderDTO);
-		}
-		String data = son.toJson(listOrderDTO);
-		return data;
 	}
 }

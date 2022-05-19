@@ -33,7 +33,7 @@
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<c:if test="${not empty login}">
 					<div class="alert alert-danger" role="alert">
-						<span class="text-danger text-dark">${login}</span>
+						<span class="text-dark">${login}</span>
 					</div>
 				</c:if>
 				<div class="form-group">

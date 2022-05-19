@@ -35,8 +35,8 @@ public class CategoryControllerAdmin {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sf, false));
 	}
 	
-	public List<CategoriesDTO> getCategories(Gson gson,Client client){
-		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/categoryService/getList");
+	public List<CategoriesDTO> getCategories(Client client, Gson gson, Integer status){
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/categoryService/getList/" + status);
 		String data = webResource.get(String.class);	
 		GenericType<List<CategoriesDTO>> listtype = new GenericType<List<CategoriesDTO>>() {};
 		List<CategoriesDTO> list = gson.fromJson(data, listtype.getType());
@@ -47,33 +47,27 @@ public class CategoryControllerAdmin {
 	public String categoryManagement(Model model) {
 		Client client = Client.create();
 		Gson gson = new Gson();
-		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/categoryService/getList");
-		String data = webResource.get(String.class);	
-		GenericType<List<CategoriesDTO>> listtype = new GenericType<List<CategoriesDTO>>() {};
-		List<CategoriesDTO> list = gson.fromJson(data, listtype.getType());
+		Integer status = 0;
 		
 		CategoriesDTO category = new CategoriesDTO();
 
 		model.addAttribute("category", category);
-		model.addAttribute("list", list);
+		model.addAttribute("list", getCategories(client, gson, status));
 		return "admin/pages/category/categoryManagement";
 	}
 
 	@RequestMapping(value = { "/createCategory" })
-	private String createCategory(@Valid @ModelAttribute("category") CategoriesDTO categoriesDTO, BindingResult result, RedirectAttributes redirAttrs ,
-			Model model) {
-		Gson gson = new Gson();
+	private String createCategory(@Valid @ModelAttribute("category") CategoriesDTO categoriesDTO, BindingResult result, RedirectAttributes redirAttrs, Model model) {
 		Client client = Client.create();
+		Gson gson = new Gson();
+		Integer status = 0;
+		
 		if (result.hasErrors()) {			
-			WebResource webResource = client.resource("http://localhost:8080/WebService/rest/categoryService/getList");
-			String data = webResource.get(String.class);
-			GenericType<List<CategoriesDTO>> listtype = new GenericType<List<CategoriesDTO>>() {};
-			List<CategoriesDTO> list = gson.fromJson(data, listtype.getType());
-			model.addAttribute("list", list);
+			model.addAttribute("list", getCategories(client, gson, status));
 			return "admin/pages/category/categoryManagement";
 		} else {			
 			boolean checkname = true;
-			List<CategoriesDTO> categoriesDTOs = getCategories(gson,client);
+			List<CategoriesDTO> categoriesDTOs = getCategories(client, gson, status);
 			for (CategoriesDTO categoriesDTO2 : categoriesDTOs) {			
 				if(categoriesDTO2.getName().equals(categoriesDTO.getName())) {
 					checkname = false;
@@ -136,7 +130,8 @@ public class CategoryControllerAdmin {
 				}
 			}else {
 				boolean checkname = true;
-				List<CategoriesDTO> categoriesDTOs = getCategories(gson,client);
+				Integer status = 0;
+				List<CategoriesDTO> categoriesDTOs = getCategories(client, gson, status);
 				for (CategoriesDTO categoriesDTO2 : categoriesDTOs) {
 					if(categoriesDTO2.getName().equals(categoriesDTO.getName())) {
 						checkname = false;

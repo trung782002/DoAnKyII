@@ -55,15 +55,15 @@ public class AccountService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String checkUnique(@PathParam("email") String email) {
 		Gson son = new Gson();
+		AccountsDTO accountsDTO = null;
+		
 		List<Accounts> listAccount = new AccountDAOImpl().getEmail(email);
-		List<AccountsDTO> listAccountDTO = new ArrayList<AccountsDTO>();
 		for (Accounts account : listAccount) {
-			AccountsDTO accountDTO = new AccountsDTO(account.getAccId(), account.getEmail(), account.getFullName(),
+			accountsDTO = new AccountsDTO(account.getAccId(), account.getEmail(), account.getFullName(),
 					account.getPhone(), account.getAddress(), account.getPassword(), account.isStatus(),
 					account.getCreatedAt());
-			listAccountDTO.add(accountDTO);
 		}
-		String Data = son.toJson(listAccountDTO);
+		String Data = son.toJson(accountsDTO);
 		return Data;
 	}
 

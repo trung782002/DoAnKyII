@@ -5,10 +5,8 @@ import java.util.List;
 import bkap.entities.Orders;
 
 public interface OrderDAO {
-	public List<Orders> getList();
-	
-	public List<Orders> getOrderAccId(Integer accId);
-	
+	public List<Orders> getList(Integer accId,Integer status);
+		
 	public Orders getById(Integer id);
 	
 	public Orders insert(Orders order);

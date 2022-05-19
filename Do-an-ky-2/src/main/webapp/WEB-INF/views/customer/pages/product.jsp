@@ -58,8 +58,6 @@
 										alt="Second slide" />
 								</div>
 							</c:forEach>
-
-
 						</div>
 					</div>
 				</div>
