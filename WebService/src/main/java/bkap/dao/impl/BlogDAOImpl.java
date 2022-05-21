@@ -9,9 +9,9 @@ import bkap.entities.Blogs;
 import bkap.util.HibernateUtil;
 
 public class BlogDAOImpl implements BlogDAO{
-
+	
 	@Override
-	public List<Blogs> getList(Integer status) {
+	public List<Blogs> getAll(Integer status) {
 		String query;
 		if(status == 0)
 			query = "from Blogs order by Id desc";
@@ -20,7 +20,27 @@ public class BlogDAOImpl implements BlogDAO{
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			List list = session.createQuery(query).list();
+			List list = session.createQuery(query).list();;
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Blogs> getList(Integer status, Integer page) {
+		String query;
+		if(status == 0)
+			query = "from Blogs order by Id desc";
+		else 
+			query = "from Blogs where Status = " + status + "order by Id desc";
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			List list = session.createQuery(query).setFirstResult((page-1)*6).setMaxResults(6).list();;
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();

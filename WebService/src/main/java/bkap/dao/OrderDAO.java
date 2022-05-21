@@ -1,5 +1,6 @@
 package bkap.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import bkap.entities.Orders;
@@ -13,4 +14,7 @@ public interface OrderDAO {
 	
 	public boolean update(Orders order);
 	
+	public List<Orders> getListStatus(Integer status);
+	
+	public List<Orders> getListCreateDate(Date createedAt);
 }

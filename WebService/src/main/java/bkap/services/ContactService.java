@@ -1,11 +1,13 @@
 package bkap.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -26,7 +28,7 @@ public class ContactService {
 		String data = son.toJson(list);
 		return data;
 	}
-	
+
 	@POST
 	@Path("/insert")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -38,14 +40,35 @@ public class ContactService {
 		return data;
 	}
 
-	@PUT
-	@Path("/update")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public String update(String jsonContact) {
+	@GET
+	@Path("/getById/{Id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getCustomerById(@PathParam("Id") Integer Id) {
+		Contacts contact = new ContactDAOImpl().getById(Id);
+		
 		Gson son = new Gson();
-		Contacts objContact = son.fromJson(jsonContact, Contacts.class);
-		boolean bl = new ContactDAOImpl().update(objContact);
+		String data = son.toJson(contact);
+		return data;
+	}
+
+	@DELETE
+	@Path("/delete/{Id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String deleteCustomer(@PathParam("Id") Integer id) {
+		boolean bl = new ContactDAOImpl().delete(id);
+		Gson son = new Gson();
 		String data = son.toJson(bl);
+		return data;
+	}
+
+	@GET
+	@Path("/getByName/{Fullname}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getCitiesByCountryName(@PathParam("Fullname") String Fullname) {
+		List<Contacts> list = new ContactDAOImpl().searchByName(Fullname);
+		Gson son = new Gson();
+		
+		String data = son.toJson(list);
 		return data;
 	}
 }

@@ -68,7 +68,7 @@ public class CartControllerCustomer {
 		
 		if(session.getAttribute("accId") != null) {
 			Integer accId = (Integer) session.getAttribute("accId");
-			WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getList");
+			WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getListAll");
 			String data = webResource.get(String.class);
 			GenericType<List<ProductsDTO>> listtype = new GenericType<List<ProductsDTO>>() {};
 			List<ProductsDTO> products = gson.fromJson(data, listtype.getType());
@@ -135,17 +135,19 @@ public class CartControllerCustomer {
 		Client client = Client.create();
 		Gson gson = new Gson();
 		List<Integer> listCartId = new ArrayList<Integer>();
+		List<Integer> listCartId1 = new ArrayList<Integer>();
 		for (int i = 0; i < cartId.length; i++) {
 			for (int j = 0; j < quantity.length; j++) {
-				if(i == j) {
-					if(quantity[j] <= 0) {
+				if(i == j){
+					CartsDTO cartsDTO = getById(client, gson, cartId[i]);
+					ProductsDTO dto = getByIdProduct(client, gson, cartsDTO.getProId());
+					if(dto.getStatus() == 3 || dto.getStatus() == 2) {
+						listCartId1.add(cartId[i]);
+						redirAttrs.addFlashAttribute("statusProduct", "Product does not exist");
+					}else if (quantity[j] <= 0) {
 						WebResource webResource1 = client.resource("http://localhost:8080/WebService/rest/cartService/delete/"+cartId[i]);
 						String data1 = webResource1.type("application/json").delete(String.class);
-					    boolean bl = gson.fromJson(data1,boolean.class);
-					}else {												
-						CartsDTO cartsDTO = getById(client, gson, cartId[i]);						
-						ProductsDTO dto = getByIdProduct(client, gson, cartsDTO.getProId());
-						
+					}else{												
 						if(quantity[j] > dto.getQuantity()) {
 							listCartId.add(cartId[i]);
  						    redirAttrs.addFlashAttribute("quantity", "There are only");
@@ -162,6 +164,7 @@ public class CartControllerCustomer {
 			} 			
 		}
 		redirAttrs.addFlashAttribute("listCartIds",listCartId);
+		redirAttrs.addFlashAttribute("listCartId1",listCartId1);
 		return "redirect:/listCart";
 	}
 	

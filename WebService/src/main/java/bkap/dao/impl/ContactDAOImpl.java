@@ -6,6 +6,7 @@ import org.hibernate.Session;
 
 import bkap.dao.ContactDAO;
 import bkap.entities.Contacts;
+import bkap.entities.Orders;
 import bkap.util.HibernateUtil;
 
 public class ContactDAOImpl implements ContactDAO {
@@ -41,20 +42,59 @@ public class ContactDAOImpl implements ContactDAO {
 		return false;
 	}
 
+
 	@Override
-	public boolean update(Contacts contact) {
+	public Contacts getById(Integer id) {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			session.beginTransaction();
-			session.update(contact);
-			session.getTransaction().commit();
-			return true;
-		} catch (Exception e){
+			Contacts contact = session.get(Contacts.class, id);
+			return contact;
+		} catch (Exception e) {
 			e.printStackTrace();
-			session.getTransaction().rollback();
 		} finally {
 			session.close();
 		}
+		return null;
+	}
+
+	@Override
+	public boolean delete(Integer id) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			session.beginTransaction();
+			session.delete(getById(id));
+			session.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			session.getTransaction().commit();
+		}finally {
+			session.close();
+		}
 		return false;
+	}
+
+	@Override
+	public List<Contacts> searchByName(String fullName) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			if (fullName == null || fullName.length() == 0) {
+				fullName = "%";
+			} else {
+				fullName = "%" + fullName + "%";
+			}
+			List list = session.createQuery("from Contacts where FullName like :fullName ").setParameter("fullName", fullName).list();
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
 	}
 }

@@ -11,6 +11,21 @@ import bkap.util.HibernateUtil;
 public class ProductDAOImpl implements ProductDAO {
 
 	@Override
+	public List<Products> getListAll() {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			List list = session.createQuery("from Products ORDER BY ProId DESC").list();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+	
+	@Override
 	public List<Products> getList() {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -51,6 +66,26 @@ public class ProductDAOImpl implements ProductDAO {
 				name = "%" + name + "%";
 			}
 			List list = session.createQuery("from Products where Status != 3 and Name like :name ORDER BY ProId DESC").setParameter("name", name).list();
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+	
+	public List<Products> searchByNameCustomer(String name) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			if (name == null || name.length() == 0) {
+				name = "%";
+			} else {
+				name = "%" + name + "%";
+			}
+			List list = session.createQuery("from Products where Status = 1 and Name like :name ORDER BY ProId DESC").setParameter("name", name).list();
 			return list;
 		} catch (Exception e) {
 			// TODO: handle exception

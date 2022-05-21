@@ -92,14 +92,6 @@
 					</a>
 				</li>
 				
-				<!-- Review -->
-				<li class="nav-item">
-					<a href="reviewManagement" class="nav-link ">
-						<span class="pcoded-micon"><i class="fas fa-star"></i></span>
-						<span class="pcoded-mtext">Review Management</span>
-					</a>
-				</li>
-				
 				<!-- Contact -->
 				<li class="nav-item">
 					<a href="contactManagement" class="nav-link ">

@@ -77,4 +77,38 @@ public class OrderService {
 		return Data;
 
 	}
+	
+	@GET
+	@Path("/getByName/{fullName}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getCustomerByName(@PathParam("customerName") String customerName) {
+		List<Orders> customerByName = new OrderDAOImpl().searchByName(customerName);
+		Gson son = new Gson();
+		List<OrdersDTO> listData = new ArrayList<OrdersDTO>();
+		for (Orders order : customerByName) {
+			OrdersDTO orderDTO = new OrdersDTO(order.getOrderId(), order.getObjAccountOfOrder().getAccId(),
+					order.getFullName(), order.getAddress(), order.getPhone(), order.getNote(), order.getTotalPrice(),
+					order.getStatus(), order.getCreatedAt(), order.getUpdatedAt());
+			listData.add(orderDTO);
+		}
+		String data = son.toJson(listData);
+		return data;
+	}
+	
+	@GET
+	@Path("/getList")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getList() {
+		List<Orders> listOrder = new OrderDAOImpl().getList();
+		Gson son = new Gson();
+		List<OrdersDTO> listOrderDTO = new ArrayList<OrdersDTO>();
+		for (Orders order : listOrder) {
+			OrdersDTO orderDTO = new OrdersDTO(order.getOrderId(), order.getObjAccountOfOrder().getAccId(),
+					order.getFullName(), order.getAddress(), order.getPhone(), order.getNote(), order.getTotalPrice(),
+					order.getStatus(), order.getCreatedAt(), order.getUpdatedAt());
+			listOrderDTO.add(orderDTO);
+		}
+		String data = son.toJson(listOrderDTO);
+		return data;
+	}
 }

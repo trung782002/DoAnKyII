@@ -4,7 +4,9 @@ import java.util.List;
 import bkap.entities.Blogs;
 
 public interface BlogDAO {
-	public List<Blogs> getList(Integer status);
+	public List<Blogs> getAll(Integer status);
+	
+	public List<Blogs> getList(Integer status, Integer page);
 	
 	public List<Blogs> searchByName(String name);
 	

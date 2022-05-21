@@ -80,4 +80,63 @@ public class OrderDetailService {
 		return data;
 	}
 
+	@GET
+	@Path("/getListStatus/{status}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String getListStatus(@PathParam("status") Integer status) {
+		Gson son = new Gson();
+		List<Orders> listOrder = new OrderDAOImpl().getListStatus(status);
+		List<OrderDetailsDTO> listOrderDetailDTO = new ArrayList<OrderDetailsDTO>();
+		for (Orders order : listOrder) {
+			List<OrderDetails> listOrderDetail = new OrderDetailDAOImpl().getByOrder(order.getOrderId());
+			for (OrderDetails orderDetail : listOrderDetail) {
+				OrderDetailsDTO orderDetailDTO = new OrderDetailsDTO(orderDetail.getId(),
+						orderDetail.getObjOrderOfOrderDetail().getOrderId(),
+						orderDetail.getObjProductOfOrderDetail().getProId(), orderDetail.getQuantity(),
+						orderDetail.getPrice());
+				listOrderDetailDTO.add(orderDetailDTO);
+			}
+		}
+		String data = son.toJson(listOrderDetailDTO);
+		return data;
+	}
+	
+	@GET
+	@Path("/getListCreatedAt/{createdAt}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String getListCreatedAt(@PathParam("createdAt") java.sql.Date createdAt) {
+		Gson son = new Gson();
+		List<Orders> listOrder = new OrderDAOImpl().getListCreateDate(createdAt);
+		List<OrderDetailsDTO> listOrderDetailDTO = new ArrayList<OrderDetailsDTO>();
+		for (Orders order : listOrder) {
+			List<OrderDetails> listOrderDetail = new OrderDetailDAOImpl().getByOrder(order.getOrderId());
+			for (OrderDetails orderDetail : listOrderDetail) {
+				OrderDetailsDTO orderDetailDTO = new OrderDetailsDTO(orderDetail.getId(),
+						orderDetail.getObjOrderOfOrderDetail().getOrderId(),
+						orderDetail.getObjProductOfOrderDetail().getProId(), orderDetail.getQuantity(),
+						orderDetail.getPrice());
+				listOrderDetailDTO.add(orderDetailDTO);
+			}
+		}
+		String data = son.toJson(listOrderDetailDTO);
+		return data;
+	}
+	
+	@GET
+	@Path("/getList")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String getList() {
+		List<OrderDetails> listOrderDetail = new OrderDetailDAOImpl().getByOrderId(null);
+		Gson son = new Gson();
+		List<OrderDetailsDTO> listOrderDetailDTO = new ArrayList<OrderDetailsDTO>();
+		for (OrderDetails orderDetail : listOrderDetail) {
+			OrderDetailsDTO orderDetailDTO = new OrderDetailsDTO(orderDetail.getId(),
+					orderDetail.getObjOrderOfOrderDetail().getOrderId(),
+					orderDetail.getObjProductOfOrderDetail().getProId(), orderDetail.getQuantity(),
+					orderDetail.getPrice());
+			listOrderDetailDTO.add(orderDetailDTO);
+		}
+		String data = son.toJson(listOrderDetailDTO);
+		return data;
+	}
 }

@@ -20,7 +20,6 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
-import bkap.entities.CartsDTO;
 import bkap.entities.ConfigsDTO;
 import bkap.entities.OrderDetailsDTO;
 import bkap.entities.OrdersDTO;
@@ -32,6 +31,13 @@ public class PurchaseControllerCustomer {
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sf, false));
+	}
+	
+	public ConfigsDTO getConfig(Client client, Gson gson) {
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/configService/getConfig"); 
+		String res = webResource.get(String.class); 
+		ConfigsDTO config = gson.fromJson(res,ConfigsDTO.class);
+		return config;
 	}
 	
 	public List<OrderDetailsDTO> getOrderDetail(Client client, Gson gson,Integer accId,Integer status) {
@@ -65,7 +71,7 @@ public class PurchaseControllerCustomer {
 	}
 	
 	public List<ProductsDTO> getProducts(Client client, Gson gson) {
-		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getList");
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getListAll");
 		String data = webResource.get(String.class);
 		GenericType<List<ProductsDTO>> listtype = new GenericType<List<ProductsDTO>>() {};
 		List<ProductsDTO> products = gson.fromJson(data, listtype.getType());
@@ -107,6 +113,7 @@ public class PurchaseControllerCustomer {
 			model.addAttribute("OrderDetailStatus_3", OrderDetailStatus_3);
 			model.addAttribute("OrderDetailStatus_0", OrderDetailStatus_0);
 			model.addAttribute("products", productsDTOs);
+			model.addAttribute("config", getConfig(client, gson));
 			return "customer/pages/theOrder";			
 		}else {
 			return "redirect:/login";

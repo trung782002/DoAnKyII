@@ -75,7 +75,7 @@ public class AccountService {
 		AccountsDTO accountDTO = son.fromJson(jsonAccount, AccountsDTO.class);
 		Accounts account = new Accounts(0, accountDTO.getEmail(), accountDTO.getFullName(), accountDTO.getPhone(),
 				accountDTO.getAddress(), accountDTO.getPassword(), accountDTO.isStatus(), accountDTO.getCreatedAt(),
-				null, null, null, null);
+				null, null, null);
 		boolean bl = new AccountDAOImpl().insert(account);
 		String data = son.toJson(bl);
 		return data;
@@ -89,7 +89,7 @@ public class AccountService {
 		AccountsDTO accountDTO = son.fromJson(jsonAccount, AccountsDTO.class);
 		Accounts account = new Accounts(accountDTO.getAccId(), accountDTO.getEmail(), accountDTO.getFullName(), accountDTO.getPhone(),
 				accountDTO.getAddress(), accountDTO.getPassword(), accountDTO.isStatus(), accountDTO.getCreatedAt(),
-				null, null, null, null);
+				null, null, null);
 		boolean bl = new AccountDAOImpl().update(account);
 		String data = son.toJson(bl);
 		return data;

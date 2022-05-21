@@ -26,17 +26,31 @@ public class BlogControllerCustomer {
 	}
 	
 	@RequestMapping(value = "/blog")
-	public String listBlogs(Model model) {
+	public String listBlogs(Model model, @RequestParam(value = "page", required = false) Integer page) {
 		Client client = Client.create();
 		Gson gson = new Gson();
 		Integer status = 1;
+		page = page == null ? 1 : page;
 		
-		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/blogService/getList/" + status);
+		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/blogService/getList/" + status + "/" + page);
 		String data = webResource.get(String.class);
 		GenericType<List<BlogsDTO>> listType = new GenericType<List<BlogsDTO>>() {};
 		List<BlogsDTO> listBlogs = gson.fromJson(data, listType.getType());
-		model.addAttribute("listBlogs", listBlogs);
 		
+		webResource = client.resource("http://localhost:8080/WebService/rest/blogService/getAll/" + status);
+		data = webResource.get(String.class);
+		listType = new GenericType<List<BlogsDTO>>() {};
+		List<BlogsDTO> listAllBlogs = gson.fromJson(data, listType.getType());
+		
+		Integer countPage = listAllBlogs.size();
+		Integer totalPage = countPage / 6;
+        if (countPage % 6 != 0) {
+        	totalPage++;
+        }
+        
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("page", page);
+		model.addAttribute("listBlogs", listBlogs);
 		model.addAttribute("config", getConfig(client, gson));
 		
 		return "customer/pages/blogs/blog";

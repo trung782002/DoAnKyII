@@ -23,74 +23,26 @@
 </section>
 <!--================End Home Banner Area =================-->
 
-<!-- Button trigger modal -->
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <!-- Start feature Area -->
 <section class="feature-area section_gap_bottom_custom">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-3 col-md-6">
-				<div class="single-feature">
-					<a href="#" class="title"> <i class="flaticon-money"></i>
-						<h3>Money back gurantee</h3>
-					</a>
-					<p>Shall open divide a one</p>
+			<c:forEach items="${listBrands}" var="brand">
+				<div class="col-lg-3 col-md-6">
+					<div class="single-feature p-0">
+						<a href="brand?brandId=${brand.brandId}">
+							<img class="card-img" src="<c:url value="resources"/>/image/${brand.imageUrl}"/>
+						</a>
+					</div>
 				</div>
-			</div>
-
-			<div class="col-lg-3 col-md-6">
-				<div class="single-feature">
-					<a href="#" class="title"> <i class="flaticon-truck"></i>
-						<h3>Free Delivery</h3>
-					</a>
-					<p>Shall open divide a one</p>
-				</div>
-			</div>
-
-			<div class="col-lg-3 col-md-6">
-				<div class="single-feature">
-					<a href="#" class="title"> <i class="flaticon-support"></i>
-						<h3>Alway support</h3>
-					</a>
-					<p>Shall open divide a one</p>
-				</div>
-			</div>
-
-			<div class="col-lg-3 col-md-6">
-				<div class="single-feature">
-					<a href="#" class="title"> <i class="flaticon-blockchain"></i>
-						<h3>Secure payment</h3>
-					</a>
-					<p>Shall open divide a one</p>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 </section>
 <!-- End feature Area -->
 
 <!--================ Feature Product Area =================-->
-<section class="feature_product_area section_gap_bottom_custom">
+<%-- <section class="feature_product_area section_gap_bottom_custom">
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-12">
@@ -118,7 +70,7 @@
 					</div>
 					<div class="product-btm">
 						<a href="#" class="d-block">
-							<h4>Latest menâ€™s sneaker</h4>
+							<h4>Latest mena€™s sneaker</h4>
 						</a>
 						<div class="mt-3">
 							<span class="mr-4">$25.00</span>
@@ -177,28 +129,11 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> --%>
 <!--================ End Feature Product Area =================-->
 
-<!--================ Offer Area =================-->
-<section class="offer_area">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="offset-lg-4 col-lg-6 text-center">
-				<div class="offer_content">
-					<h3 class="text-uppercase mb-40">all menâ€™s collection</h3>
-					<h2 class="text-uppercase">50% off</h2>
-					<a href="#" class="main_btn mb-20 mt-5">Discover Now</a>
-					<p>Limited Time Offer</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!--================ End Offer Area =================-->
-
 <!--================ New Product Area =================-->
-<section
+<%-- <section
 	class="new_product_area section_gap_top section_gap_bottom_custom">
 	<div class="container">
 		<div class="row justify-content-center">
@@ -327,7 +262,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> --%>
 <!--================ End New Product Area =================-->
 
 <!--================ Inspired Product Area =================-->
@@ -337,7 +272,7 @@
 			<div class="col-lg-12">
 				<div class="main_title">
 					<h2>
-						<span>Inspired products</span>
+						<span>Hot products</span>
 					</h2>
 					<p>Bring called seed first of third give itself now ment</p>
 				</div>
@@ -400,13 +335,29 @@
 						<div class="meta-top d-flex">
 							<span>${blog.createdAt}</span>
 						</div>
-						<a class="d-block" href="blogDetail?blogId=${blog.id}">
-							<h4>${blog.name}</h4>
-						</a>
-						<div class="text-wrap">
-							<p>${blog.title}</p>
-						</div>
-						<a href="#" class="blog_btn">Learn More <span
+						<c:if test="${blog.name.length() > 60}">
+							<a class="d-block" href="blogDetail?blogId=${blog.id}">
+								<h4>${blog.name.subSequence(0, 60)} ...</h4>
+							</a>
+						</c:if>
+						<c:if test="${blog.name.length() < 60}">
+							<a class="d-block" href="blogDetail?blogId=${blog.id}">
+								<h4>${blog.name}</h4>
+							</a>
+						</c:if>
+						
+						<c:if test="${blog.name.length() > 150}">
+							<div class="text-wrap">
+								<p>${blog.title.subSequence(0, 150)} ...</p>
+							</div>
+						</c:if>
+						<c:if test="${blog.name.length() < 150}">
+							<div class="text-wrap">
+								<p>${blog.title}</p>
+							</div>
+						</c:if>
+						
+						<a href="blogDetail?blogId=${blog.id}" class="blog_btn">Learn More <span
 							class="ml-2 ti-arrow-right"></span></a>
 					</div>
 				</div>

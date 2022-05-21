@@ -5,6 +5,7 @@ import java.util.List;
 import bkap.entities.Products;
 
 public interface ProductDAO {
+	public List<Products> getListAll();
 	
 	public List<Products> getList();
 	

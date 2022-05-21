@@ -50,28 +50,28 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="<c:url value="assets"/>/customer/js/jquery-3.2.1.min.js"></script>
-<script src="<c:url value="assets"/>/customer/js/popper.js"></script>
-<script src="<c:url value="assets"/>/customer/js/bootstrap.min.js"></script>
-<script src="<c:url value="assets"/>/customer/js/stellar.js"></script>
+<script src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/js/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/js/popper.js"></script>
+<script src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/js/stellar.js"></script>
 <script
-	src="<c:url value="assets"/>/customer/vendors/lightbox/simpleLightbox.min.js"></script>
+	src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/vendors/lightbox/simpleLightbox.min.js"></script>
 <script
-	src="<c:url value="assets"/>/customer/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+	src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/vendors/nice-select/js/jquery.nice-select.min.js"></script>
 <script
-	src="<c:url value="assets"/>/customer/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+	src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/vendors/isotope/imagesloaded.pkgd.min.js"></script>
 <script
-	src="<c:url value="assets"/>/customer/vendors/isotope/isotope-min.js"></script>
+	src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/vendors/isotope/isotope-min.js"></script>
 <script
-	src="<c:url value="assets"/>/customer/vendors/owl-carousel/owl.carousel.min.js"></script>
+	src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/vendors/owl-carousel/owl.carousel.min.js"></script>
 <script
-	src="<c:url value="assets"/>/customer/js/jquery.ajaxchimp.min.js"></script>
+	src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/js/jquery.ajaxchimp.min.js"></script>
 <script
-	src="<c:url value="assets"/>/customer/vendors/counter-up/jquery.waypoints.min.js"></script>
+	src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/vendors/counter-up/jquery.waypoints.min.js"></script>
 <script
-	src="<c:url value="assets"/>/customer/vendors/counter-up/jquery.counterup.js"></script>
-<script src="<c:url value="assets"/>/customer/js/mail-script.js"></script>
-<script src="<c:url value="assets"/>/customer/js/theme.js"></script>
+	src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/vendors/counter-up/jquery.counterup.js"></script>
+<script src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/js/mail-script.js"></script>
+<script src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/js/theme.js"></script>
 <!-- <script type="text/javascript">
 	$('#exampleModal').modal('show')
 </script> -->

@@ -17,6 +17,7 @@ import com.sun.jersey.api.client.WebResource;
 
 import bkap.entities.AccountsDTO;
 import bkap.entities.BlogsDTO;
+import bkap.entities.BrandsDTO;
 import bkap.entities.ConfigsDTO;
 import bkap.entities.ProductsDTO;
 
@@ -53,18 +54,24 @@ public class HomeControllerCustomer {
 			session.setAttribute("accAddress", account.getAddress());
 		}
 		
-		webResource = client.resource("http://localhost:8080/WebService/rest/productService/getListStatus");
+		webResource = client.resource("http://localhost:8080/WebService/rest/brandService/getList");
 		String data = webResource.get(String.class);
+		GenericType<List<BrandsDTO>> listBrandType = new GenericType<List<BrandsDTO>>() {};
+		List<BrandsDTO> listBrands = gson.fromJson(data, listBrandType.getType());
+		
+		webResource = client.resource("http://localhost:8080/WebService/rest/productService/getListStatus");
+		data = webResource.get(String.class);
 		GenericType<List<ProductsDTO>> listProductType = new GenericType<List<ProductsDTO>>() {};
 		List<ProductsDTO> listProducts = gson.fromJson(data, listProductType.getType());
-        model.addAttribute("listProducts", listProducts);
         
-		webResource = client.resource("http://localhost:8080/WebService/rest/blogService/getList/" + status);
+		webResource = client.resource("http://localhost:8080/WebService/rest/blogService/getList/" + status + "/" + 1);
 		data = webResource.get(String.class);
 		GenericType<List<BlogsDTO>> listType = new GenericType<List<BlogsDTO>>() {};
 		List<BlogsDTO> listBlogs = gson.fromJson(data, listType.getType());
-		model.addAttribute("listBlogs", listBlogs);
 		
+		model.addAttribute("listBrands", listBrands);
+		model.addAttribute("listProducts", listProducts);
+		model.addAttribute("listBlogs", listBlogs);
 		model.addAttribute("config", getConfig(client, gson));
         
 		return "customer/pages/index";

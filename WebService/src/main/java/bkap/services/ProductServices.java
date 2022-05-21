@@ -2,6 +2,7 @@ package bkap.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
@@ -21,6 +22,23 @@ import bkap.entities.dto.ProductsDTO;
 
 @Path("/productService/")
 public class ProductServices {
+	@GET
+	@Path("/getListAll")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getListProductAll() {
+		List<Products> listProduct = new ProductDAOImpl().getListAll();
+		Gson son = new Gson();
+		List<ProductsDTO> listData = new ArrayList<ProductsDTO>();
+		for (Products pr : listProduct) {
+			ProductsDTO prDTO = new ProductsDTO(pr.getProId(), pr.getName(), pr.getImageUrl(), pr.getPrice(), pr.getDiscount(),
+					pr.getObjCategoryOfProduct().getCateId(), pr.getObjBrandOfProduct().getBrandId(),
+					pr.getShortDescription(), pr.getDescription(), pr.getQuantity(), pr.getStatus(), pr.getCreatedAt());
+			listData.add(prDTO);
+		}
+		String data = son.toJson(listData);
+		return data;
+	}
+	
 	@GET
 	@Path("/getList")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -70,10 +88,29 @@ public class ProductServices {
 	}
 
 	@GET
-	@Path("/searchByName/{Name}")
+	@Path("/searchByName/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String searchByName(@PathParam("Name") String name) {
+	public String searchByName(@PathParam("name") String name) {
+
 		List<Products> listProduct = new ProductDAOImpl().searchByName(name);
+		Gson son = new Gson();
+		List<ProductsDTO> listData = new ArrayList<ProductsDTO>();
+		for (Products pr : listProduct) {
+			ProductsDTO prDTO = new ProductsDTO(pr.getProId(), pr.getName(), pr.getImageUrl(), pr.getPrice(), pr.getDiscount(),
+					pr.getObjCategoryOfProduct().getCateId(), pr.getObjBrandOfProduct().getBrandId(),
+					pr.getShortDescription(), pr.getDescription(), pr.getQuantity(), pr.getStatus(), pr.getCreatedAt());
+			listData.add(prDTO);
+		}
+		String data = son.toJson(listData);
+		return data;
+	}
+	
+	@GET
+	@Path("/searchByNameCustomer/{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String searchByNameCustomer(@PathParam("name") String name) {
+
+		List<Products> listProduct = new ProductDAOImpl().searchByNameCustomer(name);
 		Gson son = new Gson();
 		List<ProductsDTO> listData = new ArrayList<ProductsDTO>();
 		for (Products pr : listProduct) {
@@ -99,7 +136,7 @@ public class ProductServices {
 		objBrand.setBrandId(objDTO.getBrandId());
 		Products objProduct = new Products(0, objDTO.getName(), objDTO.getImageUrl(), objDTO.getPrice(),
 				objDTO.getDiscount(), objDTO.getShortDescription(), objDTO.getDescription(), objDTO.getQuantity(),
-				objDTO.getStatus(), objDTO.getCreatedAt(), objCate, objBrand, null, null, null, null);
+				objDTO.getStatus(), objDTO.getCreatedAt(), objCate, objBrand, null, null, null);
 		Products products = new ProductDAOImpl().insert(objProduct);
 		String data = son.toJson(products);
 		return data;
@@ -118,7 +155,7 @@ public class ProductServices {
 		objBrand.setBrandId(objDTO.getBrandId());
 		Products objProduct = new Products(objDTO.getProId(), objDTO.getName(), objDTO.getImageUrl(), objDTO.getPrice(),
 				objDTO.getDiscount(), objDTO.getShortDescription(), objDTO.getDescription(), objDTO.getQuantity(),
-				objDTO.getStatus(), objDTO.getCreatedAt(), objCate, objBrand, null, null, null, null);
+				objDTO.getStatus(), objDTO.getCreatedAt(), objCate, objBrand, null, null, null);
 		boolean bl = new ProductDAOImpl().update(objProduct);
 		String data = son.toJson(bl);
 		return data;

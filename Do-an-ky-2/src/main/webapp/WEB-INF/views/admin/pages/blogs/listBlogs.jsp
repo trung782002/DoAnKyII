@@ -47,8 +47,19 @@
 				<c:forEach items="${listBlogs}" var="blog">
 					<tr>
 						<%-- <th>${blog.id}</th> --%>
-						<td>${blog.name.subSequence(0, 40)} ...</td>
-						<td width="">${blog.title.subSequence(0, 40)} ...</td>
+						<c:if test="${blog.name.length() > 50}">
+							<td>${blog.name.subSequence(0, 50)} ...</td>
+						</c:if>
+						<c:if test="${blog.name.length() < 50}">
+							<td>${blog.name}</td>
+						</c:if>
+						
+						<c:if test="${blog.title.length() > 50}">
+							<td>${blog.title.subSequence(0, 50)} ...</td>
+						</c:if>
+						<c:if test="${blog.title.length() < 50}">
+							<td>${blog.title}</td>
+						</c:if>
 						<td width="20%"><img src="${pageContext.request.contextPath}/<c:url value="assets"/>/customer/img/blog/${blog.mainImageUrl}" class="card-img"></td>
 						<td width="10%" style="color: ${blog.status ? 'green' : 'red'}">${blog.status ? "Show" : "Hidden"}</td>
 						<td width="8%">
@@ -59,6 +70,18 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		
+			
+		
+		<div class="d-flex justify-content-center mt-2">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
+					<c:forEach begin="1" end="${totalPage}" var="i">
+						<li class="page-item"><a class="page-link" href="listBlogs?page=${i}">${i}</a></li>
+					</c:forEach>
+				</ul>
+			</nav>
+		</div>
 	</div>
 </div>
 

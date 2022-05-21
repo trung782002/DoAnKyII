@@ -61,9 +61,6 @@ public class Products {
 	@OneToMany(mappedBy = "objProductOfImage")
 	private Set<Product_images> listProductImages;
 	
-	@OneToMany(mappedBy = "objProductOfReview")
-	private Set<Reviews> listReviews;
-	
 	@OneToMany(mappedBy = "objProductOfCart")
 	private Set<Carts> listCarts;
 	
@@ -77,8 +74,8 @@ public class Products {
 
 	public Products(Integer proId, String name, String imageUrl, Double price, Double discount, String shortDescription,
 			String description, Integer quantity, Integer status, Date createdAt, Categories objCategoryOfProduct,
-			Brands objBrandOfProduct, Set<Product_images> listProductImages, Set<Reviews> listReviews,
-			Set<Carts> listCarts, Set<OrderDetails> listOrderDetails) {
+			Brands objBrandOfProduct, Set<Product_images> listProductImages, Set<Carts> listCarts,
+			Set<OrderDetails> listOrderDetails) {
 		super();
 		this.proId = proId;
 		this.name = name;
@@ -93,7 +90,6 @@ public class Products {
 		this.objCategoryOfProduct = objCategoryOfProduct;
 		this.objBrandOfProduct = objBrandOfProduct;
 		this.listProductImages = listProductImages;
-		this.listReviews = listReviews;
 		this.listCarts = listCarts;
 		this.listOrderDetails = listOrderDetails;
 	}
@@ -200,14 +196,6 @@ public class Products {
 
 	public void setListProductImages(Set<Product_images> listProductImages) {
 		this.listProductImages = listProductImages;
-	}
-
-	public Set<Reviews> getListReviews() {
-		return listReviews;
-	}
-
-	public void setListReviews(Set<Reviews> listReviews) {
-		this.listReviews = listReviews;
 	}
 
 	public Set<Carts> getListCarts() {

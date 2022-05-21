@@ -19,11 +19,22 @@ import bkap.entities.Blogs;
 
 @Path("/blogService/")
 public class BlogService {
+	
 	@GET
-	@Path("/getList/{status}")
+	@Path("/getAll/{status}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getListBlog(@PathParam("status") Integer status) {
-		List<Blogs> listBlog = new BlogDAOImpl().getList(status);
+	public String getAll(@PathParam("status") Integer status) {
+		List<Blogs> listBlog = new BlogDAOImpl().getAll(status);
+		Gson son = new Gson();
+		String data = son.toJson(listBlog);
+		return data;
+	}
+	
+	@GET
+	@Path("/getList/{status}/{page}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getListBlog(@PathParam("status") Integer status, @PathParam("page") Integer page) {
+		List<Blogs> listBlog = new BlogDAOImpl().getList(status, page);
 		Gson son = new Gson();
 		String data = son.toJson(listBlog);
 		return data;

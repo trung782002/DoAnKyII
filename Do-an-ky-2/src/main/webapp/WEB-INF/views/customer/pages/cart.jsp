@@ -30,8 +30,10 @@
 	<section class="cart_area">
 		<div class="container">
 			<div class="cart_inner">
-				<img src="<c:url value="assets"/>/customer/img/empty-cart.png" class="card-img">
-				<h4 class="d-flex justify-content-center mb-5">There are no products in the cart</h4>
+				<img src="<c:url value="assets"/>/customer/img/empty-cart.png"
+					class="card-img">
+				<h4 class="d-flex justify-content-center mb-5">There are no
+					products in the cart</h4>
 				<div class="continue d-flex justify-content-center">
 					<a class="main_btn" href="allCategory">Continue shopping</a>
 				</div>
@@ -58,32 +60,34 @@
 						<tbody>
 							<form method="post" action="updateCart">
 								<c:forEach items="${carts}" var="cart">
-					
+
 									<input type="hidden" name="cartId" value="${cart.cartId}" />
 									<tr>
-										<td>
-											<c:forEach items="${products}" var="product">
+										<td><c:forEach items="${products}" var="product">
 												<c:if test="${product.proId == cart.proId}">
 													<div class="media">
 														<div class="col-5">
-															<a href="productDetail?proId=${cart.proId}"><img width="85%" src="<c:url value="resources"/>/image/${product.imageUrl}"/></a>
+															<a href="productDetail?proId=${cart.proId}"><img
+																width="85%"
+																src="<c:url value="resources"/>/image/${product.imageUrl}" /></a>
 														</div>
 														<div class="media-body">
-															<a class="text-secondary" href="productDetail?proId=${cart.proId}">${product.name}</a>
+															<a class="text-secondary"
+																href="productDetail?proId=${cart.proId}">${product.name}</a>
 														</div>
 													</div>
 												</c:if>
-											</c:forEach>
-										</td>
+											</c:forEach></td>
 										<c:forEach items="${products}" var="product">
 											<c:if test="${product.proId == cart.proId}">
-												<td><h5 class="mr-5">$${product.price - product.discount}</h5></td>
+												<td><h5 class="mr-5">$${product.price -
+														product.discount}</h5></td>
 											</c:if>
 										</c:forEach>
 										<td>
 											<div class="product_count mr-5">
-												<input type="text" name="quantity" id="sst${cart.cartId}" maxlength="12"
-													value="${cart.quantity}" title="Quantity:"
+												<input type="text" name="quantity" id="sst${cart.cartId}"
+													maxlength="12" value="${cart.quantity}" title="Quantity:"
 													class="input-text qty" />
 												<button
 													onclick="var result = document.getElementById('sst${cart.cartId}'); var sst${cart.cartId} = result.value; if( !isNaN( sst${cart.cartId} )) result.value++;return false;"
@@ -95,24 +99,35 @@
 													class="reduced items-count" type="button">
 													<i class="lnr lnr-chevron-down"></i>
 												</button>
-											</div>
-										   <c:forEach items="${listCartIds}" var="listCartId">
-							                 <c:if test="${listCartId == cart.cartId}">
-							                 	<c:forEach items="${products}" var="product">
-								                 	<c:if test="${product.proId == cart.proId}">
-											        	<div class="text-danger mt-1">${quantity} ${product.quantity} quantity remaining for this item</div>
-											     	</c:if>
-										     	</c:forEach>
-										     </c:if>
-									       </c:forEach>
+											</div> <c:forEach items="${listCartIds}" var="listCartId">
+												<c:if test="${listCartId == cart.cartId}">
+													<c:forEach items="${products}" var="product">
+														<c:if test="${product.proId == cart.proId}">
+															<div class="text-danger mt-1">${quantity}
+																${product.quantity} quantity remaining for this item</div>
+														</c:if>
+													</c:forEach>
+												</c:if>
+											</c:forEach> <c:forEach items="${listCartId1}" var="listCartId">
+												<c:if test="${listCartId == cart.cartId}">
+													<c:forEach items="${products}" var="product">
+														<c:if test="${product.proId == cart.proId}">
+															<div class="text-danger mt-1">${statusProduct}</div>
+														</c:if>
+													</c:forEach>
+												</c:if>
+											</c:forEach>
 										</td>
 										<c:forEach items="${products}" var="product">
 											<c:if test="${product.proId == cart.proId}">
 												<td>
 													<div class="d-flex">
-														<h5 class="pt-2 mr-5">$${(product.price - product.discount) * cart.quantity}</h5>
-														<a class="text-secondary" href="deleteCart?cartId=${cart.cartId}"> 
-															<i style="font-size: 24px" class="fa fa-times ml-3 pt-1" aria-hidden="true"></i>
+														<h5 class="pt-2 mr-5">$${(product.price -
+															product.discount) * cart.quantity}</h5>
+														<a class="text-secondary"
+															href="deleteCart?cartId=${cart.cartId}"> <i
+															style="font-size: 24px" class="fa fa-times ml-3 pt-1"
+															aria-hidden="true"></i>
 														</a>
 													</div>
 												</td>
@@ -121,13 +136,16 @@
 									</tr>
 								</c:forEach>
 								<tr>
-									<td><a class="gray_btn main_btn ml-3" href="category">Continue Shopping</a></td>
+									<td><a class="gray_btn main_btn ml-3" href="category">Continue
+											Shopping</a></td>
 									<td colspan="2"></td>
-									<td><input class="gray_btn main_btn" type="submit" value="Update Cart"></td>
+									<td><input class="gray_btn main_btn" type="submit"
+										value="Update Cart"></td>
 								</tr>
 								<tr>
 									<td colspan="2"></td>
-									<td colspan="2" class="text-right"><a href="checkOut" class="main_btn">Proceed to checkout</a></td>
+									<td colspan="2" class="text-right"><a href="checkOut"
+										class="main_btn">Proceed to checkout</a></td>
 								</tr>
 							</form>
 						</tbody>

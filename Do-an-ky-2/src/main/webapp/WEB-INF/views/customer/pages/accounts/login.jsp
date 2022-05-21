@@ -36,6 +36,11 @@
 						<span class="text-dark">${login}</span>
 					</div>
 				</c:if>
+				<c:if test="${not empty loginSuccess}">
+					<div class="alert alert-success" role="alert">
+						<span class="text-dark">${loginSuccess}</span>
+					</div>
+				</c:if>
 				<div class="form-group">
 				    <label>Email address <span class="text-danger">*</span></label>
 				    <input class="form-control" type="text" name="Email" placeholder="Enter your email address">

@@ -43,9 +43,6 @@ public class Accounts {
 	@OneToMany(mappedBy = "objAccountOfAccountRole")
 	private Set<Account_Roles> listAccountRoles;
 	
-	@OneToMany(mappedBy = "objAccountOfReview")
-	private Set<Reviews> listReviews;
-	
 	@OneToMany(mappedBy = "objAccountOfCart")
 	private Set<Carts> listCarts;
 	
@@ -57,8 +54,8 @@ public class Accounts {
 	}
 
 	public Accounts(Integer accId, String email, String fullName, String phone, String address, String password,
-			boolean status, Date createdAt, Set<Account_Roles> listAccountRoles, Set<Reviews> listReviews,
-			Set<Carts> listCarts, Set<Orders> listOrders) {
+			boolean status, Date createdAt, Set<Account_Roles> listAccountRoles, Set<Carts> listCarts,
+			Set<Orders> listOrders) {
 		super();
 		this.accId = accId;
 		this.email = email;
@@ -69,7 +66,6 @@ public class Accounts {
 		this.status = status;
 		this.createdAt = createdAt;
 		this.listAccountRoles = listAccountRoles;
-		this.listReviews = listReviews;
 		this.listCarts = listCarts;
 		this.listOrders = listOrders;
 	}
@@ -144,14 +140,6 @@ public class Accounts {
 
 	public void setListAccountRoles(Set<Account_Roles> listAccountRoles) {
 		this.listAccountRoles = listAccountRoles;
-	}
-
-	public Set<Reviews> getListReviews() {
-		return listReviews;
-	}
-
-	public void setListReviews(Set<Reviews> listReviews) {
-		this.listReviews = listReviews;
 	}
 
 	public Set<Carts> getListCarts() {

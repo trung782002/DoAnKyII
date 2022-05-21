@@ -93,18 +93,6 @@ CREATE TABLE Configs (
 )
 
 GO
-CREATE TABLE Reviews (
-	Id INT PRIMARY KEY IDENTITY(1,1),
-	AccId INT FOREIGN KEY REFERENCES Accounts(AccId),
-	ProId INT FOREIGN KEY REFERENCES Products(ProId),
-	ProductQuality INT NOT NULL,
-	ContentRated NTEXT NOT NULL,
-	Reply NTEXT NULL,
-	Status BIT DEFAULT 1,
-	CreatedAt DATETIME DEFAULT GETDATE()
-)
-
-GO
 CREATE TABLE Carts (
 	CartId INT PRIMARY KEY IDENTITY(1,1),
 	AccId INT FOREIGN KEY REFERENCES Accounts(AccId),
@@ -122,8 +110,8 @@ CREATE TABLE Orders (
 	Note NTEXT NULL,
 	TotalPrice MONEY NOT NULL,
 	Status TINYINT DEFAULT 1,
-	CreatedAt DATETIME DEFAULT GETDATE(),
-	UpdatedAt DATETIME NULL
+	CreatedAt DATE DEFAULT GETDATE(),
+	UpdatedAt DATE NULL
 )
 
 GO
@@ -160,22 +148,13 @@ BEGIN
 END
 
 GO
-INSERT INTO Categories(Name) VALUES ('Men watch'), ('Ladies watches')
-GO
-INSERT INTO Brands(Name, ImageUrl) VALUES ('Rolex', 'rolex.jpg'), ('Casio', 'casio.jpg')
-GO
 INSERT INTO Roles(Name) VALUES ('ROLE_ADMIN'), ('ROLE_USER')
 GO
 INSERT INTO Configs VALUES ('logoImage.png', 'service-center-5.jpg', N'Số 238 Hoàng Quốc Việt, Cầu Giấy, Hà nội.', 
 '<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1455.0111587501103!2d105.78426245540275!3d21.046832990622818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab3b4220c2bd%3A0x1c9e359e2a4f618c!2sB%C3%A1ch%20Khoa%20Aptech!5e1!3m2!1svi!2s!4v1652431210865!5m2!1svi!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
 , '024 3755 4010', 'Eiser@gmail.com', '2022-05-13')
 
-select * from Accounts
+select * from Categories
 select * from Account_Roles
 --insert into Account_Roles values(1,1)
-select * from Orders
-select * from OrderDetails
-delete from Orders where OrderId = 14
-select * from Blogs
-
 

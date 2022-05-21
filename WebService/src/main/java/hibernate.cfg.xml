@@ -22,7 +22,6 @@
 		<mapping class="bkap.entities.Orders" />
 		<mapping class="bkap.entities.Product_images" />
 		<mapping class="bkap.entities.Products" />
-		<mapping class="bkap.entities.Reviews" />
 		<mapping class="bkap.entities.Roles" />
 	</session-factory>
 </hibernate-configuration>

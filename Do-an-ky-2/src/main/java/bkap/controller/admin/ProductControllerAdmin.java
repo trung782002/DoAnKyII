@@ -2,6 +2,8 @@ package bkap.controller.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.Date;
@@ -77,15 +79,23 @@ public class ProductControllerAdmin {
 	}
 
 	@RequestMapping(value = { "/searchProduct" })
-	public String searchProduct(@RequestParam("Name") String name, Model model) {
+	public String searchProduct(@RequestParam("Name") String name, Model model)throws UnsupportedEncodingException{
 		Client client = Client.create();
 		Gson gson = new Gson();
 		Integer status = 0;
-
-		WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/searchByName/" + name);
-		String data = webResource.get(String.class);
-		GenericType<List<ProductsDTO>> listtype = new GenericType<List<ProductsDTO>>() {};
-		List<ProductsDTO> list = gson.fromJson(data, listtype.getType());
+		List<ProductsDTO> list = null;
+		if(name.length() > 0) {
+			WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/searchByName/" + URLEncoder.encode(name,"UTF-8"));
+			String data = webResource.get(String.class);
+			GenericType<List<ProductsDTO>> listtype = new GenericType<List<ProductsDTO>>() {};
+			 list = gson.fromJson(data, listtype.getType());
+		}else {
+			WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getList");
+			String data = webResource.get(String.class);
+			GenericType<List<ProductsDTO>> listtype = new GenericType<List<ProductsDTO>>() {};
+		    list = gson.fromJson(data, listtype.getType());
+		}
+		
 
 		model.addAttribute("brands", getListBrands(client, gson));
 		model.addAttribute("categories", getListCategories(client, gson, status));
@@ -149,7 +159,7 @@ public class ProductControllerAdmin {
 			}
 			product.setCreatedAt(new Date());
 			product.setImageUrl(multipartFile.getOriginalFilename());
-
+			
 			String data = gson.toJson(product);
 			WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/insert");
 			ClientResponse clientResponse = webResource.type("application/json").post(ClientResponse.class, data);

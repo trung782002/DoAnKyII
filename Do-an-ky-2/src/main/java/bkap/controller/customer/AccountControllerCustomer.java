@@ -92,10 +92,12 @@ public class AccountControllerCustomer {
 	        boolean rs = gson.fromJson(data, boolean.class);
 	        
 	        model.addAttribute("config", getConfig(client, gson));
-	        if(rs)
+	        if (rs) {
+	        	model.addAttribute("loginSuccess", "Successful account registration, login to experience our service.");
 	        	return "customer/pages/accounts/login";
-	        else 
+	        } else { 
 	        	return "customer/pages/accounts/signUp";
+	        }
 		}
 	}
 
@@ -107,7 +109,7 @@ public class AccountControllerCustomer {
 			Client client = Client.create();
 			Gson gson = new Gson();
 			if (error != null) {
-				model.addAttribute("login", "Your email or password is incorrect, please try again");
+				model.addAttribute("login", "Your email or password is incorrect, please try again.");
 			}
 			model.addAttribute("config", getConfig(client, gson));
 			return "customer/pages/accounts/login";

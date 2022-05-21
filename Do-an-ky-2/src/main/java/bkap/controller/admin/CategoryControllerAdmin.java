@@ -27,7 +27,7 @@ import bkap.entities.CategoriesDTO;
 import bkap.entities.ProductsDTO;
 
 @Controller
-@RequestMapping(value = {"/admin"})
+@RequestMapping(value = "/admin")
 public class CategoryControllerAdmin {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -43,7 +43,7 @@ public class CategoryControllerAdmin {
 		return list;
 	}
 	
-	@RequestMapping(value = {"/categoryManagement"})
+	@RequestMapping("/categoryManagement")
 	public String categoryManagement(Model model) {
 		Client client = Client.create();
 		Gson gson = new Gson();
@@ -56,7 +56,7 @@ public class CategoryControllerAdmin {
 		return "admin/pages/category/categoryManagement";
 	}
 
-	@RequestMapping(value = { "/createCategory" })
+	@RequestMapping("/createCategory")
 	private String createCategory(@Valid @ModelAttribute("category") CategoriesDTO categoriesDTO, BindingResult result, RedirectAttributes redirAttrs, Model model) {
 		Client client = Client.create();
 		Gson gson = new Gson();
@@ -106,7 +106,7 @@ public class CategoryControllerAdmin {
 	    return "admin/pages/category/updateCategory";
 	}
 	
-	@RequestMapping(value = {"/updateCategory" })
+	@RequestMapping("/updateCategory")
 	private String updateCategory(@Valid @ModelAttribute("category") CategoriesDTO categoriesDTO, BindingResult result,@RequestParam("name1") String name1,
 			RedirectAttributes redirAttrs ,Model model) {
 		Gson gson = new Gson();

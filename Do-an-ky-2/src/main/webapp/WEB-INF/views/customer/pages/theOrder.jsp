@@ -51,7 +51,7 @@
 						<div class="col-2">
 							<h4>Order ID: ${order.orderId}</h4>
 						</div>
-						<div class="col-4">
+						<div class="col-3">
 							<samp style="color: #111111">
 								Order date:
 								<fmt:formatDate value="${order.createdAt}" pattern="yyyy-MM-dd" />
@@ -59,31 +59,31 @@
 							<br>
 							<samp style="color: #111111">Phone: ${order.phone}</samp>
 						</div>
-						<div class="col-6">
+						<div class="col-7">
 							<samp style="color: #111111">Address: ${order.address}</samp>
 							<br>
 							<samp style="color: #111111">Note: ${order.note}</samp>
 						</div>
-						<div class="col-12"
-							style="height: 10px; border-bottom: 1px solid #111111;"></div>
+						<!-- <div class="col-12"
+							style="height: 10px; border-bottom: 1px solid #111111;"></div> -->
 					</div>
 					<c:forEach items="${OrderDetailStatus_1}" var="orderDetail">
 						<c:if test="${order.orderId == orderDetail.orderId}">
 							<c:forEach items="${products}" var="product">
 								<c:if test="${product.proId == orderDetail.proId}">
-									<div style="background: #fffefb;" class="row mt-3">
+									<div style="background: #fffefb;" class="row mt-3 p-2">
 										<div class="col-2">
 											<img alt=""
 												src="<c:url value="resources"/>/image/${product.imageUrl}"
 												width="80%" />
 										</div>
-										<div class="col-8">
+										<div class="col-8 mt-2">
 											<samp class="mb-4 text-body" style="size: 30px">${product.name}</samp>
 											<br>
 											<samp class="mt-4">$ ${product.price - product.discount} x ${orderDetail.quantity}</samp>
 										</div>
-										<div class="col-2">
-											<samp style="color: rgba(0, 0, 0, .8);">${orderDetail.price}</samp>
+										<div class="col-2 mt-4">
+											<samp style="color: rgba(0, 0, 0, .8);">$${orderDetail.price}</samp>
 										</div>
 									</div>
 								</c:if>
@@ -93,14 +93,12 @@
 						</c:if>
 					</c:forEach>
 					<div class="row mt-4 mb-4">
-						<div class="col-10">
-							<a href="CancelOrder?id=${order.orderId}" class="btn btn-danger text-light">Cancel</a>
+						<div class="col-9">
+						    <a href="CancelOrder?id=${order.orderId}" class="btn btn-danger">Cancel</a>
 						</div>
-						<div class="col-2 mt-4 mb-4 ">
-							<b style="color: rgba(0, 0, 0, .8)">Total money:
-								$${order.totalPrice}</b>
+						<div class="col-3 mt-4 mb-4 ">
+							<b style="color: rgba(0, 0, 0, .8)">Total money: $${order.totalPrice}</b>
 						</div>
-
 					</div>
 					<div style="height: 10px; border-bottom: 1px solid #363636;"></div>
 				</c:forEach>
@@ -113,7 +111,7 @@
 						<div class="col-2">
 							<h4>Order ID: ${order.orderId}</h4>
 						</div>
-						<div class="col-4">
+						<div class="col-3">
 							<samp style="color: #111111">
 								Order date:
 								<fmt:formatDate value="${order.createdAt}" pattern="yyyy-MM-dd" />
@@ -121,31 +119,31 @@
 							<br>
 							<samp style="color: #111111">Phone: ${order.phone}</samp>
 						</div>
-						<div class="col-6">
+						<div class="col-7">
 							<samp style="color: #111111">Address: ${order.address}</samp>
 							<br>
 							<samp style="color: #111111">Note: ${order.note}</samp>
 						</div>
-						<div class="col-12"
-							style="height: 10px; border-bottom: 1px solid #111111;"></div>
+						<!-- <div class="col-12"
+							style="height: 10px; border-bottom: 1px solid #111111;"></div> -->
 					</div>
 					<c:forEach items="${OrderDetailStatus_2}" var="orderDetail">
 						<c:if test="${order.orderId == orderDetail.orderId}">
 							<c:forEach items="${products}" var="product">
 								<c:if test="${product.proId == orderDetail.proId}">
-									<div style="background: #fffefb;" class="row mt-3">
+									<div style="background: #fffefb;" class="row mt-3 p-2">
 										<div class="col-2">
 											<img alt=""
 												src="<c:url value="resources"/>/image/${product.imageUrl}"
 												width="80%" />
 										</div>
-										<div class="col-8">
+										<div class="col-8 mt-2">
 											<samp class="mb-4 text-body" style="size: 30px">${product.name}</samp>
 											<br>
 											<samp class="mt-4">$ ${product.price - product.discount} x ${orderDetail.quantity}</samp>
 										</div>
-										<div class="col-2">
-											<samp style="color: rgba(0, 0, 0, .8);">${orderDetail.price}</samp>
+										<div class="col-2 mt-4">
+											<samp style="color: rgba(0, 0, 0, .8);">$${orderDetail.price}</samp>
 										</div>
 									</div>
 								</c:if>
@@ -154,13 +152,12 @@
 								style="height: 10px; border-bottom: 1px solid rgba(0, 0, 0, .09);"></div>
 						</c:if>
 					</c:forEach>
-					<div class="row mt-4 mb-4"height: 50px">
-						<div class="col-10"></div>
-						<div class="col-2 mt-4 mb-4 ">
+					<div class="row mt-4 mb-4">
+						<div class="col-9"></div>
+						<div class="col-3 mt-4 mb-4 ">
 							<b style="color: rgba(0, 0, 0, .8)">Total money:
 								$${order.totalPrice}</b>
 						</div>
-
 					</div>
 					<div style="height: 10px; border-bottom: 1px solid #363636;"></div>
 				</c:forEach>
@@ -173,7 +170,7 @@
 						<div class="col-2">
 							<h4>Order ID: ${order.orderId}</h4>
 						</div>
-						<div class="col-4">
+						<div class="col-3">
 							<samp style="color: #111111">
 								Order date:
 								<fmt:formatDate value="${order.createdAt}" pattern="yyyy-MM-dd" />
@@ -181,31 +178,31 @@
 							<br>
 							<samp style="color: #111111">Phone: ${order.phone}</samp>
 						</div>
-						<div class="col-6">
+						<div class="col-7">
 							<samp style="color: #111111">Address: ${order.address}</samp>
 							<br>
 							<samp style="color: #111111">Note: ${order.note}</samp>
 						</div>
-						<div class="col-12"
-							style="height: 10px; border-bottom: 1px solid #111111;"></div>
+						<!-- <div class="col-12"
+							style="height: 10px; border-bottom: 1px solid #111111;"></div> -->
 					</div>
 					<c:forEach items="${OrderDetailStatus_3}" var="orderDetail">
 						<c:if test="${order.orderId == orderDetail.orderId}">
 							<c:forEach items="${products}" var="product">
 								<c:if test="${product.proId == orderDetail.proId}">
-									<div style="background: #fffefb;" class="row mt-3">
+									<div style="background: #fffefb;" class="row mt-3 p-2">
 										<div class="col-2">
 											<img alt=""
 												src="<c:url value="resources"/>/image/${product.imageUrl}"
 												width="80%" />
 										</div>
-										<div class="col-8">
+										<div class="col-8 mt-2">
 											<samp class="mb-4 text-body" style="size: 30px">${product.name}</samp>
 											<br>
 											<samp class="mt-4">$ ${product.price - product.discount} x ${orderDetail.quantity}</samp>
 										</div>
-										<div class="col-2">
-											<samp style="color: rgba(0, 0, 0, .8);">${orderDetail.price}</samp>
+										<div class="col-2 mt-4">
+											<samp style="color: rgba(0, 0, 0, .8);">$${orderDetail.price}</samp>
 										</div>
 									</div>
 								</c:if>
@@ -214,9 +211,9 @@
 								style="height: 10px; border-bottom: 1px solid rgba(0, 0, 0, .09);"></div>
 						</c:if>
 					</c:forEach>
-					<div class="row mt-4 mb-4"height: 50px">
-						<div class="col-10"></div>
-						<div class="col-2 mt-4 mb-4 ">
+					<div class="row mt-4 mb-4">
+						<div class="col-9"></div>
+						<div class="col-3 mt-4 mb-4 ">
 							<b style="color: rgba(0, 0, 0, .8)">Total money:
 								$${order.totalPrice}</b>
 						</div>
@@ -233,7 +230,7 @@
 						<div class="col-2">
 							<h4>Order ID: ${order.orderId}</h4>
 						</div>
-						<div class="col-4">
+						<div class="col-3">
 							<samp style="color: #111111">
 								Order date:
 								<fmt:formatDate value="${order.createdAt}" pattern="yyyy-MM-dd" />
@@ -241,31 +238,31 @@
 							<br>
 							<samp style="color: #111111">Phone: ${order.phone}</samp>
 						</div>
-						<div class="col-6">
+						<div class="col-7">
 							<samp style="color: #111111">Address: ${order.address}</samp>
 							<br>
 							<samp style="color: #111111">Note: ${order.note}</samp>
 						</div>
-						<div class="col-12"
-							style="height: 10px; border-bottom: 1px solid #111111;"></div>
+						<!-- <div class="col-12"
+							style="height: 10px; border-bottom: 1px solid #111111;"></div> -->
 					</div>
 					<c:forEach items="${OrderDetailStatus_0}" var="orderDetail">
 						<c:if test="${order.orderId == orderDetail.orderId}">
 							<c:forEach items="${products}" var="product">
 								<c:if test="${product.proId == orderDetail.proId}">
-									<div style="background: #fffefb;" class="row mt-3">
+									<div style="background: #fffefb;" class="row mt-3 p-2">
 										<div class="col-2">
 											<img alt=""
 												src="<c:url value="resources"/>/image/${product.imageUrl}"
 												width="80%" />
 										</div>
-										<div class="col-8">
+										<div class="col-8 mt-2">
 											<samp class="mb-4 text-body" style="size: 30px">${product.name}</samp>
 											<br>
 											<samp class="mt-4">$ ${product.price - product.discount} x ${orderDetail.quantity}</samp>
 										</div>
-										<div class="col-2">
-											<samp style="color: rgba(0, 0, 0, .8);">${orderDetail.price}</samp>
+										<div class="col-2 mt-4">
+											<samp style="color: rgba(0, 0, 0, .8);">$${orderDetail.price}</samp>
 										</div>
 									</div>
 								</c:if>
@@ -274,9 +271,9 @@
 								style="height: 10px; border-bottom: 1px solid rgba(0, 0, 0, .09);"></div>
 						</c:if>
 					</c:forEach>
-					<div class="row mt-4 mb-4"height: 50px">
-						<div class="col-10"></div>
-						<div class="col-2 mt-4 mb-4 ">
+					<div class="row mt-4 mb-4">
+						<div class="col-9"></div>
+						<div class="col-3 mt-4 mb-4 ">
 							<b style="color: rgba(0, 0, 0, .8)">Total money:
 								$${order.totalPrice}</b>
 						</div>

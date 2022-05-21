@@ -70,13 +70,32 @@ public class CheckOutControllerCustomer {
 			Integer accId = (Integer) session.getAttribute("accId");
 			List<CartsDTO> cartsDTOs = getListCart(client, gson, accId);
 			List<Integer> listCartId = new ArrayList<Integer>();
+			List<Integer> listCartId1 = new ArrayList<Integer>();
 			for (CartsDTO cartsDTO : cartsDTOs) {
 				ProductsDTO dto = getByIdProduct(client, gson, cartsDTO.getProId());
 				if(cartsDTO.getQuantity() > dto.getQuantity()) {
 					listCartId.add(cartsDTO.getCartId());
 				}
 			}
-			if(listCartId.size() == 0) {
+			
+			for (CartsDTO cartsDTO : cartsDTOs) {
+				ProductsDTO dto = getByIdProduct(client, gson, cartsDTO.getProId());
+				if(dto.getStatus() == 3 || dto.getStatus() == 2) {
+					listCartId1.add(cartsDTO.getCartId());
+				}
+			}
+			
+			if(listCartId1.size() > 0) {
+				redirAttrs.addFlashAttribute("statusProduct", "Product does not exist");
+				redirAttrs.addFlashAttribute("listCartId1",listCartId1);
+				return "redirect:/listCart";
+			}else if (listCartId.size() > 0) {
+				redirAttrs.addFlashAttribute("quantity", "There are only");
+				redirAttrs.addFlashAttribute("listCartIds",listCartId);
+				return "redirect:/listCart";
+			}
+			else {
+				
 				WebResource webResource = client.resource("http://localhost:8080/WebService/rest/productService/getList");
 				String data = webResource.get(String.class);
 				GenericType<List<ProductsDTO>> listtype = new GenericType<List<ProductsDTO>>() {};
@@ -98,10 +117,6 @@ public class CheckOutControllerCustomer {
 				model.addAttribute("config", getConfig(client, gson));
 				
 				return "customer/pages/checkOut";
-			}else {
-				redirAttrs.addFlashAttribute("quantity", "There are only");
-				redirAttrs.addFlashAttribute("listCartIds",listCartId);
-				return "redirect:/listCart";
 			}
 			
 		} else {
